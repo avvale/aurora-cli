@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonUpdateResourceByIdHandler } from '@api/common/resource';
 import { CommonResource, CommonUpdateResourceByIdInput } from '@api/graphql';
 import { Auth } from '@aurora/decorators';

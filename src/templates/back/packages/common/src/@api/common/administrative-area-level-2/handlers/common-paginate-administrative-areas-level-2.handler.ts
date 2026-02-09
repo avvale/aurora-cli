@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-2.aurora.yaml
+ */
 import { Pagination } from '@api/graphql';
 import { CommonPaginateAdministrativeAreasLevel2Query } from '@app/common/administrative-area-level-2';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';

@@ -1,16 +1,20 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import {
   CommonCreatedResourceEvent,
   CommonCreatedResourcesEvent,
-  CommonDeletedResourceEvent,
-  CommonDeletedResourcesEvent,
   CommonResource,
-  CommonUpdatedResourceEvent,
-  CommonUpdatedResourcesEvent,
 } from '@app/common/resource';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class CommonAddResourcesContextEvent extends AggregateRoot {
-  constructor(public readonly aggregateRoots: CommonResource[] = []) {
+  constructor(
+    public readonly aggregateRoots: CommonResource[] = [],
+    public readonly cQMetadata?: CQMetadata,
+  ) {
     super();
   }
 
@@ -20,61 +24,24 @@ export class CommonAddResourcesContextEvent extends AggregateRoot {
 
   created(): void {
     this.apply(
-      new CommonCreatedResourcesEvent(
-        this.aggregateRoots.map(
+      new CommonCreatedResourcesEvent({
+        payload: this.aggregateRoots.map(
           (resource) =>
-            new CommonCreatedResourceEvent(
-              resource.id.value,
-              resource.code.value,
-              resource.name.value,
-              resource.isActive.value,
-              resource.hasAttachments.value,
-              resource.createdAt?.value,
-              resource.updatedAt?.value,
-              resource.deletedAt?.value,
-            ),
+            new CommonCreatedResourceEvent({
+              payload: {
+                id: resource.id.value,
+                code: resource.code.value,
+                name: resource.name.value,
+                isActive: resource.isActive.value,
+                hasAttachments: resource.hasAttachments.value,
+                createdAt: resource.createdAt?.value,
+                updatedAt: resource.updatedAt?.value,
+                deletedAt: resource.deletedAt?.value,
+              },
+            }),
         ),
-      ),
-    );
-  }
-
-  updated(): void {
-    this.apply(
-      new CommonUpdatedResourcesEvent(
-        this.aggregateRoots.map(
-          (resource) =>
-            new CommonUpdatedResourceEvent(
-              resource.id.value,
-              resource.code.value,
-              resource.name.value,
-              resource.isActive.value,
-              resource.hasAttachments.value,
-              resource.createdAt?.value,
-              resource.updatedAt?.value,
-              resource.deletedAt?.value,
-            ),
-        ),
-      ),
-    );
-  }
-
-  deleted(): void {
-    this.apply(
-      new CommonDeletedResourcesEvent(
-        this.aggregateRoots.map(
-          (resource) =>
-            new CommonDeletedResourceEvent(
-              resource.id.value,
-              resource.code.value,
-              resource.name.value,
-              resource.isActive.value,
-              resource.hasAttachments.value,
-              resource.createdAt?.value,
-              resource.updatedAt?.value,
-              resource.deletedAt?.value,
-            ),
-        ),
-      ),
+        cQMetadata: this.cQMetadata,
+      }),
     );
   }
 }

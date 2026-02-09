@@ -1,7 +1,7 @@
-import {
-  CommonCreateResourceDto,
-  CommonResourceDto,
-} from '@api/common/resource';
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonCreateResourceInput, CommonResource } from '@api/graphql';
 import {
   CommonCreateResourceCommand,
@@ -18,10 +18,10 @@ export class CommonCreateResourceHandler {
   ) {}
 
   async main(
-    payload: CommonCreateResourceInput | CommonCreateResourceDto,
+    payload: CommonCreateResourceInput,
     timezone?: string,
     auditing?: AuditingMeta,
-  ): Promise<CommonResource | CommonResourceDto> {
+  ): Promise<CommonResource> {
     await this.commandBus.dispatch(
       new CommonCreateResourceCommand(payload, {
         timezone,

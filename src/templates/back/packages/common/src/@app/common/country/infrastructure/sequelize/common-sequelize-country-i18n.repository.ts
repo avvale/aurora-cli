@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import {
   CommonCountry,
   CommonCountryI18nModel,

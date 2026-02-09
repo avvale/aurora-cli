@@ -1,4 +1,7 @@
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonUpdateResourceByIdCommand } from '@app/common/resource';
 import { CommonUpdateResourceByIdService } from '@app/common/resource/application/update/common-update-resource-by-id.service';
 import {

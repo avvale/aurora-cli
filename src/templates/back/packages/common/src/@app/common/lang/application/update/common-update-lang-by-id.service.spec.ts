@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import {
   CommonILangRepository,
   commonMockLangData,
@@ -15,6 +18,7 @@ import {
   CommonLangIso6392,
   CommonLangIso6393,
   CommonLangName,
+  CommonLangRowId,
   CommonLangSort,
 } from '@app/common/lang/domain/value-objects';
 import {
@@ -61,6 +65,7 @@ describe('CommonUpdateLangByIdService', () => {
         await service.main(
           {
             id: new CommonLangId(commonMockLangData[0].id),
+            rowId: new CommonLangRowId(commonMockLangData[0].rowId),
             name: new CommonLangName(commonMockLangData[0].name),
             image: new CommonLangImage(commonMockLangData[0].image),
             iso6392: new CommonLangIso6392(commonMockLangData[0].iso6392),

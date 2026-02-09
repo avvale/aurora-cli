@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { SmallintValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class CommonLangSort extends SmallintValueObject {

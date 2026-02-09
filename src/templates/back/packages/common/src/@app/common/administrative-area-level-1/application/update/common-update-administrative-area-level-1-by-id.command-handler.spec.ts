@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import {
   commonMockAdministrativeAreaLevel1Data,
   CommonUpdateAdministrativeAreaLevel1ByIdCommand,
@@ -41,6 +45,7 @@ describe('CommonUpdateAdministrativeAreaLevel1ByIdCommandHandler', () => {
           new CommonUpdateAdministrativeAreaLevel1ByIdCommand(
             {
               id: commonMockAdministrativeAreaLevel1Data[0].id,
+              rowId: commonMockAdministrativeAreaLevel1Data[0].rowId,
               countryId: commonMockAdministrativeAreaLevel1Data[0].countryId,
               code: commonMockAdministrativeAreaLevel1Data[0].code,
               customCode: commonMockAdministrativeAreaLevel1Data[0].customCode,

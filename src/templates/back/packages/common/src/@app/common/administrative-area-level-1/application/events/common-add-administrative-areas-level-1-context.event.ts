@@ -1,17 +1,19 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import {
   CommonAdministrativeAreaLevel1,
   CommonCreatedAdministrativeAreaLevel1Event,
   CommonCreatedAdministrativeAreasLevel1Event,
-  CommonDeletedAdministrativeAreaLevel1Event,
-  CommonDeletedAdministrativeAreasLevel1Event,
-  CommonUpdatedAdministrativeAreaLevel1Event,
-  CommonUpdatedAdministrativeAreasLevel1Event,
 } from '@app/common/administrative-area-level-1';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class CommonAddAdministrativeAreasLevel1ContextEvent extends AggregateRoot {
   constructor(
     public readonly aggregateRoots: CommonAdministrativeAreaLevel1[] = [],
+    public readonly cQMetadata?: CQMetadata,
   ) {
     super();
   }
@@ -22,76 +24,29 @@ export class CommonAddAdministrativeAreasLevel1ContextEvent extends AggregateRoo
 
   created(): void {
     this.apply(
-      new CommonCreatedAdministrativeAreasLevel1Event(
-        this.aggregateRoots.map(
+      new CommonCreatedAdministrativeAreasLevel1Event({
+        payload: this.aggregateRoots.map(
           (administrativeAreaLevel1) =>
-            new CommonCreatedAdministrativeAreaLevel1Event(
-              administrativeAreaLevel1.id.value,
-              administrativeAreaLevel1.countryId.value,
-              administrativeAreaLevel1.code.value,
-              administrativeAreaLevel1.customCode?.value,
-              administrativeAreaLevel1.name.value,
-              administrativeAreaLevel1.slug.value,
-              administrativeAreaLevel1.latitude?.value,
-              administrativeAreaLevel1.longitude?.value,
-              administrativeAreaLevel1.zoom?.value,
-              administrativeAreaLevel1.mapType?.value,
-              administrativeAreaLevel1.createdAt?.value,
-              administrativeAreaLevel1.updatedAt?.value,
-              administrativeAreaLevel1.deletedAt?.value,
-            ),
+            new CommonCreatedAdministrativeAreaLevel1Event({
+              payload: {
+                id: administrativeAreaLevel1.id.value,
+                countryId: administrativeAreaLevel1.countryId.value,
+                code: administrativeAreaLevel1.code.value,
+                customCode: administrativeAreaLevel1.customCode?.value,
+                name: administrativeAreaLevel1.name.value,
+                slug: administrativeAreaLevel1.slug.value,
+                latitude: administrativeAreaLevel1.latitude?.value,
+                longitude: administrativeAreaLevel1.longitude?.value,
+                zoom: administrativeAreaLevel1.zoom?.value,
+                mapType: administrativeAreaLevel1.mapType?.value,
+                createdAt: administrativeAreaLevel1.createdAt?.value,
+                updatedAt: administrativeAreaLevel1.updatedAt?.value,
+                deletedAt: administrativeAreaLevel1.deletedAt?.value,
+              },
+            }),
         ),
-      ),
-    );
-  }
-
-  updated(): void {
-    this.apply(
-      new CommonUpdatedAdministrativeAreasLevel1Event(
-        this.aggregateRoots.map(
-          (administrativeAreaLevel1) =>
-            new CommonUpdatedAdministrativeAreaLevel1Event(
-              administrativeAreaLevel1.id.value,
-              administrativeAreaLevel1.countryId.value,
-              administrativeAreaLevel1.code.value,
-              administrativeAreaLevel1.customCode?.value,
-              administrativeAreaLevel1.name.value,
-              administrativeAreaLevel1.slug.value,
-              administrativeAreaLevel1.latitude?.value,
-              administrativeAreaLevel1.longitude?.value,
-              administrativeAreaLevel1.zoom?.value,
-              administrativeAreaLevel1.mapType?.value,
-              administrativeAreaLevel1.createdAt?.value,
-              administrativeAreaLevel1.updatedAt?.value,
-              administrativeAreaLevel1.deletedAt?.value,
-            ),
-        ),
-      ),
-    );
-  }
-
-  deleted(): void {
-    this.apply(
-      new CommonDeletedAdministrativeAreasLevel1Event(
-        this.aggregateRoots.map(
-          (administrativeAreaLevel1) =>
-            new CommonDeletedAdministrativeAreaLevel1Event(
-              administrativeAreaLevel1.id.value,
-              administrativeAreaLevel1.countryId.value,
-              administrativeAreaLevel1.code.value,
-              administrativeAreaLevel1.customCode?.value,
-              administrativeAreaLevel1.name.value,
-              administrativeAreaLevel1.slug.value,
-              administrativeAreaLevel1.latitude?.value,
-              administrativeAreaLevel1.longitude?.value,
-              administrativeAreaLevel1.zoom?.value,
-              administrativeAreaLevel1.mapType?.value,
-              administrativeAreaLevel1.createdAt?.value,
-              administrativeAreaLevel1.updatedAt?.value,
-              administrativeAreaLevel1.deletedAt?.value,
-            ),
-        ),
-      ),
+        cQMetadata: this.cQMetadata,
+      }),
     );
   }
 }

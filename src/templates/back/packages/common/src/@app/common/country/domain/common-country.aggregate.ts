@@ -1,4 +1,7 @@
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import {
   CommonCreatedCountryEvent,
   CommonDeletedCountryEvent,
@@ -25,16 +28,18 @@ import {
   CommonCountryLongitude,
   CommonCountryMapType,
   CommonCountryPrefix,
+  CommonCountryRowId,
   CommonCountrySort,
   CommonCountryUpdatedAt,
   CommonCountryZoom,
 } from '@app/common/country/domain/value-objects';
 import { CommonLang } from '@app/common/lang';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject, uuid } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class CommonCountry extends AggregateRoot {
   id: CommonCountryId;
+  rowId: CommonCountryRowId;
   iso3166Alpha2: CommonCountryIso3166Alpha2;
   iso3166Alpha3: CommonCountryIso3166Alpha3;
   iso3166Numeric: CommonCountryIso3166Numeric;
@@ -61,6 +66,7 @@ export class CommonCountry extends AggregateRoot {
 
   constructor(
     id: CommonCountryId,
+    rowId: CommonCountryRowId,
     iso3166Alpha2: CommonCountryIso3166Alpha2,
     iso3166Alpha3: CommonCountryIso3166Alpha3,
     iso3166Numeric: CommonCountryIso3166Numeric,
@@ -87,6 +93,7 @@ export class CommonCountry extends AggregateRoot {
   ) {
     super();
     this.id = id;
+    this.rowId = rowId;
     this.iso3166Alpha2 = iso3166Alpha2;
     this.iso3166Alpha3 = iso3166Alpha3;
     this.iso3166Numeric = iso3166Numeric;
@@ -114,6 +121,7 @@ export class CommonCountry extends AggregateRoot {
 
   static register(
     id: CommonCountryId,
+    rowId: CommonCountryRowId,
     iso3166Alpha2: CommonCountryIso3166Alpha2,
     iso3166Alpha3: CommonCountryIso3166Alpha3,
     iso3166Numeric: CommonCountryIso3166Numeric,
@@ -140,6 +148,7 @@ export class CommonCountry extends AggregateRoot {
   ): CommonCountry {
     return new CommonCountry(
       id,
+      rowId,
       iso3166Alpha2,
       iso3166Alpha3,
       iso3166Numeric,
@@ -166,99 +175,119 @@ export class CommonCountry extends AggregateRoot {
     );
   }
 
-  created(country: CommonCountry): void {
+  created(event: { payload: CommonCountry; cQMetadata?: CQMetadata }): void {
     this.apply(
-      new CommonCreatedCountryEvent(
-        country.id.value,
-        country.iso3166Alpha2.value,
-        country.iso3166Alpha3.value,
-        country.iso3166Numeric.value,
-        country.customCode?.value,
-        country.prefix?.value,
-        country.image?.value,
-        country.sort?.value,
-        country.administrativeAreas?.value,
-        country.latitude?.value,
-        country.longitude?.value,
-        country.zoom?.value,
-        country.mapType?.value,
-        country.availableLangs?.value,
-        country.createdAt?.value,
-        country.updatedAt?.value,
-        country.deletedAt?.value,
-        country.langId.value,
-        country.name.value,
-        country.slug.value,
-        country.administrativeAreaLevel1?.value,
-        country.administrativeAreaLevel2?.value,
-        country.administrativeAreaLevel3?.value,
-      ),
+      new CommonCreatedCountryEvent({
+        payload: {
+          id: event.payload.id.value,
+          iso3166Alpha2: event.payload.iso3166Alpha2.value,
+          iso3166Alpha3: event.payload.iso3166Alpha3.value,
+          iso3166Numeric: event.payload.iso3166Numeric.value,
+          customCode: event.payload.customCode?.value,
+          prefix: event.payload.prefix?.value,
+          image: event.payload.image?.value,
+          sort: event.payload.sort?.value,
+          administrativeAreas: event.payload.administrativeAreas?.value,
+          latitude: event.payload.latitude?.value,
+          longitude: event.payload.longitude?.value,
+          zoom: event.payload.zoom?.value,
+          mapType: event.payload.mapType?.value,
+          availableLangs: event.payload.availableLangs?.value,
+          createdAt: event.payload.createdAt?.value,
+          updatedAt: event.payload.updatedAt?.value,
+          deletedAt: event.payload.deletedAt?.value,
+          langId: event.payload.langId.value,
+          name: event.payload.name.value,
+          slug: event.payload.slug.value,
+          administrativeAreaLevel1:
+            event.payload.administrativeAreaLevel1?.value,
+          administrativeAreaLevel2:
+            event.payload.administrativeAreaLevel2?.value,
+          administrativeAreaLevel3:
+            event.payload.administrativeAreaLevel3?.value,
+        },
+        cQMetadata: event.cQMetadata,
+      }),
     );
   }
 
-  updated(country: CommonCountry): void {
+  updated(event: { payload: CommonCountry; cQMetadata?: CQMetadata }): void {
     this.apply(
-      new CommonUpdatedCountryEvent(
-        country.id?.value,
-        country.iso3166Alpha2?.value,
-        country.iso3166Alpha3?.value,
-        country.iso3166Numeric?.value,
-        country.customCode?.value,
-        country.prefix?.value,
-        country.image?.value,
-        country.sort?.value,
-        country.administrativeAreas?.value,
-        country.latitude?.value,
-        country.longitude?.value,
-        country.zoom?.value,
-        country.mapType?.value,
-        country.availableLangs?.value,
-        country.createdAt?.value,
-        country.updatedAt?.value,
-        country.deletedAt?.value,
-        country.langId?.value,
-        country.name?.value,
-        country.slug?.value,
-        country.administrativeAreaLevel1?.value,
-        country.administrativeAreaLevel2?.value,
-        country.administrativeAreaLevel3?.value,
-      ),
+      new CommonUpdatedCountryEvent({
+        payload: {
+          id: event.payload.id?.value,
+          iso3166Alpha2: event.payload.iso3166Alpha2?.value,
+          iso3166Alpha3: event.payload.iso3166Alpha3?.value,
+          iso3166Numeric: event.payload.iso3166Numeric?.value,
+          customCode: event.payload.customCode?.value,
+          prefix: event.payload.prefix?.value,
+          image: event.payload.image?.value,
+          sort: event.payload.sort?.value,
+          administrativeAreas: event.payload.administrativeAreas?.value,
+          latitude: event.payload.latitude?.value,
+          longitude: event.payload.longitude?.value,
+          zoom: event.payload.zoom?.value,
+          mapType: event.payload.mapType?.value,
+          availableLangs: event.payload.availableLangs?.value,
+          createdAt: event.payload.createdAt?.value,
+          updatedAt: event.payload.updatedAt?.value,
+          deletedAt: event.payload.deletedAt?.value,
+          langId: event.payload.langId?.value,
+          name: event.payload.name?.value,
+          slug: event.payload.slug?.value,
+          administrativeAreaLevel1:
+            event.payload.administrativeAreaLevel1?.value,
+          administrativeAreaLevel2:
+            event.payload.administrativeAreaLevel2?.value,
+          administrativeAreaLevel3:
+            event.payload.administrativeAreaLevel3?.value,
+        },
+        cQMetadata: event.cQMetadata,
+      }),
     );
   }
 
-  deleted(country: CommonCountry): void {
+  deleted(event: { payload: CommonCountry; cQMetadata?: CQMetadata }): void {
     this.apply(
-      new CommonDeletedCountryEvent(
-        country.id.value,
-        country.iso3166Alpha2.value,
-        country.iso3166Alpha3.value,
-        country.iso3166Numeric.value,
-        country.customCode?.value,
-        country.prefix?.value,
-        country.image?.value,
-        country.sort?.value,
-        country.administrativeAreas?.value,
-        country.latitude?.value,
-        country.longitude?.value,
-        country.zoom?.value,
-        country.mapType?.value,
-        country.availableLangs?.value,
-        country.createdAt?.value,
-        country.updatedAt?.value,
-        country.deletedAt?.value,
-        country.langId.value,
-        country.name.value,
-        country.slug.value,
-        country.administrativeAreaLevel1?.value,
-        country.administrativeAreaLevel2?.value,
-        country.administrativeAreaLevel3?.value,
-      ),
+      new CommonDeletedCountryEvent({
+        payload: {
+          id: event.payload.id.value,
+          rowId: event.payload.rowId.value,
+          iso3166Alpha2: event.payload.iso3166Alpha2.value,
+          iso3166Alpha3: event.payload.iso3166Alpha3.value,
+          iso3166Numeric: event.payload.iso3166Numeric.value,
+          customCode: event.payload.customCode?.value,
+          prefix: event.payload.prefix?.value,
+          image: event.payload.image?.value,
+          sort: event.payload.sort?.value,
+          administrativeAreas: event.payload.administrativeAreas?.value,
+          latitude: event.payload.latitude?.value,
+          longitude: event.payload.longitude?.value,
+          zoom: event.payload.zoom?.value,
+          mapType: event.payload.mapType?.value,
+          availableLangs: event.payload.availableLangs?.value,
+          createdAt: event.payload.createdAt?.value,
+          updatedAt: event.payload.updatedAt?.value,
+          deletedAt: event.payload.deletedAt?.value,
+          langId: event.payload.langId.value,
+          name: event.payload.name.value,
+          slug: event.payload.slug.value,
+          administrativeAreaLevel1:
+            event.payload.administrativeAreaLevel1?.value,
+          administrativeAreaLevel2:
+            event.payload.administrativeAreaLevel2?.value,
+          administrativeAreaLevel3:
+            event.payload.administrativeAreaLevel3?.value,
+        },
+        cQMetadata: event.cQMetadata,
+      }),
     );
   }
 
   toDTO(): LiteralObject {
     return {
       id: this.id.value,
+      rowId: this.rowId.value,
       iso3166Alpha2: this.iso3166Alpha2.value,
       iso3166Alpha3: this.iso3166Alpha3.value,
       iso3166Numeric: this.iso3166Numeric.value,
@@ -282,22 +311,6 @@ export class CommonCountry extends AggregateRoot {
       administrativeAreaLevel2: this.administrativeAreaLevel2?.value,
       administrativeAreaLevel3: this.administrativeAreaLevel3?.value,
       lang: this.lang?.toDTO(),
-    };
-  }
-
-  toI18nDTO(): LiteralObject {
-    return {
-      id: Utils.uuid(),
-      countryId: this.id.value,
-      langId: this.langId.value,
-      name: this.name.value,
-      slug: this.slug.value,
-      administrativeAreaLevel1: this.administrativeAreaLevel1?.value,
-      administrativeAreaLevel2: this.administrativeAreaLevel2?.value,
-      administrativeAreaLevel3: this.administrativeAreaLevel3?.value,
-      createdAt: this.createdAt?.value,
-      updatedAt: this.updatedAt?.value,
-      deletedAt: this.deletedAt?.value,
     };
   }
 
@@ -327,7 +340,40 @@ export class CommonCountry extends AggregateRoot {
       administrativeAreaLevel1: this.administrativeAreaLevel1?.value,
       administrativeAreaLevel2: this.administrativeAreaLevel2?.value,
       administrativeAreaLevel3: this.administrativeAreaLevel3?.value,
-      lang: this.lang?.toDTO(),
+      lang: this.lang?.toRepository(),
+    };
+  }
+
+  toI18nDTO(): LiteralObject {
+    return {
+      id: uuid(),
+      rowId: this.rowId.value,
+      countryId: this.id.value,
+      langId: this.langId.value,
+      name: this.name.value,
+      slug: this.slug.value,
+      administrativeAreaLevel1: this.administrativeAreaLevel1?.value,
+      administrativeAreaLevel2: this.administrativeAreaLevel2?.value,
+      administrativeAreaLevel3: this.administrativeAreaLevel3?.value,
+      createdAt: this.createdAt?.value,
+      updatedAt: this.updatedAt?.value,
+      deletedAt: this.deletedAt?.value,
+    };
+  }
+
+  toI18nRepository(): LiteralObject {
+    return {
+      id: uuid(),
+      countryId: this.id.value,
+      langId: this.langId.value,
+      name: this.name.value,
+      slug: this.slug.value,
+      administrativeAreaLevel1: this.administrativeAreaLevel1?.value,
+      administrativeAreaLevel2: this.administrativeAreaLevel2?.value,
+      administrativeAreaLevel3: this.administrativeAreaLevel3?.value,
+      createdAt: this.createdAt?.value,
+      updatedAt: this.updatedAt?.value,
+      deletedAt: this.deletedAt?.value,
     };
   }
 }

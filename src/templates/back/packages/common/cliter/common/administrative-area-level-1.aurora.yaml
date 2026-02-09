@@ -9,18 +9,22 @@ hasAuditing: true
 front:
   solidIcon: mat_solid:share_location
   outlineIcon: mat_outline:share_location
-description: >
-    First-level administrative subdivisions (states, provinces, regions) within countries.
-    Used for geographical organization. Referenced by administrative-area-level-2 for
-    hierarchical structure.
+description: |
+  First-level administrative subdivisions (states, provinces, regions) within countries. Used for geographical organization. Referenced by administrative-area-level-2 for hierarchical structure.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
-    description: >
-        Unique identifier for the administrative area level 1. UUID v4 format,
-        generated automatically on creation.
+    description: |
+      Unique identifier for the administrative area level 1. UUID v4 format, generated automatically on creation.
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
+    description: |
+      Auto-incrementing sequential identifier for the administrative area level 1. Used for internal ordering, human-readable reference numbers, and optimized queries. Not exposed in external APIs. Provides a stable, predictable identifier for database operations.
   - name: countryId
     type: id
     nullable: false
@@ -31,70 +35,58 @@ aggregateProperties:
       key: id
       field: country
       avoidConstraint: true
-    description: >
-        Foreign key to the country this administrative area belongs to. Establishes
-        parent-child relationship in geographical hierarchy.
+    description: |
+      Foreign key to the country this administrative area belongs to. Establishes parent-child relationship in geographical hierarchy.
   - name: code
     type: varchar
     maxLength: 8
     nullable: false
     index: unique
-    description: >
-        Standard code for the administrative area (e.g., "CA" for California, "TX" for Texas).
-        Must be unique across all level 1 areas. Maximum 8 characters.
+    description: |
+      Standard code for the administrative area (e.g., "CA" for California, "TX" for Texas). Must be unique across all level 1 areas. Maximum 8 characters.
   - name: customCode
     type: varchar
     maxLength: 64
     nullable: true
     index: unique
-    description: >
-        Optional custom code defined by the organization for internal identification.
-        Must be unique if provided. Can be used for legacy system integration or
-        custom business logic.
+    description: |
+      Optional custom code defined by the organization for internal identification. Must be unique if provided. Can be used for legacy system integration or custom business logic.
   - name: name
     type: varchar
     maxLength: 128
     nullable: false
     index: index
-    description: >
-        Full name of the administrative area (e.g., "California", "Texas", "Ontario").
-        Indexed for efficient searching and sorting.
+    description: |
+      Full name of the administrative area (e.g., "California", "Texas", "Ontario"). Indexed for efficient searching and sorting.
   - name: slug
     type: varchar
     maxLength: 128
     nullable: false
     index: index
-    description: >
-        URL-friendly identifier derived from the name. Lowercase, hyphenated format
-        (e.g., "california", "new-york"). Used for SEO-friendly URLs and routing.
+    description: |
+      URL-friendly identifier derived from the name. Lowercase, hyphenated format (e.g., "california", "new-york"). Used for SEO-friendly URLs and routing.
   - name: latitude
     type: decimal
     decimals:
       - 16
       - 14
     nullable: true
-    description: >
-        Geographical latitude coordinate of the administrative area's center point.
-        Precision of 14 decimal places allows sub-meter accuracy. Used for map
-        visualization and distance calculations.
+    description: |
+      Geographical latitude coordinate of the administrative area's center point. Precision of 14 decimal places allows sub-meter accuracy. Used for map visualization and distance calculations.
   - name: longitude
     type: decimal
     decimals:
       - 17
       - 14
     nullable: true
-    description: >
-        Geographical longitude coordinate of the administrative area's center point.
-        Precision of 14 decimal places allows sub-meter accuracy. Used for map
-        visualization and distance calculations.
+    description: |
+      Geographical longitude coordinate of the administrative area's center point. Precision of 14 decimal places allows sub-meter accuracy. Used for map visualization and distance calculations.
   - name: zoom
     type: smallint
     unsigned: true
     nullable: true
-    description: >
-        Default zoom level for map display when viewing this administrative area.
-        Typical range: 1 (world view) to 21 (building level). Determines initial
-        map scale in UI.
+    description: |
+      Default zoom level for map display when viewing this administrative area. Typical range: 1 (world view) to 21 (building level). Determines initial map scale in UI.
   - name: mapType
     type: enum
     enumOptions:
@@ -104,25 +96,31 @@ aggregateProperties:
       - TERRAIN
     nullable: true
     example: CommonAdministrativeAreaLevel1MapType.TERRAIN
-    description: >
-        Preferred map visualization type for this area. ROADMAP: Street map view.
-        SATELLITE: Aerial imagery. HYBRID: Satellite with road overlay. TERRAIN:
-        Topographic relief map. NULL uses system default.
+    description: |
+      Preferred map visualization type for this area. ROADMAP: Street map view. SATELLITE: Aerial imagery. HYBRID: Satellite with road overlay. TERRAIN: Topographic relief map. NULL uses system default.
   - name: createdAt
     type: timestamp
     nullable: true
-    description: >
-        Timestamp when the record was created. Automatically set on insertion.
-        Part of audit trail.
+    description: |
+      Timestamp when the record was created. Automatically set on insertion. Part of audit trail.
   - name: updatedAt
     type: timestamp
     nullable: true
-    description: >
-        Timestamp of the last update to the record. Automatically updated on
-        modification. Part of audit trail.
+    description: |
+      Timestamp of the last update to the record. Automatically updated on modification. Part of audit trail.
   - name: deletedAt
     type: timestamp
     nullable: true
-    description: >
-        Soft delete timestamp. NULL indicates active record. When set, record is
-        excluded from normal queries but preserved for audit and recovery.
+    description: |
+      Soft delete timestamp. NULL indicates active record. When set, record is excluded from normal queries but preserved for audit and recovery.
+excludedOperations:
+  - count
+  - delete
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - update
+  - updateAndIncrement
+  - upsert

@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-3.aurora.yaml
+ */
 import { CommonFindAdministrativeAreaLevel3ByIdHandler } from '@api/common/administrative-area-level-3';
 import { CommonAdministrativeAreaLevel3 } from '@api/graphql';
 import { Auth } from '@aurora/decorators';

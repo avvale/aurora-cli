@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import {
   CommonCountryDto,
   CommonFindCountryHandler,

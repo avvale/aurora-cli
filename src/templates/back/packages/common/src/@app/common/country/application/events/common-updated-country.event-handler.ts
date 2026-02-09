@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonUpdatedCountryEvent } from '@app/common/country';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
@@ -6,6 +10,6 @@ export class CommonUpdatedCountryEventHandler
   implements IEventHandler<CommonUpdatedCountryEvent>
 {
   handle(event: CommonUpdatedCountryEvent): void {
-    // console.log('UpdatedCountryEvent: ', event);
+    // 'UpdatedCountryEvent'
   }
 }

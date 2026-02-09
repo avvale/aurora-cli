@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonCreateCountriesHandler } from '@api/common/country';
 import { commonMockCountryData } from '@app/common/country';
 import { ICommandBus } from '@aurorajs.dev/core';

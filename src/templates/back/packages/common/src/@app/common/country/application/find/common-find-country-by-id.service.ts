@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonCountry, CommonICountryRepository } from '@app/common/country';
 import { CommonCountryId } from '@app/common/country/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';

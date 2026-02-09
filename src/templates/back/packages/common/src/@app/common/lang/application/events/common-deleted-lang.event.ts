@@ -1,17 +1,29 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
+import { CQMetadata } from '@aurorajs.dev/core';
+
 export class CommonDeletedLangEvent {
   constructor(
-    public readonly id: string,
-    public readonly name: string,
-    public readonly image: string,
-    public readonly iso6392: string,
-    public readonly iso6393: string,
-    public readonly ietf: string,
-    public readonly customCode: string,
-    public readonly dir: string,
-    public readonly sort: number,
-    public readonly isActive: boolean,
-    public readonly createdAt: string,
-    public readonly updatedAt: string,
-    public readonly deletedAt: string,
+    public readonly event: {
+      payload: {
+        id: string;
+        rowId: number;
+        name: string;
+        image: string;
+        iso6392: string;
+        iso6393: string;
+        ietf: string;
+        customCode: string;
+        dir: 'LTR' | 'RTL';
+        sort: number;
+        isActive: boolean;
+        createdAt: string;
+        updatedAt: string;
+        deletedAt: string;
+      };
+      cQMetadata?: CQMetadata;
+    },
   ) {}
 }

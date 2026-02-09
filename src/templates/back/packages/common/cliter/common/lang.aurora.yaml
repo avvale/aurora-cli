@@ -9,113 +9,104 @@ hasAuditing: true
 front:
   solidIcon: mat_solid:language
   outlineIcon: mat_outline:language
-description: >
-    Language configurations for internationalization. Stores language definitions with
-    ISO codes and display properties. Referenced by country (i18n), attachment, and
-    other modules supporting multi-language content.
+description: |
+  Language configurations for internationalization. Stores language definitions with ISO codes and display properties. Referenced by country (i18n), attachment, and other modules supporting multi-language content.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
-    description: >
-        Unique identifier for the language. UUID v4 format, generated automatically
-        on creation.
+    description: |
+      Unique identifier for the language. UUID v4 format, generated automatically on creation.
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
+    description: |
+      Auto-incrementing sequential identifier for the lang. Used for internal ordering, human-readable reference numbers, and optimized queries. Not exposed in external APIs. Provides a stable, predictable identifier for database operations.
   - name: name
     type: varchar
     maxLength: 128
     nullable: false
-    description: >
-        Full name of the language in its native form (e.g., "English", "Español",
-        "Français", "日本語"). Used for display in language selectors. Should be
-        recognizable by native speakers.
+    description: |
+      Full name of the language in its native form (e.g., "English", "Español", "Français", "日本語"). Used for display in language selectors. Should be recognizable by native speakers.
   - name: image
     type: varchar
     maxLength: 1022
     nullable: true
-    description: >
-        URL or path to language flag/icon image. Typically country flag representing
-        the language (e.g., UK flag for English, Spain flag for Spanish). Used for
-        visual language identification. Maximum 1022 characters for long URLs.
+    description: |
+      URL or path to language flag/icon image. Typically country flag representing the language (e.g., UK flag for English, Spain flag for Spanish). Used for visual language identification. Maximum 1022 characters for long URLs.
   - name: iso6392
     type: char
     length: 2
     nullable: false
     index: index
-    description: >
-        ISO 639-2 two-letter language code (e.g., "en", "es", "fr", "ja"). Standard
-        international identifier for languages. Most commonly used ISO standard.
-        Indexed for efficient lookups. Required field.
+    description: |
+      ISO 639-2 two-letter language code (e.g., "en", "es", "fr", "ja"). Standard international identifier for languages. Most commonly used ISO standard. Indexed for efficient lookups. Required field.
   - name: iso6393
     type: char
     length: 3
     nullable: false
     index: index
-    description: >
-        ISO 639-3 three-letter language code (e.g., "eng", "spa", "fra", "jpn").
-        Alternative standard identifier providing more specific language identification.
-        Indexed for efficient lookups. Required field.
+    description: |
+      ISO 639-3 three-letter language code (e.g., "eng", "spa", "fra", "jpn"). Alternative standard identifier providing more specific language identification. Indexed for efficient lookups. Required field.
   - name: ietf
     type: char
     length: 5
     nullable: false
     index: index
-    description: >
-        IETF language tag (BCP 47) for language and region (e.g., "en-US", "es-ES",
-        "fr-FR", "ja-JP"). Combines language code with region/country code. Used
-        for locale-specific formatting (dates, numbers, currency). Indexed for
-        efficient lookups. Required field.
+    description: |
+      IETF language tag (BCP 47) for language and region (e.g., "en-US", "es-ES", "fr-FR", "ja-JP"). Combines language code with region/country code. Used for locale-specific formatting (dates, numbers, currency). Indexed for efficient lookups. Required field.
   - name: customCode
     type: varchar
     maxLength: 64
     nullable: true
     index: index
-    description: >
-        Optional custom code defined by the organization for internal identification.
-        Can be used for legacy system integration or custom business logic. Indexed
-        for efficient lookups.
+    description: |
+      Optional custom code defined by the organization for internal identification. Can be used for legacy system integration or custom business logic. Indexed for efficient lookups.
   - name: dir
     type: enum
     enumOptions:
       - LTR
       - RTL
     nullable: false
-    description: >
-        Text directionality for the language. LTR: Left-to-right (English, Spanish,
-        French, etc.). RTL: Right-to-left (Arabic, Hebrew, Persian, etc.). Critical
-        for proper UI layout and text rendering. Required field.
+    description: |
+      Text directionality for the language. LTR: Left-to-right (English, Spanish, French, etc.). RTL: Right-to-left (Arabic, Hebrew, Persian, etc.). Critical for proper UI layout and text rendering. Required field.
   - name: sort
     type: smallint
     unsigned: true
     nullable: true
-    description: >
-        Display order for language lists in UI. Lower values appear first. NULL
-        values typically sorted last or alphabetically. Used for prioritizing
-        commonly used languages (e.g., English first, then Spanish).
+    description: |
+      Display order for language lists in UI. Lower values appear first. NULL values typically sorted last or alphabetically. Used for prioritizing commonly used languages (e.g., English first, then Spanish).
   - name: isActive
     type: boolean
     nullable: false
-    description: >
-        Indicates if the language is currently active and available for use. TRUE:
-        Language selectable and content can be translated. FALSE: Language disabled,
-        existing translations preserved but not editable. Used for feature toggles
-        and gradual rollout. Required field.
+    description: |
+      Indicates if the language is currently active and available for use. TRUE: Language selectable and content can be translated. FALSE: Language disabled, existing translations preserved but not editable. Used for feature toggles and gradual rollout. Required field.
   - name: createdAt
     type: timestamp
     nullable: true
-    description: >
-        Timestamp when the language was added to the system. Automatically set on
-        insertion. Part of audit trail.
+    description: |
+      Timestamp when the language was added to the system. Automatically set on insertion. Part of audit trail.
   - name: updatedAt
     type: timestamp
     nullable: true
-    description: >
-        Timestamp of the last update to the language record. Automatically updated
-        on modification. Part of audit trail.
+    description: |
+      Timestamp of the last update to the language record. Automatically updated on modification. Part of audit trail.
   - name: deletedAt
     type: timestamp
     nullable: true
-    description: >
-        Soft delete timestamp. NULL indicates active language. When set, language
-        is excluded from normal queries but preserved for data integrity of existing
-        translations and historical records.
+    description: |
+      Soft delete timestamp. NULL indicates active language. When set, language is excluded from normal queries but preserved for data integrity of existing translations and historical records.
+excludedOperations:
+  - count
+  - delete
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - update
+  - updateAndIncrement
+  - upsert

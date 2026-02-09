@@ -1,4 +1,7 @@
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonUpdateLangByIdCommand } from '@app/common/lang';
 import { CommonUpdateLangByIdService } from '@app/common/lang/application/update/common-update-lang-by-id.service';
 import {

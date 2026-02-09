@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import { CommonCreateAdministrativeAreaLevel1Handler } from '@api/common/administrative-area-level-1';
 import {
   CommonAdministrativeAreaLevel1,

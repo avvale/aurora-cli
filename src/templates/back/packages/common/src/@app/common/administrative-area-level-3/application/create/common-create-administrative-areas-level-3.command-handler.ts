@@ -1,4 +1,7 @@
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-3.aurora.yaml
+ */
 import { CommonCreateAdministrativeAreasLevel3Command } from '@app/common/administrative-area-level-3';
 import { CommonCreateAdministrativeAreasLevel3Service } from '@app/common/administrative-area-level-3/application/create/common-create-administrative-areas-level-3.service';
 import {

@@ -1,7 +1,15 @@
-import { CommonCreatedAdministrativeAreaLevel2Event } from './common-created-administrative-area-level-2.event';
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-2.aurora.yaml
+ */
+import { CommonCreatedAdministrativeAreaLevel2Event } from '@app/common/administrative-area-level-2';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class CommonCreatedAdministrativeAreasLevel2Event {
   constructor(
-    public readonly administrativeAreasLevel2: CommonCreatedAdministrativeAreaLevel2Event[],
+    public readonly event: {
+      payload: CommonCreatedAdministrativeAreaLevel2Event[];
+      cQMetadata?: CQMetadata;
+    },
   ) {}
 }

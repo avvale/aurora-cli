@@ -1,4 +1,7 @@
-import { CommonCountryDto } from '@api/common/country';
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonCountry } from '@api/graphql';
 import {
   CommonDeleteCountryByIdCommand,
@@ -14,7 +17,11 @@ import {
   IQueryBus,
   QueryStatement,
 } from '@aurorajs.dev/core';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 
 @Injectable()
 export class CommonDeleteCountryByIdHandler {
@@ -33,7 +40,7 @@ export class CommonDeleteCountryByIdHandler {
     timezone?: string,
     contentLanguage?: string,
     auditing?: AuditingMeta,
-  ): Promise<CommonCountry | CommonCountryDto> {
+  ): Promise<CommonCountry> {
     if (!contentLanguage)
       throw new BadRequestException(
         'To delete a multi-language object, the content-language header must be defined.',
@@ -53,6 +60,10 @@ export class CommonDeleteCountryByIdHandler {
         timezone,
       }),
     );
+
+    if (!country) {
+      throw new NotFoundException(`CommonCountry with id: ${id}, not found`);
+    }
 
     await this.commandBus.dispatch(
       new CommonDeleteCountryByIdCommand(id, constraint, {

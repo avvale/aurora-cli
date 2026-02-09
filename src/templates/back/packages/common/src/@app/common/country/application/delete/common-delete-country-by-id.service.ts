@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import {
   CommonICountryI18nRepository,
   CommonICountryRepository,
@@ -80,7 +84,10 @@ export class CommonDeleteCountryByIdService {
     // insert EventBus in object, to be able to apply and commit events
     const countryRegister = this.publisher.mergeObjectContext(country);
 
-    countryRegister.deleted(country); // apply event to model events
+    countryRegister.deleted({
+      payload: country,
+      cQMetadata,
+    }); // apply event to model events
     countryRegister.commit(); // commit all events of model
   }
 }

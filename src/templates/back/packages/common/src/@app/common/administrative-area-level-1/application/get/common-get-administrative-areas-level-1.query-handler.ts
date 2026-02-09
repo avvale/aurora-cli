@@ -1,9 +1,15 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import {
+  CommonAdministrativeAreaLevel1,
   CommonAdministrativeAreaLevel1Mapper,
   CommonAdministrativeAreaLevel1Response,
   CommonGetAdministrativeAreasLevel1Query,
 } from '@app/common/administrative-area-level-1';
 import { CommonGetAdministrativeAreasLevel1Service } from '@app/common/administrative-area-level-1/application/get/common-get-administrative-areas-level-1.service';
+import { LiteralObject } from '@aurorajs.dev/core';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(CommonGetAdministrativeAreasLevel1Query)
@@ -19,13 +25,17 @@ export class CommonGetAdministrativeAreasLevel1QueryHandler
 
   async execute(
     query: CommonGetAdministrativeAreasLevel1Query,
-  ): Promise<CommonAdministrativeAreaLevel1Response[]> {
+  ): Promise<CommonAdministrativeAreaLevel1Response[] | LiteralObject[]> {
+    const models = await this.getAdministrativeAreasLevel1Service.main(
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
+
+    if (query.cQMetadata?.excludeMapModelToAggregate) return models;
+
     return this.mapper.mapAggregatesToResponses(
-      await this.getAdministrativeAreasLevel1Service.main(
-        query.queryStatement,
-        query.constraint,
-        query.cQMetadata,
-      ),
+      models as CommonAdministrativeAreaLevel1[],
     );
   }
 }

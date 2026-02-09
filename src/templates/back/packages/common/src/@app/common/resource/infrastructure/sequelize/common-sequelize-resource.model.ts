@@ -1,5 +1,7 @@
-/* eslint-disable indent */
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import {
   AuditingSideEffectEvent,
   SequelizeAuditingAgent,
@@ -25,6 +27,10 @@ import {
   freezeTableName: true,
   timestamps: false,
   indexes: [
+    {
+      fields: ['rowId'],
+      unique: true,
+    },
     {
       fields: ['code'],
       unique: true,
@@ -140,16 +146,24 @@ export class CommonResourceModel extends Model<CommonResourceModel> {
   id: string;
 
   @Column({
+    field: 'rowId',
+    autoIncrement: true,
+    allowNull: false,
+    type: DataTypes.BIGINT,
+  })
+  rowId: number;
+
+  @Column({
     field: 'code',
     allowNull: false,
-    type: DataTypes.STRING(63),
+    type: DataTypes.STRING(64),
   })
   code: string;
 
   @Column({
     field: 'name',
     allowNull: false,
-    type: DataTypes.STRING(127),
+    type: DataTypes.STRING(128),
   })
   name: string;
 

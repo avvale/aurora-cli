@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import {
   CommonUpdateCountryByIdHandler,
   CommonUpdateCountryByIdResolver,

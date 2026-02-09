@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import { CommonDeleteAdministrativeAreaLevel1ByIdCommand } from '@app/common/administrative-area-level-1';
 import { CommonDeleteAdministrativeAreaLevel1ByIdService } from '@app/common/administrative-area-level-1/application/delete/common-delete-administrative-area-level-1-by-id.service';
 import { CommonAdministrativeAreaLevel1Id } from '@app/common/administrative-area-level-1/domain/value-objects';

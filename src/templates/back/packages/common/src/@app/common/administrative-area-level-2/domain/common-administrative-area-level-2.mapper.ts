@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-2.aurora.yaml
+ */
 import { CommonAdministrativeAreaLevel1Mapper } from '@app/common/administrative-area-level-1';
 import {
   CommonAdministrativeAreaLevel2,
@@ -15,6 +19,7 @@ import {
   CommonAdministrativeAreaLevel2Longitude,
   CommonAdministrativeAreaLevel2MapType,
   CommonAdministrativeAreaLevel2Name,
+  CommonAdministrativeAreaLevel2RowId,
   CommonAdministrativeAreaLevel2Slug,
   CommonAdministrativeAreaLevel2UpdatedAt,
   CommonAdministrativeAreaLevel2Zoom,
@@ -90,6 +95,9 @@ export class CommonAdministrativeAreaLevel2Mapper implements IMapper {
       new CommonAdministrativeAreaLevel2Id(administrativeAreaLevel2.id, {
         undefinable: true,
       }),
+      new CommonAdministrativeAreaLevel2RowId(administrativeAreaLevel2.rowId, {
+        undefinable: true,
+      }),
       new CommonAdministrativeAreaLevel2CountryId(
         administrativeAreaLevel2.countryId,
         { undefinable: true },
@@ -142,9 +150,10 @@ export class CommonAdministrativeAreaLevel2Mapper implements IMapper {
         { addTimezone: cQMetadata?.timezone },
       ),
       this.options.eagerLoading
-        ? new CommonCountryMapper({
-            eagerLoading: true,
-          }).mapModelToAggregate(administrativeAreaLevel2.country, cQMetadata)
+        ? new CommonCountryMapper({ eagerLoading: true }).mapModelToAggregate(
+            administrativeAreaLevel2.country,
+            cQMetadata,
+          )
         : undefined,
       this.options.eagerLoading
         ? new CommonAdministrativeAreaLevel1Mapper({
@@ -164,6 +173,7 @@ export class CommonAdministrativeAreaLevel2Mapper implements IMapper {
 
     return new CommonAdministrativeAreaLevel2Response(
       administrativeAreaLevel2.id.value,
+      administrativeAreaLevel2.rowId.value,
       administrativeAreaLevel2.countryId.value,
       administrativeAreaLevel2.administrativeAreaLevel1Id.value,
       administrativeAreaLevel2.code.value,

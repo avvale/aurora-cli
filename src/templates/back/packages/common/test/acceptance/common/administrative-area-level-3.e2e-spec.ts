@@ -1,6 +1,7 @@
-/* eslint-disable max-len */
-/* eslint-disable quotes */
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-3.aurora.yaml
+ */
 import { CommonModule } from '@api/common/common.module';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
@@ -9,7 +10,7 @@ import {
   commonMockAdministrativeAreaLevel3Data,
   CommonMockAdministrativeAreaLevel3Seeder,
 } from '@app/common/administrative-area-level-3';
-import { GraphQLConfigModule } from '@aurora/modules/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -99,6 +100,22 @@ describe('administrative-area-level-3', () => {
       .then((res) => {
         expect(res.body.message).toContain(
           'Value for CommonAdministrativeAreaLevel3Id must be defined, can not be null',
+        );
+      });
+  });
+
+  test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3RowId property can not to be null', () => {
+    return request(app.getHttpServer())
+      .post('/common/administrative-area-level-3/create')
+      .set('Accept', 'application/json')
+      .send({
+        ...mockData[0],
+        rowId: null,
+      })
+      .expect(400)
+      .then((res) => {
+        expect(res.body.message).toContain(
+          'Value for CommonAdministrativeAreaLevel3RowId must be defined, can not be null',
         );
       });
   });
@@ -211,6 +228,22 @@ describe('administrative-area-level-3', () => {
       .then((res) => {
         expect(res.body.message).toContain(
           'Value for CommonAdministrativeAreaLevel3Id must be defined, can not be undefined',
+        );
+      });
+  });
+
+  test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3RowId property can not to be undefined', () => {
+    return request(app.getHttpServer())
+      .post('/common/administrative-area-level-3/create')
+      .set('Accept', 'application/json')
+      .send({
+        ...mockData[0],
+        rowId: undefined,
+      })
+      .expect(400)
+      .then((res) => {
+        expect(res.body.message).toContain(
+          'Value for CommonAdministrativeAreaLevel3RowId must be defined, can not be undefined',
         );
       });
   });
@@ -391,51 +424,51 @@ describe('administrative-area-level-3', () => {
       });
   });
 
-  test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3CustomCode is too large, has a maximum length of 63', () => {
+  test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3CustomCode is too large, has a maximum length of 64', () => {
     return request(app.getHttpServer())
       .post('/common/administrative-area-level-3/create')
       .set('Accept', 'application/json')
       .send({
         ...mockData[0],
         customCode:
-          '****************************************************************',
+          '*****************************************************************',
       })
       .expect(400)
       .then((res) => {
         expect(res.body.message).toContain(
-          'Value for CommonAdministrativeAreaLevel3CustomCode is too large, has a maximum length of 63',
+          'Value for CommonAdministrativeAreaLevel3CustomCode is too large, has a maximum length of 64',
         );
       });
   });
 
-  test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Name is too large, has a maximum length of 127', () => {
+  test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Name is too large, has a maximum length of 128', () => {
     return request(app.getHttpServer())
       .post('/common/administrative-area-level-3/create')
       .set('Accept', 'application/json')
       .send({
         ...mockData[0],
-        name: '********************************************************************************************************************************',
+        name: '*********************************************************************************************************************************',
       })
       .expect(400)
       .then((res) => {
         expect(res.body.message).toContain(
-          'Value for CommonAdministrativeAreaLevel3Name is too large, has a maximum length of 127',
+          'Value for CommonAdministrativeAreaLevel3Name is too large, has a maximum length of 128',
         );
       });
   });
 
-  test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Slug is too large, has a maximum length of 127', () => {
+  test('/REST:POST common/administrative-area-level-3/create - Got 400 Conflict, AdministrativeAreaLevel3Slug is too large, has a maximum length of 128', () => {
     return request(app.getHttpServer())
       .post('/common/administrative-area-level-3/create')
       .set('Accept', 'application/json')
       .send({
         ...mockData[0],
-        slug: '********************************************************************************************************************************',
+        slug: '*********************************************************************************************************************************',
       })
       .expect(400)
       .then((res) => {
         expect(res.body.message).toContain(
-          'Value for CommonAdministrativeAreaLevel3Slug is too large, has a maximum length of 127',
+          'Value for CommonAdministrativeAreaLevel3Slug is too large, has a maximum length of 128',
         );
       });
   });
@@ -692,6 +725,7 @@ describe('administrative-area-level-3', () => {
                         commonCreateAdministrativeAreaLevel3 (payload:$payload)
                         {
                             id
+                            rowId
                             countryId
                             administrativeAreaLevel1Id
                             administrativeAreaLevel2Id
@@ -772,6 +806,7 @@ describe('administrative-area-level-3', () => {
                         commonGetAdministrativeAreasLevel3 (query:$query)
                         {
                             id
+                            rowId
                             code
                             customCode
                             name
@@ -815,6 +850,7 @@ describe('administrative-area-level-3', () => {
                         commonCreateAdministrativeAreaLevel3 (payload:$payload)
                         {
                             id
+                            rowId
                             countryId
                             administrativeAreaLevel1Id
                             administrativeAreaLevel2Id
@@ -855,6 +891,7 @@ describe('administrative-area-level-3', () => {
                         commonFindAdministrativeAreaLevel3 (query:$query)
                         {
                             id
+                            rowId
                             code
                             customCode
                             name
@@ -899,6 +936,7 @@ describe('administrative-area-level-3', () => {
                         commonFindAdministrativeAreaLevel3 (query:$query)
                         {
                             id
+                            rowId
                             code
                             customCode
                             name
@@ -939,6 +977,7 @@ describe('administrative-area-level-3', () => {
                         commonFindAdministrativeAreaLevel3ById (id:$id)
                         {
                             id
+                            rowId
                             code
                             customCode
                             name
@@ -979,6 +1018,7 @@ describe('administrative-area-level-3', () => {
                         commonFindAdministrativeAreaLevel3ById (id:$id)
                         {
                             id
+                            rowId
                             code
                             customCode
                             name
@@ -1015,6 +1055,7 @@ describe('administrative-area-level-3', () => {
                         commonUpdateAdministrativeAreaLevel3ById (payload:$payload)
                         {
                             id
+                            rowId
                             code
                             customCode
                             name
@@ -1058,6 +1099,7 @@ describe('administrative-area-level-3', () => {
                         commonUpdateAdministrativeAreaLevel3ById (payload:$payload)
                         {
                             id
+                            rowId
                             code
                             customCode
                             name
@@ -1097,6 +1139,7 @@ describe('administrative-area-level-3', () => {
                         commonUpdateAdministrativeAreasLevel3 (payload:$payload query:$query)
                         {
                             id
+                            rowId
                             code
                             customCode
                             name
@@ -1141,6 +1184,7 @@ describe('administrative-area-level-3', () => {
                         commonDeleteAdministrativeAreaLevel3ById (id:$id)
                         {
                             id
+                            rowId
                             code
                             customCode
                             name
@@ -1181,6 +1225,7 @@ describe('administrative-area-level-3', () => {
                         commonDeleteAdministrativeAreaLevel3ById (id:$id)
                         {
                             id
+                            rowId
                             code
                             customCode
                             name

@@ -1,9 +1,15 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import {
   CommonGetResourcesQuery,
+  CommonResource,
   CommonResourceMapper,
   CommonResourceResponse,
 } from '@app/common/resource';
 import { CommonGetResourcesService } from '@app/common/resource/application/get/common-get-resources.service';
+import { LiteralObject } from '@aurorajs.dev/core';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(CommonGetResourcesQuery)
@@ -18,13 +24,15 @@ export class CommonGetResourcesQueryHandler
 
   async execute(
     query: CommonGetResourcesQuery,
-  ): Promise<CommonResourceResponse[]> {
-    return this.mapper.mapAggregatesToResponses(
-      await this.getResourcesService.main(
-        query.queryStatement,
-        query.constraint,
-        query.cQMetadata,
-      ),
+  ): Promise<CommonResourceResponse[] | LiteralObject[]> {
+    const models = await this.getResourcesService.main(
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
     );
+
+    if (query.cQMetadata?.excludeMapModelToAggregate) return models;
+
+    return this.mapper.mapAggregatesToResponses(models as CommonResource[]);
   }
 }

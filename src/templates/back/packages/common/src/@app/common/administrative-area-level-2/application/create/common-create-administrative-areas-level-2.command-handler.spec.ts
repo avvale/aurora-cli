@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-2.aurora.yaml
+ */
 import {
   CommonCreateAdministrativeAreasLevel2Command,
   commonMockAdministrativeAreaLevel2Data,

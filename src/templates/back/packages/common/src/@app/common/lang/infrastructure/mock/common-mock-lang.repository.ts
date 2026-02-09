@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import {
   CommonILangRepository,
   CommonLang,
@@ -15,6 +19,7 @@ import {
   CommonLangIso6392,
   CommonLangIso6393,
   CommonLangName,
+  CommonLangRowId,
   CommonLangSort,
   CommonLangUpdatedAt,
 } from '@app/common/lang/domain/value-objects';
@@ -51,6 +56,7 @@ export class CommonMockLangRepository
       this.collectionSource.push(
         CommonLang.register(
           new CommonLangId(itemCollection.id),
+          new CommonLangRowId(itemCollection.rowId),
           new CommonLangName(itemCollection.name),
           new CommonLangImage(itemCollection.image),
           new CommonLangIso6392(itemCollection.iso6392),

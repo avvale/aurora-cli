@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import {
   CommonICountryI18nRepository,
   CommonICountryRepository,
@@ -24,6 +27,7 @@ import {
   CommonCountryLongitude,
   CommonCountryMapType,
   CommonCountryPrefix,
+  CommonCountryRowId,
   CommonCountrySort,
   CommonCountryZoom,
 } from '@app/common/country/domain/value-objects';
@@ -79,6 +83,7 @@ describe('CommonCreateCountryService', () => {
         await service.main(
           {
             id: new CommonCountryId(commonMockCountryData[0].id),
+            rowId: new CommonCountryRowId(commonMockCountryData[0].rowId),
             iso3166Alpha2: new CommonCountryIso3166Alpha2(
               commonMockCountryData[0].iso3166Alpha2,
             ),

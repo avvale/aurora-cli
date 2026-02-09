@@ -1,8 +1,11 @@
-import { CommonResourceDto } from '@api/common/resource';
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonResource } from '@api/graphql';
 import { CommonFindResourceQuery } from '@app/common/resource';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class CommonFindResourceHandler {
@@ -12,11 +15,17 @@ export class CommonFindResourceHandler {
     queryStatement?: QueryStatement,
     constraint?: QueryStatement,
     timezone?: string,
-  ): Promise<CommonResource | CommonResourceDto> {
-    return await this.queryBus.ask(
+  ): Promise<CommonResource> {
+    const resource = await this.queryBus.ask(
       new CommonFindResourceQuery(queryStatement, constraint, {
         timezone,
       }),
     );
+
+    if (!resource) {
+      throw new NotFoundException(`CommonResource not found`);
+    }
+
+    return resource;
   }
 }

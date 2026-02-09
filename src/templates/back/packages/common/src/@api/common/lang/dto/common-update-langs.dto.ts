@@ -1,65 +1,78 @@
-/* eslint-disable indent */
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonLangDir } from '@api/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CommonUpdateLangsDto {
   @ApiProperty({
     type: String,
-    description: 'id [input here api field description]',
+    description:
+      'Unique identifier for the language. UUID v4 format, generated automatically on creation.',
   })
   id?: string;
 
   @ApiProperty({
     type: String,
-    description: 'name [input here api field description]',
+    description:
+      'Full name of the language in its native form (e.g., &quot;English&quot;, &quot;Español&quot;, &quot;Français&quot;, &quot;日本語&quot;). Used for display in language selectors. Should be recognizable by native speakers.',
   })
   name?: string;
 
   @ApiProperty({
     type: String,
-    description: 'image [input here api field description]',
+    description:
+      'URL or path to language flag/icon image. Typically country flag representing the language (e.g., UK flag for English, Spain flag for Spanish). Used for visual language identification. Maximum 1022 characters for long URLs.',
   })
   image?: string;
 
   @ApiProperty({
     type: String,
-    description: 'iso6392 [input here api field description]',
+    description:
+      'ISO 639-2 two-letter language code (e.g., &quot;en&quot;, &quot;es&quot;, &quot;fr&quot;, &quot;ja&quot;). Standard international identifier for languages. Most commonly used ISO standard. Indexed for efficient lookups. Required field.',
   })
   iso6392?: string;
 
   @ApiProperty({
     type: String,
-    description: 'iso6393 [input here api field description]',
+    description:
+      'ISO 639-3 three-letter language code (e.g., &quot;eng&quot;, &quot;spa&quot;, &quot;fra&quot;, &quot;jpn&quot;). Alternative standard identifier providing more specific language identification. Indexed for efficient lookups. Required field.',
   })
   iso6393?: string;
 
   @ApiProperty({
     type: String,
-    description: 'ietf [input here api field description]',
+    description:
+      'IETF language tag (BCP 47) for language and region (e.g., &quot;en-US&quot;, &quot;es-ES&quot;, &quot;fr-FR&quot;, &quot;ja-JP&quot;). Combines language code with region/country code. Used for locale-specific formatting (dates, numbers, currency). Indexed for efficient lookups. Required field.',
   })
   ietf?: string;
 
   @ApiProperty({
     type: String,
-    description: 'customCode [input here api field description]',
+    description:
+      'Optional custom code defined by the organization for internal identification. Can be used for legacy system integration or custom business logic. Indexed for efficient lookups.',
   })
   customCode?: string;
 
   @ApiProperty({
     enum: CommonLangDir,
-    description: 'dir [input here api field description]',
+    description:
+      'Text directionality for the language. LTR: Left-to-right (English, Spanish, French, etc.). RTL: Right-to-left (Arabic, Hebrew, Persian, etc.). Critical for proper UI layout and text rendering. Required field.',
   })
   dir?: CommonLangDir;
 
   @ApiProperty({
     type: Number,
-    description: 'sort [input here api field description]',
+    description:
+      'Display order for language lists in UI. Lower values appear first. NULL values typically sorted last or alphabetically. Used for prioritizing commonly used languages (e.g., English first, then Spanish).',
   })
   sort?: number;
 
   @ApiProperty({
     type: Boolean,
-    description: 'isActive [input here api field description]',
+    description:
+      'Indicates if the language is currently active and available for use. TRUE: Language selectable and content can be translated. FALSE: Language disabled, existing translations preserved but not editable. Used for feature toggles and gradual rollout. Required field.',
   })
   isActive?: boolean;
 }

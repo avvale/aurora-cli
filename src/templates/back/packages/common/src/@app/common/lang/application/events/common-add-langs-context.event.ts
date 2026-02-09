@@ -1,16 +1,20 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import {
   CommonCreatedLangEvent,
   CommonCreatedLangsEvent,
-  CommonDeletedLangEvent,
-  CommonDeletedLangsEvent,
   CommonLang,
-  CommonUpdatedLangEvent,
-  CommonUpdatedLangsEvent,
 } from '@app/common/lang';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class CommonAddLangsContextEvent extends AggregateRoot {
-  constructor(public readonly aggregateRoots: CommonLang[] = []) {
+  constructor(
+    public readonly aggregateRoots: CommonLang[] = [],
+    public readonly cQMetadata?: CQMetadata,
+  ) {
     super();
   }
 
@@ -20,76 +24,29 @@ export class CommonAddLangsContextEvent extends AggregateRoot {
 
   created(): void {
     this.apply(
-      new CommonCreatedLangsEvent(
-        this.aggregateRoots.map(
+      new CommonCreatedLangsEvent({
+        payload: this.aggregateRoots.map(
           (lang) =>
-            new CommonCreatedLangEvent(
-              lang.id.value,
-              lang.name.value,
-              lang.image?.value,
-              lang.iso6392.value,
-              lang.iso6393.value,
-              lang.ietf.value,
-              lang.customCode?.value,
-              lang.dir.value,
-              lang.sort?.value,
-              lang.isActive.value,
-              lang.createdAt?.value,
-              lang.updatedAt?.value,
-              lang.deletedAt?.value,
-            ),
+            new CommonCreatedLangEvent({
+              payload: {
+                id: lang.id.value,
+                name: lang.name.value,
+                image: lang.image?.value,
+                iso6392: lang.iso6392.value,
+                iso6393: lang.iso6393.value,
+                ietf: lang.ietf.value,
+                customCode: lang.customCode?.value,
+                dir: lang.dir.value,
+                sort: lang.sort?.value,
+                isActive: lang.isActive.value,
+                createdAt: lang.createdAt?.value,
+                updatedAt: lang.updatedAt?.value,
+                deletedAt: lang.deletedAt?.value,
+              },
+            }),
         ),
-      ),
-    );
-  }
-
-  updated(): void {
-    this.apply(
-      new CommonUpdatedLangsEvent(
-        this.aggregateRoots.map(
-          (lang) =>
-            new CommonUpdatedLangEvent(
-              lang.id.value,
-              lang.name.value,
-              lang.image?.value,
-              lang.iso6392.value,
-              lang.iso6393.value,
-              lang.ietf.value,
-              lang.customCode?.value,
-              lang.dir.value,
-              lang.sort?.value,
-              lang.isActive.value,
-              lang.createdAt?.value,
-              lang.updatedAt?.value,
-              lang.deletedAt?.value,
-            ),
-        ),
-      ),
-    );
-  }
-
-  deleted(): void {
-    this.apply(
-      new CommonDeletedLangsEvent(
-        this.aggregateRoots.map(
-          (lang) =>
-            new CommonDeletedLangEvent(
-              lang.id.value,
-              lang.name.value,
-              lang.image?.value,
-              lang.iso6392.value,
-              lang.iso6393.value,
-              lang.ietf.value,
-              lang.customCode?.value,
-              lang.dir.value,
-              lang.sort?.value,
-              lang.isActive.value,
-              lang.createdAt?.value,
-              lang.updatedAt?.value,
-              lang.deletedAt?.value,
-            ),
-        ),
-      ),
+        cQMetadata: this.cQMetadata,
+      }),
     );
   }
 }

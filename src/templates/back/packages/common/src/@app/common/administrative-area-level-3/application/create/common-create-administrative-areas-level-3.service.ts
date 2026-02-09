@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-3.aurora.yaml
+ */
 import {
   CommonAddAdministrativeAreasLevel3ContextEvent,
   CommonAdministrativeAreaLevel3,
@@ -48,33 +52,29 @@ export class CommonCreateAdministrativeAreasLevel3Service {
     cQMetadata?: CQMetadata,
   ): Promise<void> {
     // create aggregate with factory pattern
-    const aggregateAdministrativeAreasLevel3 = payload.map(
-      (administrativeAreaLevel3) =>
-        CommonAdministrativeAreaLevel3.register(
-          administrativeAreaLevel3.id,
-          administrativeAreaLevel3.countryId,
-          administrativeAreaLevel3.administrativeAreaLevel1Id,
-          administrativeAreaLevel3.administrativeAreaLevel2Id,
-          administrativeAreaLevel3.code,
-          administrativeAreaLevel3.customCode,
-          administrativeAreaLevel3.name,
-          administrativeAreaLevel3.slug,
-          administrativeAreaLevel3.latitude,
-          administrativeAreaLevel3.longitude,
-          administrativeAreaLevel3.zoom,
-          administrativeAreaLevel3.mapType,
-          new CommonAdministrativeAreaLevel3CreatedAt({
-            currentTimestamp: true,
-          }),
-          new CommonAdministrativeAreaLevel3UpdatedAt({
-            currentTimestamp: true,
-          }),
-          null, // deleteAt
-        ),
+    const administrativeAreasLevel3 = payload.map((administrativeAreaLevel3) =>
+      CommonAdministrativeAreaLevel3.register(
+        administrativeAreaLevel3.id,
+        undefined, // rowId
+        administrativeAreaLevel3.countryId,
+        administrativeAreaLevel3.administrativeAreaLevel1Id,
+        administrativeAreaLevel3.administrativeAreaLevel2Id,
+        administrativeAreaLevel3.code,
+        administrativeAreaLevel3.customCode,
+        administrativeAreaLevel3.name,
+        administrativeAreaLevel3.slug,
+        administrativeAreaLevel3.latitude,
+        administrativeAreaLevel3.longitude,
+        administrativeAreaLevel3.zoom,
+        administrativeAreaLevel3.mapType,
+        new CommonAdministrativeAreaLevel3CreatedAt({ currentTimestamp: true }),
+        new CommonAdministrativeAreaLevel3UpdatedAt({ currentTimestamp: true }),
+        null, // deleteAt
+      ),
     );
 
     // insert
-    await this.repository.insert(aggregateAdministrativeAreasLevel3, {
+    await this.repository.insert(administrativeAreasLevel3, {
       insertOptions: cQMetadata?.repositoryOptions,
     });
 
@@ -83,7 +83,8 @@ export class CommonCreateAdministrativeAreasLevel3Service {
     const administrativeAreasLevel3Registered =
       this.publisher.mergeObjectContext(
         new CommonAddAdministrativeAreasLevel3ContextEvent(
-          aggregateAdministrativeAreasLevel3,
+          administrativeAreasLevel3,
+          cQMetadata,
         ),
       );
 

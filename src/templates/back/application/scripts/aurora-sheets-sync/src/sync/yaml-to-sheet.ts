@@ -33,6 +33,13 @@ export interface PushResult {
   messages: string[];
 }
 
+interface HyperlinkContext {
+  currentBcName: string;
+  allBcConfigs: Record<string, { spreadsheetId: string }>;
+  sheetsApi: sheets_v4.Sheets;
+  externalSheetIdsCache: Map<string, Map<string, number>>;
+}
+
 /**
  * Push YAML schemas to Google Sheets
  */
@@ -108,7 +115,15 @@ export async function pushBoundedContext(
       bcConfig.spreadsheetId,
     );
 
-    // Step 3: Update each module sheet with data
+    // Step 3: Create hyperlink context for external BC references
+    const hyperlinkContext: HyperlinkContext = {
+      currentBcName: boundedContextName,
+      allBcConfigs: config.getBoundedContextsConfig(),
+      sheetsApi,
+      externalSheetIdsCache: new Map(),
+    };
+
+    // Step 4: Update each module sheet with data
     for (const schema of schemas) {
       try {
         await updateModuleSheet(
@@ -116,6 +131,7 @@ export async function pushBoundedContext(
           bcConfig.spreadsheetId,
           schema,
           moduleSheetIds,
+          hyperlinkContext,
         );
         result.modulesProcessed++;
         result.messages.push(`✓ Updated: ${schema.moduleName}`);
@@ -175,6 +191,15 @@ function getSchemaValue(schema: AuroraSchema, path: string): unknown {
     }
   }
   return value;
+}
+
+/**
+ * Extract bounded context name from a modulePath
+ * Example: "common/country" -> "common"
+ */
+function getBoundedContextFromPath(modulePath: string): string {
+  const parts = modulePath.split('/');
+  return parts[0] || '';
 }
 
 /**
@@ -379,28 +404,72 @@ async function readModuleHeaders(
  * Map a property to a row based on available headers
  * Only includes values for headers that exist in the sheet
  * @param moduleSheetIds - Map of module names to sheet IDs for hyperlinks
+ * @param hyperlinkContext - Context for generating external BC hyperlinks
  */
-function mapPropertyToRow(
+async function mapPropertyToRow(
   prop: AuroraProperty,
   headers: string[],
   moduleSheetIds: Map<string, number>,
-): string[] {
+  hyperlinkContext: HyperlinkContext,
+): Promise<string[]> {
   const propRow = propertyToSheetRow(prop);
-  return headers.map((header) => {
+  const row: string[] = [];
+
+  for (const header of headers) {
     const value = propRow[header as keyof SheetPropertyRow];
 
-    // Special handling for 'master' column - add hyperlink if module exists in this BC
+    // Special handling for 'master' column - add hyperlink
     if (header === 'master' && value) {
-      const sheetId = moduleSheetIds.get(value);
-      if (sheetId !== undefined) {
-        return `=HYPERLINK("#gid=${sheetId}", "${value}")`;
+      // Check if it's an internal module (same BC)
+      const internalSheetId = moduleSheetIds.get(value);
+      if (internalSheetId !== undefined) {
+        row.push(`=HYPERLINK("#gid=${internalSheetId}", "${value}")`);
+        continue;
       }
-      // Module from another BC - no hyperlink
-      return value;
+
+      // Check if it's an external BC reference
+      const modulePath = prop.relationship?.modulePath;
+      if (modulePath) {
+        const externalBcName = getBoundedContextFromPath(modulePath);
+        const externalBcConfig = hyperlinkContext.allBcConfigs[externalBcName];
+
+        // External BC is configured - generate external hyperlink
+        if (
+          externalBcConfig &&
+          externalBcName !== hyperlinkContext.currentBcName
+        ) {
+          // Get sheet IDs for external BC (with caching)
+          let externalSheetIds =
+            hyperlinkContext.externalSheetIdsCache.get(externalBcName);
+          if (!externalSheetIds) {
+            externalSheetIds = await getSheetIdMap(
+              hyperlinkContext.sheetsApi,
+              externalBcConfig.spreadsheetId,
+            );
+            hyperlinkContext.externalSheetIdsCache.set(
+              externalBcName,
+              externalSheetIds,
+            );
+          }
+
+          const externalSheetId = externalSheetIds.get(value);
+          if (externalSheetId !== undefined) {
+            const externalUrl = `https://docs.google.com/spreadsheets/d/${externalBcConfig.spreadsheetId}/edit#gid=${externalSheetId}`;
+            row.push(`=HYPERLINK("${externalUrl}", "${value}")`);
+            continue;
+          }
+        }
+      }
+
+      // Module from another BC not configured - plain text
+      row.push(value);
+      continue;
     }
 
-    return value || '';
-  });
+    row.push(value || '');
+  }
+
+  return row;
 }
 
 /**
@@ -428,12 +497,14 @@ async function getSheetIdMap(
  * Update a single module sheet
  * Reads headers from row 1 (never modified) and writes properties from row 2
  * @param moduleSheetIds - Map of module names to sheet IDs for master hyperlinks
+ * @param hyperlinkContext - Context for generating external BC hyperlinks
  */
 async function updateModuleSheet(
   api: sheets_v4.Sheets,
   spreadsheetId: string,
   schema: AuroraSchema,
   moduleSheetIds: Map<string, number>,
+  hyperlinkContext: HyperlinkContext,
 ): Promise<void> {
   const sheetName = schema.moduleName;
 
@@ -457,7 +528,14 @@ async function updateModuleSheet(
     // For pivot-containing properties, simplify them (remove pivot details)
     // but keep them in their original position
     const processedProp = createPropertyWithoutPivot(prop);
-    dataRows.push(mapPropertyToRow(processedProp, headers, moduleSheetIds));
+    dataRows.push(
+      await mapPropertyToRow(
+        processedProp,
+        headers,
+        moduleSheetIds,
+        hyperlinkContext,
+      ),
+    );
   }
 
   // Calculate last column letter based on headers count

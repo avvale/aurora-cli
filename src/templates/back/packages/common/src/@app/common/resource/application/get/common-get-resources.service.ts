@@ -1,8 +1,12 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import {
   CommonIResourceRepository,
   CommonResource,
 } from '@app/common/resource';
-import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -13,7 +17,7 @@ export class CommonGetResourcesService {
     queryStatement?: QueryStatement,
     constraint?: QueryStatement,
     cQMetadata?: CQMetadata,
-  ): Promise<CommonResource[]> {
+  ): Promise<CommonResource[] | LiteralObject[]> {
     return await this.repository.get({
       queryStatement,
       constraint,

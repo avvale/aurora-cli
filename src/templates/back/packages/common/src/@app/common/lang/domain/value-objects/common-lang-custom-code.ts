@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { StringValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class CommonLangCustomCode extends StringValueObject {
@@ -11,7 +15,7 @@ export class CommonLangCustomCode extends StringValueObject {
           name: 'CommonLangCustomCode',
           nullable: true,
           undefinable: true,
-          maxLength: 63,
+          maxLength: 64,
         },
         validationRules,
       ),

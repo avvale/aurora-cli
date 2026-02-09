@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonPaginateCountriesHandler } from '@api/common/country';
 import { commonMockCountryData } from '@app/common/country';
 import { commonMockLangData } from '@app/common/lang';

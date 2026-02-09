@@ -124,11 +124,18 @@ export class SheetsConfigManager {
     return bc;
   }
 
-  getAllBoundedContexts(): string[] {
+  getAllBoundedContextNames(): string[] {
     if (!this.config) {
       throw new Error('Config not loaded. Call load() first.');
     }
     return Object.keys(this.config.boundedContexts);
+  }
+
+  getBoundedContextsConfig(): Record<string, BoundedContextConfig> {
+    if (!this.config) {
+      throw new Error('Config not loaded. Call load() first.');
+    }
+    return this.config.boundedContexts;
   }
 
   getCliterPath(): string {

@@ -1,7 +1,7 @@
-import {
-  CommonResourceDto,
-  CommonUpdateResourceByIdDto,
-} from '@api/common/resource';
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonResource, CommonUpdateResourceByIdInput } from '@api/graphql';
 import {
   CommonFindResourceByIdQuery,
@@ -9,12 +9,12 @@ import {
 } from '@app/common/resource';
 import {
   AuditingMeta,
+  diff,
   ICommandBus,
   IQueryBus,
   QueryStatement,
-  diff,
 } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class CommonUpdateResourceByIdHandler {
@@ -24,16 +24,22 @@ export class CommonUpdateResourceByIdHandler {
   ) {}
 
   async main(
-    payload: CommonUpdateResourceByIdInput | CommonUpdateResourceByIdDto,
+    payload: CommonUpdateResourceByIdInput,
     constraint?: QueryStatement,
     timezone?: string,
     auditing?: AuditingMeta,
-  ): Promise<CommonResource | CommonResourceDto> {
+  ): Promise<CommonResource> {
     const resource = await this.queryBus.ask(
       new CommonFindResourceByIdQuery(payload.id, constraint, {
         timezone,
       }),
     );
+
+    if (!resource) {
+      throw new NotFoundException(
+        `CommonResource with id: ${payload.id}, not found`,
+      );
+    }
 
     const dataToUpdate = diff(payload, resource);
 

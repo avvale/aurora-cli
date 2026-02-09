@@ -1,4 +1,7 @@
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import {
   CommonCreatedResourceEvent,
   CommonDeletedResourceEvent,
@@ -12,13 +15,15 @@ import {
   CommonResourceId,
   CommonResourceIsActive,
   CommonResourceName,
+  CommonResourceRowId,
   CommonResourceUpdatedAt,
 } from '@app/common/resource/domain/value-objects';
-import { LiteralObject } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class CommonResource extends AggregateRoot {
   id: CommonResourceId;
+  rowId: CommonResourceRowId;
   code: CommonResourceCode;
   name: CommonResourceName;
   isActive: CommonResourceIsActive;
@@ -29,6 +34,7 @@ export class CommonResource extends AggregateRoot {
 
   constructor(
     id: CommonResourceId,
+    rowId: CommonResourceRowId,
     code: CommonResourceCode,
     name: CommonResourceName,
     isActive: CommonResourceIsActive,
@@ -39,6 +45,7 @@ export class CommonResource extends AggregateRoot {
   ) {
     super();
     this.id = id;
+    this.rowId = rowId;
     this.code = code;
     this.name = name;
     this.isActive = isActive;
@@ -50,6 +57,7 @@ export class CommonResource extends AggregateRoot {
 
   static register(
     id: CommonResourceId,
+    rowId: CommonResourceRowId,
     code: CommonResourceCode,
     name: CommonResourceName,
     isActive: CommonResourceIsActive,
@@ -60,6 +68,7 @@ export class CommonResource extends AggregateRoot {
   ): CommonResource {
     return new CommonResource(
       id,
+      rowId,
       code,
       name,
       isActive,
@@ -70,54 +79,65 @@ export class CommonResource extends AggregateRoot {
     );
   }
 
-  created(resource: CommonResource): void {
+  created(event: { payload: CommonResource; cQMetadata?: CQMetadata }): void {
     this.apply(
-      new CommonCreatedResourceEvent(
-        resource.id.value,
-        resource.code.value,
-        resource.name.value,
-        resource.isActive.value,
-        resource.hasAttachments.value,
-        resource.createdAt?.value,
-        resource.updatedAt?.value,
-        resource.deletedAt?.value,
-      ),
+      new CommonCreatedResourceEvent({
+        payload: {
+          id: event.payload.id.value,
+          code: event.payload.code.value,
+          name: event.payload.name.value,
+          isActive: event.payload.isActive.value,
+          hasAttachments: event.payload.hasAttachments.value,
+          createdAt: event.payload.createdAt?.value,
+          updatedAt: event.payload.updatedAt?.value,
+          deletedAt: event.payload.deletedAt?.value,
+        },
+        cQMetadata: event.cQMetadata,
+      }),
     );
   }
 
-  updated(resource: CommonResource): void {
+  updated(event: { payload: CommonResource; cQMetadata?: CQMetadata }): void {
     this.apply(
-      new CommonUpdatedResourceEvent(
-        resource.id?.value,
-        resource.code?.value,
-        resource.name?.value,
-        resource.isActive?.value,
-        resource.hasAttachments?.value,
-        resource.createdAt?.value,
-        resource.updatedAt?.value,
-        resource.deletedAt?.value,
-      ),
+      new CommonUpdatedResourceEvent({
+        payload: {
+          id: event.payload.id?.value,
+          code: event.payload.code?.value,
+          name: event.payload.name?.value,
+          isActive: event.payload.isActive?.value,
+          hasAttachments: event.payload.hasAttachments?.value,
+          createdAt: event.payload.createdAt?.value,
+          updatedAt: event.payload.updatedAt?.value,
+          deletedAt: event.payload.deletedAt?.value,
+        },
+        cQMetadata: event.cQMetadata,
+      }),
     );
   }
 
-  deleted(resource: CommonResource): void {
+  deleted(event: { payload: CommonResource; cQMetadata?: CQMetadata }): void {
     this.apply(
-      new CommonDeletedResourceEvent(
-        resource.id.value,
-        resource.code.value,
-        resource.name.value,
-        resource.isActive.value,
-        resource.hasAttachments.value,
-        resource.createdAt?.value,
-        resource.updatedAt?.value,
-        resource.deletedAt?.value,
-      ),
+      new CommonDeletedResourceEvent({
+        payload: {
+          id: event.payload.id.value,
+          rowId: event.payload.rowId.value,
+          code: event.payload.code.value,
+          name: event.payload.name.value,
+          isActive: event.payload.isActive.value,
+          hasAttachments: event.payload.hasAttachments.value,
+          createdAt: event.payload.createdAt?.value,
+          updatedAt: event.payload.updatedAt?.value,
+          deletedAt: event.payload.deletedAt?.value,
+        },
+        cQMetadata: event.cQMetadata,
+      }),
     );
   }
 
   toDTO(): LiteralObject {
     return {
       id: this.id.value,
+      rowId: this.rowId.value,
       code: this.code.value,
       name: this.name.value,
       isActive: this.isActive.value,

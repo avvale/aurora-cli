@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-3.aurora.yaml
+ */
 import { CommonPaginateAdministrativeAreasLevel3Handler } from '@api/common/administrative-area-level-3';
 import { Pagination } from '@api/graphql';
 import { Auth } from '@aurora/decorators';

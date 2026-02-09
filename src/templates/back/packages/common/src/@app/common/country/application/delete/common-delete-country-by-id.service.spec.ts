@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/** * @aurora-generated * @source cliter/common/country.aurora.yaml */
 import {
   CommonICountryI18nRepository,
   CommonICountryRepository,
@@ -19,7 +19,6 @@ describe('CommonDeleteCountryByIdService', () => {
   let service: CommonDeleteCountryByIdService;
   let repository: CommonICountryRepository;
   let mockRepository: CommonMockCountryRepository;
-
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -56,17 +55,14 @@ describe('CommonDeleteCountryByIdService', () => {
         },
       ],
     }).compile();
-
     service = module.get(CommonDeleteCountryByIdService);
     repository = module.get(CommonICountryRepository);
     mockRepository = module.get(CommonMockCountryRepository);
   });
-
   describe('main', () => {
     test('CommonDeleteCountryByIdService should be defined', () => {
       expect(service).toBeDefined();
     });
-
     test('should delete country and emit event', async () => {
       jest
         .spyOn(repository, 'findById')

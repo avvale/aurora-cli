@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import { CommonUpdatedAdministrativeAreaLevel1Event } from '@app/common/administrative-area-level-1';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
@@ -6,6 +10,6 @@ export class CommonUpdatedAdministrativeAreaLevel1EventHandler
   implements IEventHandler<CommonUpdatedAdministrativeAreaLevel1Event>
 {
   handle(event: CommonUpdatedAdministrativeAreaLevel1Event): void {
-    // console.log('UpdatedAdministrativeAreaLevel1Event: ', event);
+    // 'UpdatedAdministrativeAreaLevel1Event'
   }
 }

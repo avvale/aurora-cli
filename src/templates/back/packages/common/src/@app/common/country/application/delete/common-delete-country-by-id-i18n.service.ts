@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import {
   CommonICountryI18nRepository,
   CommonICountryRepository,
@@ -47,6 +51,7 @@ export class CommonDeleteCountryByIdI18nService {
     // if has not any translation in i18n table, delete record
     if (availableLangs.length === 0) {
       await this.repository.deleteById(country.id, {
+        deleteOptions: cQMetadata?.repositoryOptions,
         cQMetadata,
       });
     } else {
@@ -57,7 +62,10 @@ export class CommonDeleteCountryByIdI18nService {
     // insert EventBus in object, to be able to apply and commit events
     const countryRegister = this.publisher.mergeObjectContext(country);
 
-    countryRegister.deleted(country); // apply event to model events
+    countryRegister.deleted({
+      payload: country,
+      cQMetadata,
+    }); // apply event to model events
     countryRegister.commit(); // commit all events of model
   }
 }

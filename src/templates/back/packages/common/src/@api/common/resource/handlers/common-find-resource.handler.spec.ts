@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonFindResourceHandler } from '@api/common/resource';
 import { commonMockResourceData } from '@app/common/resource';
 import { IQueryBus } from '@aurorajs.dev/core';

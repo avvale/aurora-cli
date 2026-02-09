@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonDeletedResourceEvent } from '@app/common/resource';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
@@ -6,6 +10,6 @@ export class CommonDeletedResourceEventHandler
   implements IEventHandler<CommonDeletedResourceEvent>
 {
   handle(event: CommonDeletedResourceEvent): void {
-    // console.log('CommonDeletedResourceEvent: ', event);
+    // CommonDeletedResourceEvent'
   }
 }

@@ -1,125 +1,133 @@
+# @aurora-generated
+# @source cliter/common/lang.aurora.yaml
 enum CommonLangDir {
-    LTR
-    RTL
+  LTR
+  RTL
 }
 
-
-type CommonLang
-{
-    id: ID!
-    name: GraphQLString!
-    image: GraphQLString
-    iso6392: GraphQLString!
-    iso6393: GraphQLString!
-    ietf: GraphQLString!
-    customCode: GraphQLString
-    dir: CommonLangDir!
-    sort: GraphQLInt
-    isActive: GraphQLBoolean!
-    createdAt: GraphQLTimestamp
-    updatedAt: GraphQLTimestamp
-    deletedAt: GraphQLTimestamp
+type CommonLang {
+  """
+  Unique identifier for the language. UUID v4 format, generated automatically on creation.
+  """
+  id: ID!
+  """
+  Auto-incrementing sequential identifier for the lang. Used for internal ordering, human-readable reference numbers, and optimized queries. Not exposed in external APIs. Provides a stable, predictable identifier for database operations.
+  """
+  rowId: GraphQLInt!
+  """
+  Full name of the language in its native form (e.g., &quot;English&quot;, &quot;Español&quot;, &quot;Français&quot;, &quot;日本語&quot;). Used for display in language selectors. Should be recognizable by native speakers.
+  """
+  name: GraphQLString!
+  """
+  URL or path to language flag/icon image. Typically country flag representing the language (e.g., UK flag for English, Spain flag for Spanish). Used for visual language identification. Maximum 1022 characters for long URLs.
+  """
+  image: GraphQLString
+  """
+  ISO 639-2 two-letter language code (e.g., &quot;en&quot;, &quot;es&quot;, &quot;fr&quot;, &quot;ja&quot;). Standard international identifier for languages. Most commonly used ISO standard. Indexed for efficient lookups. Required field.
+  """
+  iso6392: GraphQLString!
+  """
+  ISO 639-3 three-letter language code (e.g., &quot;eng&quot;, &quot;spa&quot;, &quot;fra&quot;, &quot;jpn&quot;). Alternative standard identifier providing more specific language identification. Indexed for efficient lookups. Required field.
+  """
+  iso6393: GraphQLString!
+  """
+  IETF language tag (BCP 47) for language and region (e.g., &quot;en-US&quot;, &quot;es-ES&quot;, &quot;fr-FR&quot;, &quot;ja-JP&quot;). Combines language code with region/country code. Used for locale-specific formatting (dates, numbers, currency). Indexed for efficient lookups. Required field.
+  """
+  ietf: GraphQLString!
+  """
+  Optional custom code defined by the organization for internal identification. Can be used for legacy system integration or custom business logic. Indexed for efficient lookups.
+  """
+  customCode: GraphQLString
+  """
+  Text directionality for the language. LTR: Left-to-right (English, Spanish, French, etc.). RTL: Right-to-left (Arabic, Hebrew, Persian, etc.). Critical for proper UI layout and text rendering. Required field.
+  """
+  dir: CommonLangDir!
+  """
+  Display order for language lists in UI. Lower values appear first. NULL values typically sorted last or alphabetically. Used for prioritizing commonly used languages (e.g., English first, then Spanish).
+  """
+  sort: GraphQLInt
+  """
+  Indicates if the language is currently active and available for use. TRUE: Language selectable and content can be translated. FALSE: Language disabled, existing translations preserved but not editable. Used for feature toggles and gradual rollout. Required field.
+  """
+  isActive: GraphQLBoolean!
+  """
+  Timestamp when the language was added to the system. Automatically set on insertion. Part of audit trail.
+  """
+  createdAt: GraphQLTimestamp
+  """
+  Timestamp of the last update to the language record. Automatically updated on modification. Part of audit trail.
+  """
+  updatedAt: GraphQLTimestamp
+  """
+  Soft delete timestamp. NULL indicates active language. When set, language is excluded from normal queries but preserved for data integrity of existing translations and historical records.
+  """
+  deletedAt: GraphQLTimestamp
 }
 
-input CommonCreateLangInput
-{
-    id: ID!
-    name: GraphQLString!
-    image: GraphQLString
-    iso6392: GraphQLString!
-    iso6393: GraphQLString!
-    ietf: GraphQLString!
-    customCode: GraphQLString
-    dir: CommonLangDir!
-    sort: GraphQLInt
-    isActive: GraphQLBoolean!
+input CommonCreateLangInput {
+  id: ID!
+  name: GraphQLString!
+  image: GraphQLString
+  iso6392: GraphQLString!
+  iso6393: GraphQLString!
+  ietf: GraphQLString!
+  customCode: GraphQLString
+  dir: CommonLangDir!
+  sort: GraphQLInt
+  isActive: GraphQLBoolean!
 }
 
-input CommonUpdateLangByIdInput
-{
-    id: ID!
-    name: GraphQLString
-    image: GraphQLString
-    iso6392: GraphQLString
-    iso6393: GraphQLString
-    ietf: GraphQLString
-    customCode: GraphQLString
-    dir: CommonLangDir
-    sort: GraphQLInt
-    isActive: GraphQLBoolean
+input CommonUpdateLangByIdInput {
+  id: ID!
+  name: GraphQLString
+  image: GraphQLString
+  iso6392: GraphQLString
+  iso6393: GraphQLString
+  ietf: GraphQLString
+  customCode: GraphQLString
+  dir: CommonLangDir
+  sort: GraphQLInt
+  isActive: GraphQLBoolean
 }
 
-input CommonUpdateLangsInput
-{
-    id: ID
-    name: GraphQLString
-    image: GraphQLString
-    iso6392: GraphQLString
-    iso6393: GraphQLString
-    ietf: GraphQLString
-    customCode: GraphQLString
-    dir: CommonLangDir
-    sort: GraphQLInt
-    isActive: GraphQLBoolean
+input CommonUpdateLangsInput {
+  id: ID
+  name: GraphQLString
+  image: GraphQLString
+  iso6392: GraphQLString
+  iso6393: GraphQLString
+  ietf: GraphQLString
+  customCode: GraphQLString
+  dir: CommonLangDir
+  sort: GraphQLInt
+  isActive: GraphQLBoolean
 }
 
-type Query
-{
-    commonFindLang(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): CommonLang
+type Query {
+  commonFindLang(query: QueryStatement, constraint: QueryStatement): CommonLang
 
-    commonFindLangById(
-        id: ID
-        constraint: QueryStatement
-    ): CommonLang
+  commonFindLangById(id: ID, constraint: QueryStatement): CommonLang
 
-    commonGetLangs(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [CommonLang]!
+  commonGetLangs(
+    query: QueryStatement
+    constraint: QueryStatement
+  ): [CommonLang]!
 
-    commonPaginateLangs(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): Pagination!
-
+  commonPaginateLangs(
+    query: QueryStatement
+    constraint: QueryStatement
+  ): Pagination!
 }
 
-type Mutation
-{
-    commonCreateLang(
-        payload: CommonCreateLangInput!
-    ): CommonLang
+type Mutation {
+  commonCreateLang(payload: CommonCreateLangInput!): CommonLang
 
-    commonCreateLangs(
-        payload: [CommonCreateLangInput]!
-    ): Boolean!
+  commonCreateLangs(payload: [CommonCreateLangInput]!): Boolean!
 
-    commonUpdateLangById(
-        payload: CommonUpdateLangByIdInput!
-        constraint: QueryStatement
-    ): CommonLang
+  commonUpdateLangById(
+    payload: CommonUpdateLangByIdInput!
+    constraint: QueryStatement
+  ): CommonLang
 
-    commonUpdateLangs(
-        payload: CommonUpdateLangsInput!
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [CommonLang]!
-
-    commonUpsertLang(
-        payload: CommonUpdateLangByIdInput!
-    ): CommonLang
-
-    commonDeleteLangById(
-        id: ID!
-        constraint: QueryStatement
-    ): CommonLang
-
-    commonDeleteLangs(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [CommonLang]!
-
+  commonDeleteLangById(id: ID!, constraint: QueryStatement): CommonLang
 }

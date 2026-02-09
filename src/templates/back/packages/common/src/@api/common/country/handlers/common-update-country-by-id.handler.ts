@@ -1,7 +1,7 @@
-import {
-  CommonCountryDto,
-  CommonUpdateCountryByIdDto,
-} from '@api/common/country';
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonCountry, CommonUpdateCountryByIdInput } from '@api/graphql';
 import {
   CommonFindCountryByIdQuery,
@@ -12,12 +12,16 @@ import {
   CoreAddI18nConstraintService,
   CoreGetContentLanguageObjectService,
   CoreGetSearchKeyLangService,
+  diff,
   ICommandBus,
   IQueryBus,
   QueryStatement,
-  diff,
 } from '@aurorajs.dev/core';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 
 @Injectable()
 export class CommonUpdateCountryByIdHandler {
@@ -30,12 +34,12 @@ export class CommonUpdateCountryByIdHandler {
   ) {}
 
   async main(
-    payload: CommonUpdateCountryByIdInput | CommonUpdateCountryByIdDto,
+    payload: CommonUpdateCountryByIdInput,
     constraint?: QueryStatement,
     timezone?: string,
     contentLanguage?: string,
     auditing?: AuditingMeta,
-  ): Promise<CommonCountry | CommonCountryDto> {
+  ): Promise<CommonCountry> {
     if (!contentLanguage)
       throw new BadRequestException(
         'To update a multi-language object, the content-language header must be defined.',
@@ -56,11 +60,13 @@ export class CommonUpdateCountryByIdHandler {
       }),
     );
 
-    const dataToUpdate = diff(payload, country);
+    if (!country) {
+      throw new NotFoundException(
+        `CommonCountry with id: ${payload.id}, not found`,
+      );
+    }
 
-    // diff method get only new items to load in JSON, not deleted items. We need items from payload to update
-    if ('administrativeAreas' in dataToUpdate)
-      dataToUpdate.administrativeAreas = payload.administrativeAreas;
+    const dataToUpdate = diff(payload, country);
 
     const contentLanguageObject =
       await this.coreGetContentLanguageObjectService.get(contentLanguage);

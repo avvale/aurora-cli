@@ -9,18 +9,22 @@ hasAuditing: true
 front:
   solidIcon: mat_solid:share_location
   outlineIcon: mat_outline:share_location
-description: >
-    Third-level administrative subdivisions (municipalities, cities, communes) within
-    level 2 areas. Finest-grained geographical hierarchy for precise address information
-    and local service areas.
+description: |
+  Third-level administrative subdivisions (municipalities, cities, communes) within level 2 areas. Finest-grained geographical hierarchy for precise address information and local service areas.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
-    description: >
-        Unique identifier for the administrative area level 3. UUID v4 format,
-        generated automatically on creation.
+    description: |
+      Unique identifier for the administrative area level 3. UUID v4 format, generated automatically on creation.
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
+    description: |
+      Auto-incrementing sequential identifier for the administrative area level 3. Used for internal ordering, human-readable reference numbers, and optimized queries. Not exposed in external APIs. Provides a stable, predictable identifier for database operations.
   - name: countryId
     type: id
     nullable: false
@@ -31,9 +35,8 @@ aggregateProperties:
       key: id
       field: country
       avoidConstraint: true
-    description: >
-        Foreign key to the country this administrative area belongs to. Denormalized
-        from level 1 for efficient querying without joins.
+    description: |
+      Foreign key to the country this administrative area belongs to. Denormalized from level 1 for efficient querying without joins.
   - name: administrativeAreaLevel1Id
     type: id
     nullable: false
@@ -44,9 +47,8 @@ aggregateProperties:
       key: id
       field: administrativeAreaLevel1
       avoidConstraint: true
-    description: >
-        Foreign key to the administrative area level 1. Denormalized from level 2
-        for efficient querying without joins. Establishes top-level hierarchy.
+    description: |
+      Foreign key to the administrative area level 1. Denormalized from level 2 for efficient querying without joins. Establishes top-level hierarchy.
   - name: administrativeAreaLevel2Id
     type: id
     nullable: false
@@ -57,70 +59,58 @@ aggregateProperties:
       key: id
       field: administrativeAreaLevel2
       avoidConstraint: true
-    description: >
-        Foreign key to the parent administrative area level 2. Establishes direct
-        hierarchical relationship (e.g., city belongs to county).
+    description: |
+      Foreign key to the parent administrative area level 2. Establishes direct hierarchical relationship (e.g., city belongs to county).
   - name: code
     type: varchar
     maxLength: 8
     nullable: false
     index: unique
-    description: >
-        Standard code for the administrative area (e.g., "LA" for Los Angeles city).
-        Must be unique across all level 3 areas. Maximum 8 characters.
+    description: |
+      Standard code for the administrative area (e.g., "LA" for Los Angeles city). Must be unique across all level 3 areas. Maximum 8 characters.
   - name: customCode
     type: varchar
     maxLength: 64
     nullable: true
     index: unique
-    description: >
-        Optional custom code defined by the organization for internal identification.
-        Must be unique if provided. Can be used for legacy system integration or
-        custom business logic.
+    description: |
+      Optional custom code defined by the organization for internal identification. Must be unique if provided. Can be used for legacy system integration or custom business logic.
   - name: name
     type: varchar
     maxLength: 128
     nullable: false
     index: index
-    description: >
-        Full name of the administrative area (e.g., "Los Angeles", "Manhattan", "Paris").
-        Indexed for efficient searching and sorting.
+    description: |
+      Full name of the administrative area (e.g., "Los Angeles", "Manhattan", "Paris"). Indexed for efficient searching and sorting.
   - name: slug
     type: varchar
     maxLength: 128
     nullable: false
     index: index
-    description: >
-        URL-friendly identifier derived from the name. Lowercase, hyphenated format
-        (e.g., "los-angeles", "new-york-city"). Used for SEO-friendly URLs and routing.
+    description: |
+      URL-friendly identifier derived from the name. Lowercase, hyphenated format (e.g., "los-angeles", "new-york-city"). Used for SEO-friendly URLs and routing.
   - name: latitude
     type: decimal
     decimals:
       - 16
       - 14
     nullable: true
-    description: >
-        Geographical latitude coordinate of the administrative area's center point.
-        Precision of 14 decimal places allows sub-meter accuracy. Used for map
-        visualization and distance calculations.
+    description: |
+      Geographical latitude coordinate of the administrative area's center point. Precision of 14 decimal places allows sub-meter accuracy. Used for map visualization and distance calculations.
   - name: longitude
     type: decimal
     decimals:
       - 17
       - 14
     nullable: true
-    description: >
-        Geographical longitude coordinate of the administrative area's center point.
-        Precision of 14 decimal places allows sub-meter accuracy. Used for map
-        visualization and distance calculations.
+    description: |
+      Geographical longitude coordinate of the administrative area's center point. Precision of 14 decimal places allows sub-meter accuracy. Used for map visualization and distance calculations.
   - name: zoom
     type: smallint
     unsigned: true
     nullable: true
-    description: >
-        Default zoom level for map display when viewing this administrative area.
-        Typical range: 1 (world view) to 21 (building level). Usually highest zoom
-        level for detailed city/municipality view.
+    description: |
+      Default zoom level for map display when viewing this administrative area. Typical range: 1 (world view) to 21 (building level). Usually highest zoom level for detailed city/municipality view.
   - name: mapType
     type: enum
     enumOptions:
@@ -130,25 +120,31 @@ aggregateProperties:
       - TERRAIN
     nullable: true
     example: CommonAdministrativeAreaLevel1MapType.TERRAIN
-    description: >
-        Preferred map visualization type for this area. ROADMAP: Street map view.
-        SATELLITE: Aerial imagery. HYBRID: Satellite with road overlay. TERRAIN:
-        Topographic relief map. NULL uses system default.
+    description: |
+      Preferred map visualization type for this area. ROADMAP: Street map view. SATELLITE: Aerial imagery. HYBRID: Satellite with road overlay. TERRAIN: Topographic relief map. NULL uses system default.
   - name: createdAt
     type: timestamp
     nullable: true
-    description: >
-        Timestamp when the record was created. Automatically set on insertion.
-        Part of audit trail.
+    description: |
+      Timestamp when the record was created. Automatically set on insertion. Part of audit trail.
   - name: updatedAt
     type: timestamp
     nullable: true
-    description: >
-        Timestamp of the last update to the record. Automatically updated on
-        modification. Part of audit trail.
+    description: |
+      Timestamp of the last update to the record. Automatically updated on modification. Part of audit trail.
   - name: deletedAt
     type: timestamp
     nullable: true
-    description: >
-        Soft delete timestamp. NULL indicates active record. When set, record is
-        excluded from normal queries but preserved for audit and recovery.
+    description: |
+      Soft delete timestamp. NULL indicates active record. When set, record is excluded from normal queries but preserved for audit and recovery.
+excludedOperations:
+  - count
+  - delete
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - update
+  - updateAndIncrement
+  - upsert

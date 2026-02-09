@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonIResourceRepository } from '@app/common/resource';
 import { CommonResourceId } from '@app/common/resource/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
@@ -32,7 +36,10 @@ export class CommonDeleteResourceByIdService {
     // insert EventBus in object, to be able to apply and commit events
     const resourceRegister = this.publisher.mergeObjectContext(resource);
 
-    resourceRegister.deleted(resource); // apply event to model events
+    resourceRegister.deleted({
+      payload: resource,
+      cQMetadata,
+    }); // apply event to model events
     resourceRegister.commit(); // commit all events of model
   }
 }

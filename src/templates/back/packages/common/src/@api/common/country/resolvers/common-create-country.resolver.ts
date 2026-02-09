@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonCreateCountryHandler } from '@api/common/country';
 import { CommonCountry, CommonCreateCountryInput } from '@api/graphql';
 import { Auth } from '@aurora/decorators';

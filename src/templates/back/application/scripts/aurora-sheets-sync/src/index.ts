@@ -38,7 +38,7 @@ program
       });
 
       const boundedContexts = options.all
-        ? config.getAllBoundedContexts()
+        ? config.getAllBoundedContextNames()
         : options.bc
           ? [options.bc]
           : [];
@@ -90,7 +90,7 @@ program
       });
 
       const boundedContexts = options.all
-        ? config.getAllBoundedContexts()
+        ? config.getAllBoundedContextNames()
         : options.bc
           ? [options.bc]
           : [];
@@ -141,7 +141,7 @@ program
       });
 
       const boundedContexts = options.all
-        ? config.getAllBoundedContexts()
+        ? config.getAllBoundedContextNames()
         : options.bc
           ? [options.bc]
           : [];
@@ -256,7 +256,7 @@ program
       await config.load();
 
       console.log('Configured bounded contexts:');
-      for (const bc of config.getAllBoundedContexts()) {
+      for (const bc of config.getAllBoundedContextNames()) {
         const bcConfig = config.getBoundedContext(bc);
         console.log(`  • ${bc}`);
         console.log(`    Spreadsheet ID: ${bcConfig.spreadsheetId}`);

@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-3.aurora.yaml
+ */
 import { CommonCreatedAdministrativeAreaLevel3Event } from '@app/common/administrative-area-level-3';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
@@ -6,6 +10,6 @@ export class CommonCreatedAdministrativeAreaLevel3EventHandler
   implements IEventHandler<CommonCreatedAdministrativeAreaLevel3Event>
 {
   handle(event: CommonCreatedAdministrativeAreaLevel3Event): void {
-    // console.log('CommonCreatedAdministrativeAreaLevel3Event: ', event);
+    // 'CommonCreatedAdministrativeAreaLevel3Event'
   }
 }

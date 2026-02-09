@@ -1,8 +1,12 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-3.aurora.yaml
+ */
 import {
   CommonAdministrativeAreaLevel3,
   CommonIAdministrativeAreaLevel3Repository,
 } from '@app/common/administrative-area-level-3';
-import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -15,7 +19,7 @@ export class CommonGetAdministrativeAreasLevel3Service {
     queryStatement?: QueryStatement,
     constraint?: QueryStatement,
     cQMetadata?: CQMetadata,
-  ): Promise<CommonAdministrativeAreaLevel3[]> {
+  ): Promise<CommonAdministrativeAreaLevel3[] | LiteralObject[]> {
     return await this.repository.get({
       queryStatement,
       constraint,

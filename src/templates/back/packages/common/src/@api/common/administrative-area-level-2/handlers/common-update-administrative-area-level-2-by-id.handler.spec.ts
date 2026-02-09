@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-2.aurora.yaml
+ */
 import { CommonUpdateAdministrativeAreaLevel2ByIdHandler } from '@api/common/administrative-area-level-2';
 import { CommonUpdateAdministrativeAreaLevel2ByIdInput } from '@api/graphql';
 import { commonMockAdministrativeAreaLevel2Data } from '@app/common/administrative-area-level-2';

@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonILangRepository, CommonLang } from '@app/common/lang';
 import { CommonLangId } from '@app/common/lang/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';

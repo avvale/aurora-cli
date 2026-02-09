@@ -1,7 +1,7 @@
-import {
-  CommonAdministrativeAreaLevel1Dto,
-  CommonCreateAdministrativeAreaLevel1Dto,
-} from '@api/common/administrative-area-level-1';
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import {
   CommonAdministrativeAreaLevel1,
   CommonCreateAdministrativeAreaLevel1Input,
@@ -21,14 +21,10 @@ export class CommonCreateAdministrativeAreaLevel1Handler {
   ) {}
 
   async main(
-    payload:
-      | CommonCreateAdministrativeAreaLevel1Input
-      | CommonCreateAdministrativeAreaLevel1Dto,
+    payload: CommonCreateAdministrativeAreaLevel1Input,
     timezone?: string,
     auditing?: AuditingMeta,
-  ): Promise<
-    CommonAdministrativeAreaLevel1 | CommonAdministrativeAreaLevel1Dto
-  > {
+  ): Promise<CommonAdministrativeAreaLevel1> {
     await this.commandBus.dispatch(
       new CommonCreateAdministrativeAreaLevel1Command(payload, {
         timezone,

@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonFindLangHandler, CommonLangDto } from '@api/common/lang';
 import { Auth } from '@aurora/decorators';
 import { QueryStatement, Timezone } from '@aurorajs.dev/core';

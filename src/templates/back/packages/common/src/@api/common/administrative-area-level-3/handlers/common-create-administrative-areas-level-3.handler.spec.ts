@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-3.aurora.yaml
+ */
 import { CommonCreateAdministrativeAreasLevel3Handler } from '@api/common/administrative-area-level-3';
 import { commonMockAdministrativeAreaLevel3Data } from '@app/common/administrative-area-level-3';
 import { ICommandBus } from '@aurorajs.dev/core';

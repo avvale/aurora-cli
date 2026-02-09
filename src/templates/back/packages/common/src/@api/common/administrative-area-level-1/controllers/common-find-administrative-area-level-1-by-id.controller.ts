@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import {
   CommonAdministrativeAreaLevel1Dto,
   CommonFindAdministrativeAreaLevel1ByIdHandler,

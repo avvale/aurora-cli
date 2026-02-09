@@ -1,5 +1,15 @@
-import { CommonCreatedResourceEvent } from './common-created-resource.event';
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
+import { CommonCreatedResourceEvent } from '@app/common/resource';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class CommonCreatedResourcesEvent {
-  constructor(public readonly resources: CommonCreatedResourceEvent[]) {}
+  constructor(
+    public readonly event: {
+      payload: CommonCreatedResourceEvent[];
+      cQMetadata?: CQMetadata;
+    },
+  ) {}
 }

@@ -1,4 +1,7 @@
-import { CommonCreateLangDto } from '@api/common/lang';
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonCreateLangInput } from '@api/graphql';
 import { CommonCreateLangsCommand } from '@app/common/lang';
 import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
@@ -9,7 +12,7 @@ export class CommonCreateLangsHandler {
   constructor(private readonly commandBus: ICommandBus) {}
 
   async main(
-    payload: CommonCreateLangInput[] | CommonCreateLangDto[],
+    payload: CommonCreateLangInput[],
     timezone?: string,
     auditing?: AuditingMeta,
   ): Promise<boolean> {

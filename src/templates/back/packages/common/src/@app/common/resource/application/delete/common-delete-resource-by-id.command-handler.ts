@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonDeleteResourceByIdCommand } from '@app/common/resource';
 import { CommonDeleteResourceByIdService } from '@app/common/resource/application/delete/common-delete-resource-by-id.service';
 import { CommonResourceId } from '@app/common/resource/domain/value-objects';

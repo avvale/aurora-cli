@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonCreateLangsHandler } from '@api/common/lang';
 import { commonMockLangData } from '@app/common/lang';
 import { ICommandBus } from '@aurorajs.dev/core';

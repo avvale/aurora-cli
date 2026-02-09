@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
 export class CommonDeleteCountryByIdI18nCommand {

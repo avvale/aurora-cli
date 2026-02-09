@@ -1,4 +1,7 @@
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonCreateResourceCommand } from '@app/common/resource';
 import { CommonCreateResourceService } from '@app/common/resource/application/create/common-create-resource.service';
 import {

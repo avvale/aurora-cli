@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonPaginateResourcesHandler } from '@api/common/resource';
 import { Pagination } from '@api/graphql';
 import { Auth } from '@aurora/decorators';

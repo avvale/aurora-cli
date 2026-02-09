@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import {
   CommonAddLangsContextEvent,
   CommonILangRepository,
@@ -44,9 +48,10 @@ export class CommonCreateLangsService {
     cQMetadata?: CQMetadata,
   ): Promise<void> {
     // create aggregate with factory pattern
-    const aggregateLangs = payload.map((lang) =>
+    const langs = payload.map((lang) =>
       CommonLang.register(
         lang.id,
+        undefined, // rowId
         lang.name,
         lang.image,
         lang.iso6392,
@@ -63,14 +68,14 @@ export class CommonCreateLangsService {
     );
 
     // insert
-    await this.repository.insert(aggregateLangs, {
+    await this.repository.insert(langs, {
       insertOptions: cQMetadata?.repositoryOptions,
     });
 
     // create AddLangsContextEvent to have object wrapper to add event publisher functionality
     // insert EventBus in object, to be able to apply and commit events
     const langsRegistered = this.publisher.mergeObjectContext(
-      new CommonAddLangsContextEvent(aggregateLangs),
+      new CommonAddLangsContextEvent(langs, cQMetadata),
     );
 
     langsRegistered.created(); // apply event to model events

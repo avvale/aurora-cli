@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import {
   CommonAdministrativeAreaLevel1,
   commonMockAdministrativeAreaLevel1Data,
@@ -13,6 +17,7 @@ import {
   CommonAdministrativeAreaLevel1Longitude,
   CommonAdministrativeAreaLevel1MapType,
   CommonAdministrativeAreaLevel1Name,
+  CommonAdministrativeAreaLevel1RowId,
   CommonAdministrativeAreaLevel1Slug,
   CommonAdministrativeAreaLevel1UpdatedAt,
   CommonAdministrativeAreaLevel1Zoom,
@@ -40,6 +45,9 @@ export class CommonMockAdministrativeAreaLevel1Seeder extends MockSeeder<CommonA
       this.collectionSource.push(
         CommonAdministrativeAreaLevel1.register(
           new CommonAdministrativeAreaLevel1Id(administrativeAreaLevel1.id),
+          new CommonAdministrativeAreaLevel1RowId(
+            administrativeAreaLevel1.rowId,
+          ),
           new CommonAdministrativeAreaLevel1CountryId(
             administrativeAreaLevel1.countryId,
           ),

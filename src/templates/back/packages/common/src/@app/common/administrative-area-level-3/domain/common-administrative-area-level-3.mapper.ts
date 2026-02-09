@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-3.aurora.yaml
+ */
 import { CommonAdministrativeAreaLevel1Mapper } from '@app/common/administrative-area-level-1';
 import { CommonAdministrativeAreaLevel2Mapper } from '@app/common/administrative-area-level-2';
 import {
@@ -17,6 +21,7 @@ import {
   CommonAdministrativeAreaLevel3Longitude,
   CommonAdministrativeAreaLevel3MapType,
   CommonAdministrativeAreaLevel3Name,
+  CommonAdministrativeAreaLevel3RowId,
   CommonAdministrativeAreaLevel3Slug,
   CommonAdministrativeAreaLevel3UpdatedAt,
   CommonAdministrativeAreaLevel3Zoom,
@@ -92,6 +97,9 @@ export class CommonAdministrativeAreaLevel3Mapper implements IMapper {
       new CommonAdministrativeAreaLevel3Id(administrativeAreaLevel3.id, {
         undefinable: true,
       }),
+      new CommonAdministrativeAreaLevel3RowId(administrativeAreaLevel3.rowId, {
+        undefinable: true,
+      }),
       new CommonAdministrativeAreaLevel3CountryId(
         administrativeAreaLevel3.countryId,
         { undefinable: true },
@@ -148,9 +156,10 @@ export class CommonAdministrativeAreaLevel3Mapper implements IMapper {
         { addTimezone: cQMetadata?.timezone },
       ),
       this.options.eagerLoading
-        ? new CommonCountryMapper({
-            eagerLoading: true,
-          }).mapModelToAggregate(administrativeAreaLevel3.country, cQMetadata)
+        ? new CommonCountryMapper({ eagerLoading: true }).mapModelToAggregate(
+            administrativeAreaLevel3.country,
+            cQMetadata,
+          )
         : undefined,
       this.options.eagerLoading
         ? new CommonAdministrativeAreaLevel1Mapper({
@@ -178,6 +187,7 @@ export class CommonAdministrativeAreaLevel3Mapper implements IMapper {
 
     return new CommonAdministrativeAreaLevel3Response(
       administrativeAreaLevel3.id.value,
+      administrativeAreaLevel3.rowId.value,
       administrativeAreaLevel3.countryId.value,
       administrativeAreaLevel3.administrativeAreaLevel1Id.value,
       administrativeAreaLevel3.administrativeAreaLevel2Id.value,

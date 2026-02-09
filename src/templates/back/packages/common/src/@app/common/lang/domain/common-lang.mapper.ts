@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonLang, CommonLangResponse } from '@app/common/lang';
 import {
   CommonLangCreatedAt,
@@ -11,6 +15,7 @@ import {
   CommonLangIso6392,
   CommonLangIso6393,
   CommonLangName,
+  CommonLangRowId,
   CommonLangSort,
   CommonLangUpdatedAt,
 } from '@app/common/lang/domain/value-objects';
@@ -74,6 +79,7 @@ export class CommonLangMapper implements IMapper {
   ): CommonLang {
     return CommonLang.register(
       new CommonLangId(lang.id, { undefinable: true }),
+      new CommonLangRowId(lang.rowId, { undefinable: true }),
       new CommonLangName(lang.name, { undefinable: true }),
       new CommonLangImage(lang.image, { undefinable: true }),
       new CommonLangIso6392(lang.iso6392, { undefinable: true }),
@@ -106,6 +112,7 @@ export class CommonLangMapper implements IMapper {
 
     return new CommonLangResponse(
       lang.id.value,
+      lang.rowId.value,
       lang.name.value,
       lang.image.value,
       lang.iso6392.value,

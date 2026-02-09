@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import {
   CommonIResourceRepository,
   commonMockResourceData,
@@ -11,6 +14,7 @@ import {
   CommonResourceId,
   CommonResourceIsActive,
   CommonResourceName,
+  CommonResourceRowId,
 } from '@app/common/resource/domain/value-objects';
 import {
   CommandBus,
@@ -55,6 +59,7 @@ describe('CommonCreateResourceService', () => {
       expect(
         await service.main({
           id: new CommonResourceId(commonMockResourceData[0].id),
+          rowId: new CommonResourceRowId(commonMockResourceData[0].rowId),
           code: new CommonResourceCode(commonMockResourceData[0].code),
           name: new CommonResourceName(commonMockResourceData[0].name),
           isActive: new CommonResourceIsActive(

@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonDeleteCountryByIdI18nCommand } from '@app/common/country';
 import { CommonDeleteCountryByIdI18nService } from '@app/common/country/application/delete/common-delete-country-by-id-i18n.service';
 import { CommonCountryId } from '@app/common/country/domain/value-objects';

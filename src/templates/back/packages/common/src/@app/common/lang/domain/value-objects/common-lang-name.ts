@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { StringValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class CommonLangName extends StringValueObject {
@@ -11,7 +15,7 @@ export class CommonLangName extends StringValueObject {
           name: 'CommonLangName',
           nullable: false,
           undefinable: false,
-          maxLength: 127,
+          maxLength: 128,
         },
         validationRules,
       ),

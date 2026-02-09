@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-2.aurora.yaml
+ */
 import {
   CommonIAdministrativeAreaLevel2Repository,
   commonMockAdministrativeAreaLevel2Data,
@@ -15,6 +18,7 @@ import {
   CommonAdministrativeAreaLevel2Longitude,
   CommonAdministrativeAreaLevel2MapType,
   CommonAdministrativeAreaLevel2Name,
+  CommonAdministrativeAreaLevel2RowId,
   CommonAdministrativeAreaLevel2Slug,
   CommonAdministrativeAreaLevel2Zoom,
 } from '@app/common/administrative-area-level-2/domain/value-objects';
@@ -63,6 +67,9 @@ describe('CommonUpdateAdministrativeAreaLevel2ByIdService', () => {
           {
             id: new CommonAdministrativeAreaLevel2Id(
               commonMockAdministrativeAreaLevel2Data[0].id,
+            ),
+            rowId: new CommonAdministrativeAreaLevel2RowId(
+              commonMockAdministrativeAreaLevel2Data[0].rowId,
             ),
             countryId: new CommonAdministrativeAreaLevel2CountryId(
               commonMockAdministrativeAreaLevel2Data[0].countryId,

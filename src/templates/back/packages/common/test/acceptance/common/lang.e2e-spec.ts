@@ -1,6 +1,7 @@
-/* eslint-disable max-len */
-/* eslint-disable quotes */
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonModule } from '@api/common/common.module';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
@@ -9,7 +10,7 @@ import {
   commonMockLangData,
   CommonMockLangSeeder,
 } from '@app/common/lang';
-import { GraphQLConfigModule } from '@aurora/modules/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -91,6 +92,22 @@ describe('lang', () => {
       .then((res) => {
         expect(res.body.message).toContain(
           'Value for CommonLangId must be defined, can not be null',
+        );
+      });
+  });
+
+  test('/REST:POST common/lang/create - Got 400 Conflict, LangRowId property can not to be null', () => {
+    return request(app.getHttpServer())
+      .post('/common/lang/create')
+      .set('Accept', 'application/json')
+      .send({
+        ...mockData[0],
+        rowId: null,
+      })
+      .expect(400)
+      .then((res) => {
+        expect(res.body.message).toContain(
+          'Value for CommonLangRowId must be defined, can not be null',
         );
       });
   });
@@ -203,6 +220,22 @@ describe('lang', () => {
       .then((res) => {
         expect(res.body.message).toContain(
           'Value for CommonLangId must be defined, can not be undefined',
+        );
+      });
+  });
+
+  test('/REST:POST common/lang/create - Got 400 Conflict, LangRowId property can not to be undefined', () => {
+    return request(app.getHttpServer())
+      .post('/common/lang/create')
+      .set('Accept', 'application/json')
+      .send({
+        ...mockData[0],
+        rowId: undefined,
+      })
+      .expect(400)
+      .then((res) => {
+        expect(res.body.message).toContain(
+          'Value for CommonLangRowId must be defined, can not be undefined',
         );
       });
   });
@@ -367,18 +400,18 @@ describe('lang', () => {
       });
   });
 
-  test('/REST:POST common/lang/create - Got 400 Conflict, LangName is too large, has a maximum length of 127', () => {
+  test('/REST:POST common/lang/create - Got 400 Conflict, LangName is too large, has a maximum length of 128', () => {
     return request(app.getHttpServer())
       .post('/common/lang/create')
       .set('Accept', 'application/json')
       .send({
         ...mockData[0],
-        name: '********************************************************************************************************************************',
+        name: '*********************************************************************************************************************************',
       })
       .expect(400)
       .then((res) => {
         expect(res.body.message).toContain(
-          'Value for CommonLangName is too large, has a maximum length of 127',
+          'Value for CommonLangName is too large, has a maximum length of 128',
         );
       });
   });
@@ -400,19 +433,19 @@ describe('lang', () => {
       });
   });
 
-  test('/REST:POST common/lang/create - Got 400 Conflict, LangCustomCode is too large, has a maximum length of 63', () => {
+  test('/REST:POST common/lang/create - Got 400 Conflict, LangCustomCode is too large, has a maximum length of 64', () => {
     return request(app.getHttpServer())
       .post('/common/lang/create')
       .set('Accept', 'application/json')
       .send({
         ...mockData[0],
         customCode:
-          '****************************************************************',
+          '*****************************************************************',
       })
       .expect(400)
       .then((res) => {
         expect(res.body.message).toContain(
-          'Value for CommonLangCustomCode is too large, has a maximum length of 63',
+          'Value for CommonLangCustomCode is too large, has a maximum length of 64',
         );
       });
   });
@@ -616,6 +649,7 @@ describe('lang', () => {
                         commonCreateLang (payload:$payload)
                         {
                             id
+                            rowId
                             name
                             image
                             iso6392
@@ -694,6 +728,7 @@ describe('lang', () => {
                         commonGetLangs (query:$query)
                         {
                             id
+                            rowId
                             name
                             image
                             iso6392
@@ -733,6 +768,7 @@ describe('lang', () => {
                         commonCreateLang (payload:$payload)
                         {
                             id
+                            rowId
                             name
                             image
                             iso6392
@@ -772,6 +808,7 @@ describe('lang', () => {
                         commonFindLang (query:$query)
                         {
                             id
+                            rowId
                             name
                             image
                             iso6392
@@ -817,6 +854,7 @@ describe('lang', () => {
                         commonFindLang (query:$query)
                         {
                             id
+                            rowId
                             name
                             image
                             iso6392
@@ -858,6 +896,7 @@ describe('lang', () => {
                         commonFindLangById (id:$id)
                         {
                             id
+                            rowId
                             name
                             image
                             iso6392
@@ -899,6 +938,7 @@ describe('lang', () => {
                         commonFindLangById (id:$id)
                         {
                             id
+                            rowId
                             name
                             image
                             iso6392
@@ -936,6 +976,7 @@ describe('lang', () => {
                         commonUpdateLangById (payload:$payload)
                         {
                             id
+                            rowId
                             name
                             image
                             iso6392
@@ -980,6 +1021,7 @@ describe('lang', () => {
                         commonUpdateLangById (payload:$payload)
                         {
                             id
+                            rowId
                             name
                             image
                             iso6392
@@ -1020,6 +1062,7 @@ describe('lang', () => {
                         commonUpdateLangs (payload:$payload query:$query)
                         {
                             id
+                            rowId
                             name
                             image
                             iso6392
@@ -1065,6 +1108,7 @@ describe('lang', () => {
                         commonDeleteLangById (id:$id)
                         {
                             id
+                            rowId
                             name
                             image
                             iso6392
@@ -1106,6 +1150,7 @@ describe('lang', () => {
                         commonDeleteLangById (id:$id)
                         {
                             id
+                            rowId
                             name
                             image
                             iso6392

@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import {
   CommonIAdministrativeAreaLevel1Repository,
   CommonMockAdministrativeAreaLevel1Repository,

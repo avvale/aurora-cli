@@ -1,5 +1,7 @@
-/* eslint-disable indent */
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-2.aurora.yaml
+ */
 import { CommonAdministrativeAreaLevel1Model } from '@app/common/administrative-area-level-1';
 import { CommonCountryModel } from '@app/common/country';
 import {
@@ -29,6 +31,10 @@ import {
   freezeTableName: true,
   timestamps: false,
   indexes: [
+    {
+      fields: ['rowId'],
+      unique: true,
+    },
     {
       fields: ['code'],
       unique: true,
@@ -173,6 +179,14 @@ export class CommonAdministrativeAreaLevel2Model extends Model<CommonAdministrat
   })
   id: string;
 
+  @Column({
+    field: 'rowId',
+    autoIncrement: true,
+    allowNull: false,
+    type: DataTypes.BIGINT,
+  })
+  rowId: number;
+
   @ForeignKey(() => CommonCountryModel)
   @Column({
     field: 'countryId',
@@ -211,21 +225,21 @@ export class CommonAdministrativeAreaLevel2Model extends Model<CommonAdministrat
   @Column({
     field: 'customCode',
     allowNull: true,
-    type: DataTypes.STRING(63),
+    type: DataTypes.STRING(64),
   })
   customCode: string;
 
   @Column({
     field: 'name',
     allowNull: false,
-    type: DataTypes.STRING(127),
+    type: DataTypes.STRING(128),
   })
   name: string;
 
   @Column({
     field: 'slug',
     allowNull: false,
-    type: DataTypes.STRING(127),
+    type: DataTypes.STRING(128),
   })
   slug: string;
 

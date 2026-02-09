@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonCountry, commonMockCountryData } from '@app/common/country';
 import {
   CommonCountryAdministrativeAreas,
@@ -20,6 +24,7 @@ import {
   CommonCountryLongitude,
   CommonCountryMapType,
   CommonCountryPrefix,
+  CommonCountryRowId,
   CommonCountrySort,
   CommonCountryUpdatedAt,
   CommonCountryZoom,
@@ -44,6 +49,7 @@ export class CommonMockCountrySeeder extends MockSeeder<CommonCountry> {
       this.collectionSource.push(
         CommonCountry.register(
           new CommonCountryId(country.id),
+          new CommonCountryRowId(country.rowId),
           new CommonCountryIso3166Alpha2(country.iso3166Alpha2),
           new CommonCountryIso3166Alpha3(country.iso3166Alpha3),
           new CommonCountryIso3166Numeric(country.iso3166Numeric),

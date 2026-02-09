@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import {
   CommonCreateCountryCommand,
   commonMockCountryData,
@@ -40,6 +44,7 @@ describe('CommonCreateCountryCommandHandler', () => {
           new CommonCreateCountryCommand(
             {
               id: commonMockCountryData[0].id,
+              rowId: commonMockCountryData[0].rowId,
               iso3166Alpha2: commonMockCountryData[0].iso3166Alpha2,
               iso3166Alpha3: commonMockCountryData[0].iso3166Alpha3,
               iso3166Numeric: commonMockCountryData[0].iso3166Numeric,

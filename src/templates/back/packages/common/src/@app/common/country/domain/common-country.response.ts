@@ -1,8 +1,13 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonLangResponse } from '@app/common/lang';
 
 export class CommonCountryResponse {
   constructor(
     public readonly id: string,
+    public readonly rowId: number,
     public readonly iso3166Alpha2: string,
     public readonly iso3166Alpha3: string,
     public readonly iso3166Numeric: string,
@@ -14,7 +19,7 @@ export class CommonCountryResponse {
     public readonly latitude: number,
     public readonly longitude: number,
     public readonly zoom: number,
-    public readonly mapType: string,
+    public readonly mapType: 'ROADMAP' | 'SATELLITE' | 'HYBRID' | 'TERRAIN',
     public readonly availableLangs: any,
     public readonly createdAt: string,
     public readonly updatedAt: string,

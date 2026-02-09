@@ -43,6 +43,7 @@ export interface AuroraProperty {
   index?: string;
   indexUsing?: string;
   maxLength?: number;
+  length?: number;
   decimals?: [number, number];
   defaultValue?: unknown;
   enumOptions?: string[];
@@ -98,7 +99,7 @@ export interface SheetPropertyRow {
   primaryKey: string;
   index: string;
   indexUsing: string;
-  maxLength: string;
+  'maxLength/length': string;
   decimals: string;
   defaultValue: string;
   enumOptions: string;
@@ -167,7 +168,7 @@ export const PROPERTY_HEADERS: (keyof SheetPropertyRow)[] = [
   'nullable',
   'index',
   'indexUsing',
-  'maxLength',
+  'maxLength/length',
   'decimals',
   'defaultValue',
   'enumOptions',

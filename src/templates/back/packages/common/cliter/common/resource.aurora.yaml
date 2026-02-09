@@ -9,65 +9,69 @@ hasAuditing: true
 front:
   solidIcon: mat_solid:account_tree
   outlineIcon: mat_outline:account_tree
-description: >
-    Resource types that can have attachments (files, images). Referenced by
-    attachment-family module to categorize attachment types. Defines which system
-    entities support file attachments.
+description: |
+  Resource types that can have attachments (files, images). Referenced by attachment-family module to categorize attachment types. Defines which system entities support file attachments.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
-    description: >
-        Unique identifier for the resource. UUID v4 format, generated automatically
-        on creation.
+    description: |
+      Unique identifier for the resource. UUID v4 format, generated automatically on creation.
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
+    description: |
+      Sequential numeric identifier for sorting and pagination. Auto-incremented, unique per record. Used for efficient range queries.
   - name: code
     type: varchar
     maxLength: 64
     nullable: false
     index: unique
-    description: >
-        Unique code identifying the resource type (e.g., "PRODUCT", "USER_AVATAR",
-        "ARTICLE_IMAGE"). Used programmatically to reference resource types. Must
-        be unique across all resources. Typically uppercase with underscores.
+    description: |
+      Unique code identifying the resource type (e.g., "PRODUCT", "USER_AVATAR", "ARTICLE_IMAGE"). Used programmatically to reference resource types. Must be unique across all resources. Typically uppercase with underscores.
   - name: name
     type: varchar
     maxLength: 128
     nullable: false
-    description: >
-        Human-readable name of the resource type (e.g., "Product Images", "User Avatars").
-        Displayed in admin interfaces for resource management. Should be descriptive
-        and user-friendly.
+    description: |
+      Human-readable name of the resource type (e.g., "Product Images", "User Avatars"). Displayed in admin interfaces for resource management. Should be descriptive and user-friendly.
   - name: isActive
     type: boolean
     nullable: false
-    description: >
-        Indicates if the resource type is currently active and can accept new attachments.
-        TRUE: Resource accepts attachments. FALSE: Resource disabled, no new attachments
-        allowed but existing ones preserved. Used for feature toggles and deprecation.
+    description: |
+      Indicates if the resource type is currently active and can accept new attachments. TRUE: Resource accepts attachments. FALSE: Resource disabled, no new attachments allowed but existing ones preserved. Used for feature toggles and deprecation.
   - name: hasAttachments
     type: boolean
     nullable: false
-    description: >
-        Indicates if this resource type supports file attachments. TRUE: Attachments
-        can be associated with entities of this type. FALSE: Resource type exists
-        but doesn't support attachments. Used for resource classification and validation.
+    description: |
+      Indicates if this resource type supports file attachments. TRUE: Attachments can be associated with entities of this type. FALSE: Resource type exists but doesn't support attachments. Used for resource classification and validation.
   - name: createdAt
     type: timestamp
     nullable: true
-    description: >
-        Timestamp when the record was created. Automatically set on insertion.
-        Part of audit trail.
+    description: |
+      Timestamp when the record was created. Automatically set on insertion. Part of audit trail.
   - name: updatedAt
     type: timestamp
     nullable: true
-    description: >
-        Timestamp of the last update to the record. Automatically updated on
-        modification. Part of audit trail.
+    description: |
+      Timestamp of the last update to the record. Automatically updated on modification. Part of audit trail.
   - name: deletedAt
     type: timestamp
     nullable: true
-    description: >
-        Soft delete timestamp. NULL indicates active record. When set, record is
-        excluded from normal queries but preserved for audit and data integrity of
-        existing attachments.
+    description: |
+      Soft delete timestamp. NULL indicates active record. When set, record is excluded from normal queries but preserved for audit and data integrity of existing attachments.
+excludedOperations:
+  - count
+  - createBatch
+  - delete
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - update
+  - updateAndIncrement
+  - upsert

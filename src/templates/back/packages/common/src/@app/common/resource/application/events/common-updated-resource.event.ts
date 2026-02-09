@@ -1,12 +1,23 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
+import { CQMetadata } from '@aurorajs.dev/core';
+
 export class CommonUpdatedResourceEvent {
   constructor(
-    public readonly id: string,
-    public readonly code: string,
-    public readonly name: string,
-    public readonly isActive: boolean,
-    public readonly hasAttachments: boolean,
-    public readonly createdAt: string,
-    public readonly updatedAt: string,
-    public readonly deletedAt: string,
+    public readonly event: {
+      payload: {
+        id: string;
+        code: string;
+        name: string;
+        isActive: boolean;
+        hasAttachments: boolean;
+        createdAt: string;
+        updatedAt: string;
+        deletedAt: string;
+      };
+      cQMetadata?: CQMetadata;
+    },
   ) {}
 }

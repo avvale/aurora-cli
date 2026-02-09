@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 export { CommonCountryDto } from './common-country.dto';
 export { CommonCreateCountryDto } from './common-create-country.dto';
 export { CommonUpdateCountriesDto } from './common-update-countries.dto';

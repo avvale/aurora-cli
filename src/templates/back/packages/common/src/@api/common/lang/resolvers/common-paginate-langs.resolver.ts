@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonPaginateLangsHandler } from '@api/common/lang';
 import { Pagination } from '@api/graphql';
 import { Auth } from '@aurora/decorators';

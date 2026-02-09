@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-3.aurora.yaml
+ */
 import {
   CommonAdministrativeAreaLevel3,
   CommonIAdministrativeAreaLevel3Repository,
@@ -16,6 +20,7 @@ import {
   CommonAdministrativeAreaLevel3Longitude,
   CommonAdministrativeAreaLevel3MapType,
   CommonAdministrativeAreaLevel3Name,
+  CommonAdministrativeAreaLevel3RowId,
   CommonAdministrativeAreaLevel3Slug,
   CommonAdministrativeAreaLevel3UpdatedAt,
   CommonAdministrativeAreaLevel3Zoom,
@@ -55,6 +60,7 @@ export class CommonMockAdministrativeAreaLevel3Repository
       this.collectionSource.push(
         CommonAdministrativeAreaLevel3.register(
           new CommonAdministrativeAreaLevel3Id(itemCollection.id),
+          new CommonAdministrativeAreaLevel3RowId(itemCollection.rowId),
           new CommonAdministrativeAreaLevel3CountryId(itemCollection.countryId),
           new CommonAdministrativeAreaLevel3AdministrativeAreaLevel1Id(
             itemCollection.administrativeAreaLevel1Id,

@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonResource, CommonResourceResponse } from '@app/common/resource';
 import {
   CommonResourceCode,
@@ -7,6 +11,7 @@ import {
   CommonResourceId,
   CommonResourceIsActive,
   CommonResourceName,
+  CommonResourceRowId,
   CommonResourceUpdatedAt,
 } from '@app/common/resource/domain/value-objects';
 import {
@@ -73,6 +78,7 @@ export class CommonResourceMapper implements IMapper {
   ): CommonResource {
     return CommonResource.register(
       new CommonResourceId(resource.id, { undefinable: true }),
+      new CommonResourceRowId(resource.rowId, { undefinable: true }),
       new CommonResourceCode(resource.code, { undefinable: true }),
       new CommonResourceName(resource.name, { undefinable: true }),
       new CommonResourceIsActive(resource.isActive, { undefinable: true }),
@@ -102,6 +108,7 @@ export class CommonResourceMapper implements IMapper {
 
     return new CommonResourceResponse(
       resource.id.value,
+      resource.rowId.value,
       resource.code.value,
       resource.name.value,
       resource.isActive.value,

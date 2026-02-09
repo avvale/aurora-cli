@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import { CommonAdministrativeAreaLevel1 } from '@app/common/administrative-area-level-1';
 import {
   CQMetadata,
@@ -57,6 +61,36 @@ export abstract class CommonIAdministrativeAreaLevel1Repository
     constraint?: QueryStatement;
     cQMetadata?: CQMetadata;
   }): Promise<number>;
+
+  // max record
+  abstract max(
+    column: string,
+    options?: {
+      queryStatement?: QueryStatement;
+      constraint?: QueryStatement;
+      cQMetadata?: CQMetadata;
+    },
+  ): Promise<number>;
+
+  // min record
+  abstract min(
+    column: string,
+    options?: {
+      queryStatement?: QueryStatement;
+      constraint?: QueryStatement;
+      cQMetadata?: CQMetadata;
+    },
+  ): Promise<number>;
+
+  // sum record
+  abstract sum(
+    column: string,
+    options?: {
+      queryStatement?: QueryStatement;
+      constraint?: QueryStatement;
+      cQMetadata?: CQMetadata;
+    },
+  ): Promise<number>;
 
   // ******************
   // ** side effects **

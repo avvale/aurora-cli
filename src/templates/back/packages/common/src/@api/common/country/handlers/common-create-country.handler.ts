@@ -1,4 +1,7 @@
-import { CommonCountryDto, CommonCreateCountryDto } from '@api/common/country';
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonCountry, CommonCreateCountryInput } from '@api/graphql';
 import {
   CommonCreateCountryCommand,
@@ -27,11 +30,11 @@ export class CommonCreateCountryHandler {
   ) {}
 
   async main(
-    payload: CommonCreateCountryInput | CommonCreateCountryDto,
+    payload: CommonCreateCountryInput,
     timezone?: string,
     contentLanguage?: string,
     auditing?: AuditingMeta,
-  ): Promise<CommonCountry | CommonCountryDto> {
+  ): Promise<CommonCountry> {
     if (!contentLanguage)
       throw new BadRequestException(
         'To create a multi-language object, the content-language header must be defined.',

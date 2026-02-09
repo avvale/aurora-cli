@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import {
   commonMockLangData,
   CommonUpdateLangByIdCommand,
@@ -40,6 +44,7 @@ describe('CommonUpdateLangByIdCommandHandler', () => {
           new CommonUpdateLangByIdCommand(
             {
               id: commonMockLangData[0].id,
+              rowId: commonMockLangData[0].rowId,
               name: commonMockLangData[0].name,
               image: commonMockLangData[0].image,
               iso6392: commonMockLangData[0].iso6392,

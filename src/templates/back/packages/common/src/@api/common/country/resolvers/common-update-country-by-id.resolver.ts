@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonUpdateCountryByIdHandler } from '@api/common/country';
 import { CommonCountry, CommonUpdateCountryByIdInput } from '@api/graphql';
 import { Auth } from '@aurora/decorators';

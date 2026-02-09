@@ -1,4 +1,8 @@
-import { CommonPaginateLangsQuery } from '@app/common/lang';
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
+import { CommonLangMapper, CommonPaginateLangsQuery } from '@app/common/lang';
 import { CommonPaginateLangsService } from '@app/common/lang/application/paginate/common-paginate-langs.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
@@ -7,6 +11,8 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 export class CommonPaginateLangsQueryHandler
   implements IQueryHandler<CommonPaginateLangsQuery>
 {
+  private readonly mapper: CommonLangMapper = new CommonLangMapper();
+
   constructor(
     private readonly paginateLangsService: CommonPaginateLangsService,
   ) {}
@@ -21,7 +27,7 @@ export class CommonPaginateLangsQueryHandler
     return new PaginationResponse(
       total,
       count,
-      rows.map((item) => item.toDTO()),
+      this.mapper.mapAggregatesToResponses(rows),
     );
   }
 }

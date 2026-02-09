@@ -1,4 +1,7 @@
-import { CommonCountryDto } from '@api/common/country';
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonCountry } from '@api/graphql';
 import { CommonFindCountryByIdQuery } from '@app/common/country';
 import {
@@ -8,11 +11,16 @@ import {
   QueryStatement,
   Utils,
 } from '@aurorajs.dev/core';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 
 @Injectable()
 export class CommonFindCountryByIdHandler {
   i18nColumns: string[] = [
+    'rowId',
     'name',
     'slug',
     'administrativeAreaLevel1',
@@ -34,7 +42,7 @@ export class CommonFindCountryByIdHandler {
     constraint?: QueryStatement,
     timezone?: string,
     contentLanguage?: string,
-  ): Promise<CommonCountry | CommonCountryDto> {
+  ): Promise<CommonCountry> {
     if (!contentLanguage)
       throw new BadRequestException(
         'To find a multi-language object, the content-language header must be defined.',
@@ -52,10 +60,16 @@ export class CommonFindCountryByIdHandler {
     // Replace all i18n keys by $countryI18n.key$
     constraint = Utils.deepMapKeys(constraint, this.i18nFunctionReplace);
 
-    return await this.queryBus.ask(
+    const country = await this.queryBus.ask(
       new CommonFindCountryByIdQuery(id, constraint, {
         timezone,
       }),
     );
+
+    if (!country) {
+      throw new NotFoundException(`CommonCountry with id: ${id}, not found`);
+    }
+
+    return country;
   }
 }

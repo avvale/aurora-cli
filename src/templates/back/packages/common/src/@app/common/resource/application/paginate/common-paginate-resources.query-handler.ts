@@ -1,4 +1,11 @@
-import { CommonPaginateResourcesQuery } from '@app/common/resource';
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
+import {
+  CommonPaginateResourcesQuery,
+  CommonResourceMapper,
+} from '@app/common/resource';
 import { CommonPaginateResourcesService } from '@app/common/resource/application/paginate/common-paginate-resources.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
@@ -7,6 +14,8 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 export class CommonPaginateResourcesQueryHandler
   implements IQueryHandler<CommonPaginateResourcesQuery>
 {
+  private readonly mapper: CommonResourceMapper = new CommonResourceMapper();
+
   constructor(
     private readonly paginateResourcesService: CommonPaginateResourcesService,
   ) {}
@@ -23,7 +32,7 @@ export class CommonPaginateResourcesQueryHandler
     return new PaginationResponse(
       total,
       count,
-      rows.map((item) => item.toDTO()),
+      this.mapper.mapAggregatesToResponses(rows),
     );
   }
 }

@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -10,7 +14,6 @@ export class CommonLangSagas {
                 ofType(CreatedLangEvent),
                 delay(1000),
                 map(event => {
-                    console.log('Inside [HeroesGameSagas] Saga');
                     return 'command';
                 }),
             );

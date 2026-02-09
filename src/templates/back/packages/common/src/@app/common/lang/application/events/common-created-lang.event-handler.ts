@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonCreatedLangEvent } from '@app/common/lang';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
@@ -6,6 +10,6 @@ export class CommonCreatedLangEventHandler
   implements IEventHandler<CommonCreatedLangEvent>
 {
   handle(event: CommonCreatedLangEvent): void {
-    // console.log('CommonCreatedLangEvent: ', event);
+    // 'CommonCreatedLangEvent'
   }
 }

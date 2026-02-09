@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonUpdateLangByIdHandler } from '@api/common/lang';
 import { CommonUpdateLangByIdInput } from '@api/graphql';
 import { commonMockLangData } from '@app/common/lang';
-import {
-  CoreGetLangsService,
-  ICommandBus,
-  IQueryBus,
-} from '@aurorajs.dev/core';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('CommonUpdateLangByIdHandler', () => {
@@ -30,14 +29,6 @@ describe('CommonUpdateLangByIdHandler', () => {
           provide: ICommandBus,
           useValue: {
             dispatch: () => {
-              /**/
-            },
-          },
-        },
-        {
-          provide: CoreGetLangsService,
-          useValue: {
-            init: () => {
               /**/
             },
           },

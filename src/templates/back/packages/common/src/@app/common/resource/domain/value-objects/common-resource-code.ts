@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { StringValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class CommonResourceCode extends StringValueObject {
@@ -11,7 +15,7 @@ export class CommonResourceCode extends StringValueObject {
           name: 'CommonResourceCode',
           nullable: false,
           undefinable: false,
-          maxLength: 63,
+          maxLength: 64,
         },
         validationRules,
       ),

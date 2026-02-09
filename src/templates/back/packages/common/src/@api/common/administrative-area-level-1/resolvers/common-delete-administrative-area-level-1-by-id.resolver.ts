@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import { CommonDeleteAdministrativeAreaLevel1ByIdHandler } from '@api/common/administrative-area-level-1';
 import { CommonAdministrativeAreaLevel1 } from '@api/graphql';
 import { Auth } from '@aurora/decorators';

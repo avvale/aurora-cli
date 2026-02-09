@@ -1,4 +1,7 @@
-import { CommonAdministrativeAreaLevel2Dto } from '@api/common/administrative-area-level-2';
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-2.aurora.yaml
+ */
 import { CommonAdministrativeAreaLevel2 } from '@api/graphql';
 import { CommonGetAdministrativeAreasLevel2Query } from '@app/common/administrative-area-level-2';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
@@ -12,9 +15,7 @@ export class CommonGetAdministrativeAreasLevel2Handler {
     queryStatement?: QueryStatement,
     constraint?: QueryStatement,
     timezone?: string,
-  ): Promise<
-    CommonAdministrativeAreaLevel2[] | CommonAdministrativeAreaLevel2Dto[]
-  > {
+  ): Promise<CommonAdministrativeAreaLevel2[]> {
     return await this.queryBus.ask(
       new CommonGetAdministrativeAreasLevel2Query(queryStatement, constraint, {
         timezone,

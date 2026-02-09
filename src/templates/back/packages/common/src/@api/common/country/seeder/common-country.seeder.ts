@@ -1,11 +1,14 @@
+// ignored file
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 //
-import {
-  CommonCreateCountriesCommand,
-  commonMockCountryData,
-} from '@app/common/country';
+import { countries } from '@app/common/common.seed';
+import { CommonCreateCountriesCommand } from '@app/common/country';
 
 @Injectable()
 export class CommonCountrySeeder {
@@ -16,7 +19,7 @@ export class CommonCountrySeeder {
 
   async main(): Promise<boolean> {
     await this.commandBus.dispatch(
-      new CommonCreateCountriesCommand(commonMockCountryData, {
+      new CommonCreateCountriesCommand(countries, {
         timezone: process.env.TZ,
       }),
     );

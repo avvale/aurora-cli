@@ -1,5 +1,15 @@
-import { CommonCreatedLangEvent } from './common-created-lang.event';
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
+import { CommonCreatedLangEvent } from '@app/common/lang';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class CommonCreatedLangsEvent {
-  constructor(public readonly langs: CommonCreatedLangEvent[]) {}
+  constructor(
+    public readonly event: {
+      payload: CommonCreatedLangEvent[];
+      cQMetadata?: CQMetadata;
+    },
+  ) {}
 }

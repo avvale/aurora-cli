@@ -1,4 +1,7 @@
-import { CommonCountryDto } from '@api/common/country';
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonCountry } from '@api/graphql';
 import { CommonGetCountriesQuery } from '@app/common/country';
 import {
@@ -13,6 +16,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 @Injectable()
 export class CommonGetCountriesHandler {
   i18nColumns: string[] = [
+    'rowId',
     'name',
     'slug',
     'administrativeAreaLevel1',
@@ -34,7 +38,7 @@ export class CommonGetCountriesHandler {
     constraint?: QueryStatement,
     timezone?: string,
     contentLanguage?: string,
-  ): Promise<CommonCountry[] | CommonCountryDto[]> {
+  ): Promise<CommonCountry[]> {
     if (!contentLanguage)
       throw new BadRequestException(
         'To get a multi-language objects, the content-language header must be defined.',

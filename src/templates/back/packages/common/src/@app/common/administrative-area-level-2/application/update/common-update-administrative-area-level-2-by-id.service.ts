@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-2.aurora.yaml
+ */
 import {
   CommonAdministrativeAreaLevel2,
   CommonIAdministrativeAreaLevel2Repository,
@@ -47,6 +51,7 @@ export class CommonUpdateAdministrativeAreaLevel2ByIdService {
     // create aggregate with factory pattern
     const administrativeAreaLevel2 = CommonAdministrativeAreaLevel2.register(
       payload.id,
+      undefined, // rowId
       payload.countryId,
       payload.administrativeAreaLevel1Id,
       payload.code,
@@ -74,7 +79,10 @@ export class CommonUpdateAdministrativeAreaLevel2ByIdService {
       administrativeAreaLevel2,
     );
 
-    administrativeAreaLevel2Register.updated(administrativeAreaLevel2); // apply event to model events
+    administrativeAreaLevel2Register.updated({
+      payload: administrativeAreaLevel2,
+      cQMetadata,
+    }); // apply event to model events
     administrativeAreaLevel2Register.commit(); // commit all events of model
   }
 }

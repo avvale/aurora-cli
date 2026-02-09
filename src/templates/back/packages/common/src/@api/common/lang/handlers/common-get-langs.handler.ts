@@ -1,4 +1,7 @@
-import { CommonLangDto } from '@api/common/lang';
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonLang } from '@api/graphql';
 import { CommonGetLangsQuery } from '@app/common/lang';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
@@ -12,7 +15,7 @@ export class CommonGetLangsHandler {
     queryStatement?: QueryStatement,
     constraint?: QueryStatement,
     timezone?: string,
-  ): Promise<CommonLang[] | CommonLangDto[]> {
+  ): Promise<CommonLang[]> {
     return await this.queryBus.ask(
       new CommonGetLangsQuery(queryStatement, constraint, {
         timezone,

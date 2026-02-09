@@ -1,11 +1,11 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 //
-import {
-  CommonCreateResourcesCommand,
-  commonMockResourceData,
-} from '@app/common/resource';
 
 @Injectable()
 export class CommonResourceSeeder {
@@ -15,12 +15,6 @@ export class CommonResourceSeeder {
   ) {}
 
   async main(): Promise<boolean> {
-    await this.commandBus.dispatch(
-      new CommonCreateResourcesCommand(commonMockResourceData, {
-        timezone: process.env.TZ,
-      }),
-    );
-
     return true;
   }
 }

@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import { StringValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class CommonAdministrativeAreaLevel1CustomCode extends StringValueObject {
@@ -11,7 +15,7 @@ export class CommonAdministrativeAreaLevel1CustomCode extends StringValueObject 
           name: 'CommonAdministrativeAreaLevel1CustomCode',
           nullable: true,
           undefinable: true,
-          maxLength: 63,
+          maxLength: 64,
         },
         validationRules,
       ),

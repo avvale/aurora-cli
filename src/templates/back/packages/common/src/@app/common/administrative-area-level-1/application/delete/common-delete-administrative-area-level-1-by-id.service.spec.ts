@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/** * @aurora-generated * @source cliter/common/administrative-area-level-1.aurora.yaml */
 import {
   CommonIAdministrativeAreaLevel1Repository,
   commonMockAdministrativeAreaLevel1Data,
@@ -18,7 +18,6 @@ describe('CommonDeleteAdministrativeAreaLevel1ByIdService', () => {
   let service: CommonDeleteAdministrativeAreaLevel1ByIdService;
   let repository: CommonIAdministrativeAreaLevel1Repository;
   let mockRepository: CommonMockAdministrativeAreaLevel1Repository;
-
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -41,17 +40,14 @@ describe('CommonDeleteAdministrativeAreaLevel1ByIdService', () => {
         },
       ],
     }).compile();
-
     service = module.get(CommonDeleteAdministrativeAreaLevel1ByIdService);
     repository = module.get(CommonIAdministrativeAreaLevel1Repository);
     mockRepository = module.get(CommonMockAdministrativeAreaLevel1Repository);
   });
-
   describe('main', () => {
     test('CommonDeleteAdministrativeAreaLevel1ByIdService should be defined', () => {
       expect(service).toBeDefined();
     });
-
     test('should delete administrativeAreaLevel1 and emit event', async () => {
       jest
         .spyOn(repository, 'findById')

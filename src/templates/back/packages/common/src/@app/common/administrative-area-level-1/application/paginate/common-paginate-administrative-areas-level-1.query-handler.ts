@@ -1,4 +1,11 @@
-import { CommonPaginateAdministrativeAreasLevel1Query } from '@app/common/administrative-area-level-1';
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
+import {
+  CommonAdministrativeAreaLevel1Mapper,
+  CommonPaginateAdministrativeAreasLevel1Query,
+} from '@app/common/administrative-area-level-1';
 import { CommonPaginateAdministrativeAreasLevel1Service } from '@app/common/administrative-area-level-1/application/paginate/common-paginate-administrative-areas-level-1.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
@@ -7,6 +14,9 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 export class CommonPaginateAdministrativeAreasLevel1QueryHandler
   implements IQueryHandler<CommonPaginateAdministrativeAreasLevel1Query>
 {
+  private readonly mapper: CommonAdministrativeAreaLevel1Mapper =
+    new CommonAdministrativeAreaLevel1Mapper();
+
   constructor(
     private readonly paginateAdministrativeAreasLevel1Service: CommonPaginateAdministrativeAreasLevel1Service,
   ) {}
@@ -24,7 +34,7 @@ export class CommonPaginateAdministrativeAreasLevel1QueryHandler
     return new PaginationResponse(
       total,
       count,
-      rows.map((item) => item.toDTO()),
+      this.mapper.mapAggregatesToResponses(rows),
     );
   }
 }

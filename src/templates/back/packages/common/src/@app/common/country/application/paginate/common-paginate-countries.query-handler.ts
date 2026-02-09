@@ -1,4 +1,11 @@
-import { CommonPaginateCountriesQuery } from '@app/common/country';
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
+import {
+  CommonCountryMapper,
+  CommonPaginateCountriesQuery,
+} from '@app/common/country';
 import { CommonPaginateCountriesService } from '@app/common/country/application/paginate/common-paginate-countries.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
@@ -7,6 +14,8 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 export class CommonPaginateCountriesQueryHandler
   implements IQueryHandler<CommonPaginateCountriesQuery>
 {
+  private readonly mapper: CommonCountryMapper = new CommonCountryMapper();
+
   constructor(
     private readonly paginateCountriesService: CommonPaginateCountriesService,
   ) {}
@@ -23,7 +32,7 @@ export class CommonPaginateCountriesQueryHandler
     return new PaginationResponse(
       total,
       count,
-      rows.map((item) => item.toDTO()),
+      this.mapper.mapAggregatesToResponses(rows),
     );
   }
 }

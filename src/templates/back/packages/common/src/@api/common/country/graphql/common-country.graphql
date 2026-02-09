@@ -1,188 +1,215 @@
+# @aurora-generated
+# @source cliter/common/country.aurora.yaml
 enum CommonCountryMapType {
-    ROADMAP
-    SATELLITE
-    HYBRID
-    TERRAIN
+  ROADMAP
+  SATELLITE
+  HYBRID
+  TERRAIN
 }
 
-enum CommonAdministrativeArea {
-    ADMINISTRATIVE_AREA_LEVEL_1
-    ADMINISTRATIVE_AREA_LEVEL_2
-    ADMINISTRATIVE_AREA_LEVEL_3
+type CommonCountry {
+  """
+  Unique identifier for the country. UUID v4 format, generated automatically on creation.
+  """
+  id: ID!
+  """
+  Auto-incrementing sequential identifier for the country. Used for internal ordering, human-readable reference numbers, and optimized queries. Not exposed in external APIs. Provides a stable, predictable identifier for database operations.
+  """
+  rowId: GraphQLInt!
+  """
+  ISO 3166-1 alpha-2 country code (two-letter code, e.g., &quot;US&quot;, &quot;GB&quot;, &quot;FR&quot;). Standard international identifier for countries. Indexed for efficient lookups.
+  """
+  iso3166Alpha2: GraphQLString!
+  """
+  ISO 3166-1 alpha-3 country code (three-letter code, e.g., &quot;USA&quot;, &quot;GBR&quot;, &quot;FRA&quot;). Alternative standard identifier. Indexed for efficient lookups.
+  """
+  iso3166Alpha3: GraphQLString!
+  """
+  ISO 3166-1 numeric country code (three-digit code, e.g., &quot;840&quot;, &quot;826&quot;, &quot;250&quot;). Numeric standard identifier. Stored as char to preserve leading zeros. Indexed for efficient lookups.
+  """
+  iso3166Numeric: GraphQLString!
+  """
+  Optional custom code defined by the organization for internal identification. Can be used for legacy system integration or custom business logic. Indexed for efficient lookups.
+  """
+  customCode: GraphQLString
+  """
+  International dialing prefix for phone numbers (e.g., &quot;+1&quot;, &quot;+44&quot;, &quot;+33&quot;). Used for phone number validation and formatting. Maximum 5 characters.
+  """
+  prefix: GraphQLString
+  """
+  URL or path to country flag image or icon. Used for visual representation in UI. Maximum 1022 characters for long URLs.
+  """
+  image: GraphQLString
+  """
+  Display order for country lists. Lower values appear first. NULL values typically sorted last or alphabetically. Used for prioritizing commonly selected countries.
+  """
+  sort: GraphQLInt
+  """
+  JSON structure defining the administrative divisions hierarchy for this country. Specifies how many levels exist and their names (e.g., state/county/city). Used to configure address forms dynamically.
+  """
+  administrativeAreas: JSON
+  """
+  Geographical latitude coordinate of the country&#x27;s center point. Precision of 14 decimal places allows sub-meter accuracy. Used for map visualization and initial map positioning.
+  """
+  latitude: GraphQLFloat
+  """
+  Geographical longitude coordinate of the country&#x27;s center point. Precision of 14 decimal places allows sub-meter accuracy. Used for map visualization and initial map positioning.
+  """
+  longitude: GraphQLFloat
+  """
+  Default zoom level for map display when viewing this country. Typical range: 1 (world view) to 21 (building level). Lower values for larger countries. Determines initial map scale in UI.
+  """
+  zoom: GraphQLInt
+  """
+  Preferred map visualization type for this country. ROADMAP: Street map view. SATELLITE: Aerial imagery. HYBRID: Satellite with road overlay. TERRAIN: Topographic relief map. NULL uses system default.
+  """
+  mapType: CommonCountryMapType
+  """
+  Array of language IDs available for this country&#x27;s i18n content. Determines which translations are required and displayed. Used for filtering and validation of country translations.
+  """
+  availableLangs: JSON
+  """
+  Timestamp when the record was created. Automatically set on insertion. Part of audit trail.
+  """
+  createdAt: GraphQLTimestamp
+  """
+  Timestamp of the last update to the record. Automatically updated on modification. Part of audit trail.
+  """
+  updatedAt: GraphQLTimestamp
+  """
+  Soft delete timestamp. NULL indicates active record. When set, record is excluded from normal queries but preserved for audit and recovery.
+  """
+  deletedAt: GraphQLTimestamp
+  """
+  Foreign key to the language this translation is for. Combined with countryId forms unique constraint (one translation per language per country).
+  """
+  langId: ID!
+  lang: CommonLang
+  """
+  Localized name of the country in the specified language (e.g., &quot;United States&quot; in English, &quot;États-Unis&quot; in French). Indexed for efficient searching and sorting.
+  """
+  name: GraphQLString!
+  """
+  Localized URL-friendly identifier derived from the translated name. Lowercase, hyphenated format. Used for SEO-friendly multilingual URLs. Indexed for routing.
+  """
+  slug: GraphQLString!
+  """
+  Localized label for administrative area level 1 in this country and language (e.g., &quot;State&quot; in English, &quot;État&quot; in French, &quot;Bundesland&quot; in German). Used for dynamic form labels.
+  """
+  administrativeAreaLevel1: GraphQLString
+  """
+  Localized label for administrative area level 2 in this country and language (e.g., &quot;County&quot; in English, &quot;Comté&quot; in French, &quot;Landkreis&quot; in German). Used for dynamic form labels.
+  """
+  administrativeAreaLevel2: GraphQLString
+  """
+  Localized label for administrative area level 3 in this country and language (e.g., &quot;City&quot; in English, &quot;Ville&quot; in French, &quot;Stadt&quot; in German). Used for dynamic form labels.
+  """
+  administrativeAreaLevel3: GraphQLString
 }
 
-type CommonAdministrativeAreasCountry
-{
-    commonCountry: CommonCountry
-    commonGetAdministrativeAreasLevel1: [CommonAdministrativeAreaLevel1]
-    commonGetAdministrativeAreasLevel2: [CommonAdministrativeAreaLevel2]
-    commonGetAdministrativeAreasLevel3: [CommonAdministrativeAreaLevel3]
+input CommonCreateCountryInput {
+  id: ID!
+  iso3166Alpha2: GraphQLString!
+  iso3166Alpha3: GraphQLString!
+  iso3166Numeric: GraphQLString!
+  customCode: GraphQLString
+  prefix: GraphQLString
+  image: GraphQLString
+  sort: GraphQLInt
+  administrativeAreas: JSON
+  latitude: GraphQLFloat
+  longitude: GraphQLFloat
+  zoom: GraphQLInt
+  mapType: CommonCountryMapType
+  availableLangs: JSON
+  langId: ID!
+  name: GraphQLString!
+  slug: GraphQLString!
+  administrativeAreaLevel1: GraphQLString
+  administrativeAreaLevel2: GraphQLString
+  administrativeAreaLevel3: GraphQLString
 }
 
-type CommonCountry
-{
-    id: ID!
-    iso3166Alpha2: GraphQLString!
-    iso3166Alpha3: GraphQLString!
-    iso3166Numeric: GraphQLString!
-    customCode: GraphQLString
-    prefix: GraphQLString
-    image: GraphQLString
-    sort: GraphQLInt
-    administrativeAreas: JSON
-    latitude: GraphQLFloat
-    longitude: GraphQLFloat
-    zoom: GraphQLInt
-    mapType: CommonCountryMapType
-    availableLangs: JSON
-    createdAt: GraphQLTimestamp
-    updatedAt: GraphQLTimestamp
-    deletedAt: GraphQLTimestamp
-    langId: ID!
-    lang: CommonLang
-    name: GraphQLString!
-    slug: GraphQLString!
-    administrativeAreaLevel1: GraphQLString
-    administrativeAreaLevel2: GraphQLString
-    administrativeAreaLevel3: GraphQLString
+input CommonUpdateCountryByIdInput {
+  id: ID!
+  iso3166Alpha2: GraphQLString
+  iso3166Alpha3: GraphQLString
+  iso3166Numeric: GraphQLString
+  customCode: GraphQLString
+  prefix: GraphQLString
+  image: GraphQLString
+  sort: GraphQLInt
+  administrativeAreas: JSON
+  latitude: GraphQLFloat
+  longitude: GraphQLFloat
+  zoom: GraphQLInt
+  mapType: CommonCountryMapType
+  availableLangs: JSON
+  langId: ID
+  name: GraphQLString
+  slug: GraphQLString
+  administrativeAreaLevel1: GraphQLString
+  administrativeAreaLevel2: GraphQLString
+  administrativeAreaLevel3: GraphQLString
 }
 
-input CommonCreateCountryInput
-{
-    id: ID!
-    iso3166Alpha2: GraphQLString!
-    iso3166Alpha3: GraphQLString!
-    iso3166Numeric: GraphQLString!
-    customCode: GraphQLString
-    prefix: GraphQLString
-    image: GraphQLString
-    sort: GraphQLInt
-    administrativeAreas: JSON
-    latitude: GraphQLFloat
-    longitude: GraphQLFloat
-    zoom: GraphQLInt
-    mapType: CommonCountryMapType
-    availableLangs: JSON
-    langId: ID!
-    name: GraphQLString!
-    slug: GraphQLString!
-    administrativeAreaLevel1: GraphQLString
-    administrativeAreaLevel2: GraphQLString
-    administrativeAreaLevel3: GraphQLString
+input CommonUpdateCountriesInput {
+  id: ID
+  iso3166Alpha2: GraphQLString
+  iso3166Alpha3: GraphQLString
+  iso3166Numeric: GraphQLString
+  customCode: GraphQLString
+  prefix: GraphQLString
+  image: GraphQLString
+  sort: GraphQLInt
+  administrativeAreas: JSON
+  latitude: GraphQLFloat
+  longitude: GraphQLFloat
+  zoom: GraphQLInt
+  mapType: CommonCountryMapType
+  availableLangs: JSON
+  langId: ID
+  name: GraphQLString
+  slug: GraphQLString
+  administrativeAreaLevel1: GraphQLString
+  administrativeAreaLevel2: GraphQLString
+  administrativeAreaLevel3: GraphQLString
 }
 
-input CommonUpdateCountryByIdInput
-{
-    id: ID!
-    iso3166Alpha2: GraphQLString
-    iso3166Alpha3: GraphQLString
-    iso3166Numeric: GraphQLString
-    customCode: GraphQLString
-    prefix: GraphQLString
-    image: GraphQLString
-    sort: GraphQLInt
-    administrativeAreas: JSON
-    latitude: GraphQLFloat
-    longitude: GraphQLFloat
-    zoom: GraphQLInt
-    mapType: CommonCountryMapType
-    availableLangs: JSON
-    langId: ID
-    name: GraphQLString
-    slug: GraphQLString
-    administrativeAreaLevel1: GraphQLString
-    administrativeAreaLevel2: GraphQLString
-    administrativeAreaLevel3: GraphQLString
+type Query {
+  commonFindCountry(
+    query: QueryStatement
+    constraint: QueryStatement
+  ): CommonCountry
+
+  commonFindCountryById(id: ID, constraint: QueryStatement): CommonCountry
+
+  commonGetCountries(
+    query: QueryStatement
+    constraint: QueryStatement
+  ): [CommonCountry]!
+
+  commonPaginateCountries(
+    query: QueryStatement
+    constraint: QueryStatement
+  ): Pagination!
+
+  # additionalApis
+  commonAdministrativeAreasCountry(
+    query: QueryStatement
+    constraint: QueryStatement
+  ): [CommonCountry]!
 }
 
-input CommonUpdateCountriesInput
-{
-    id: ID
-    iso3166Alpha2: GraphQLString
-    iso3166Alpha3: GraphQLString
-    iso3166Numeric: GraphQLString
-    customCode: GraphQLString
-    prefix: GraphQLString
-    image: GraphQLString
-    sort: GraphQLInt
-    administrativeAreas: JSON
-    latitude: GraphQLFloat
-    longitude: GraphQLFloat
-    zoom: GraphQLInt
-    mapType: CommonCountryMapType
-    availableLangs: JSON
-    langId: ID
-    name: GraphQLString
-    slug: GraphQLString
-    administrativeAreaLevel1: GraphQLString
-    administrativeAreaLevel2: GraphQLString
-    administrativeAreaLevel3: GraphQLString
-}
+type Mutation {
+  commonCreateCountry(payload: CommonCreateCountryInput!): CommonCountry
 
-type Query
-{
-    commonFindCountry(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): CommonCountry
+  commonCreateCountries(payload: [CommonCreateCountryInput]!): Boolean!
 
-    commonFindCountryById(
-        id: ID
-        constraint: QueryStatement
-    ): CommonCountry
+  commonUpdateCountryById(
+    payload: CommonUpdateCountryByIdInput!
+    constraint: QueryStatement
+  ): CommonCountry
 
-    commonGetCountries(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [CommonCountry]!
-
-    commonPaginateCountries(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): Pagination!
-
-
-    # additionalApis
-    commonAdministrativeAreasCountry(
-        countryId: GraphQLString!
-        administrativeAreaLevel1Id: GraphQLString
-        administrativeAreaLevel2Id: GraphQLString
-    ): CommonAdministrativeAreasCountry
-}
-
-type Mutation
-{
-    commonCreateCountry(
-        payload: CommonCreateCountryInput!
-    ): CommonCountry
-
-    commonCreateCountries(
-        payload: [CommonCreateCountryInput]!
-    ): Boolean!
-
-    commonUpdateCountryById(
-        payload: CommonUpdateCountryByIdInput!
-        constraint: QueryStatement
-    ): CommonCountry
-
-    commonUpdateCountries(
-        payload: CommonUpdateCountriesInput!
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [CommonCountry]!
-
-    commonUpsertCountry(
-        payload: CommonUpdateCountryByIdInput!
-    ): CommonCountry
-
-    commonDeleteCountryById(
-        id: ID!
-        constraint: QueryStatement
-    ): CommonCountry
-
-    commonDeleteCountries(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [CommonCountry]!
-
+  commonDeleteCountryById(id: ID!, constraint: QueryStatement): CommonCountry
 }

@@ -1,17 +1,28 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
+import { CQMetadata } from '@aurorajs.dev/core';
+
 export class CommonCreatedAdministrativeAreaLevel1Event {
   constructor(
-    public readonly id: string,
-    public readonly countryId: string,
-    public readonly code: string,
-    public readonly customCode: string,
-    public readonly name: string,
-    public readonly slug: string,
-    public readonly latitude: number,
-    public readonly longitude: number,
-    public readonly zoom: number,
-    public readonly mapType: string,
-    public readonly createdAt: string,
-    public readonly updatedAt: string,
-    public readonly deletedAt: string,
+    public readonly event: {
+      payload: {
+        id: string;
+        countryId: string;
+        code: string;
+        customCode: string;
+        name: string;
+        slug: string;
+        latitude: number;
+        longitude: number;
+        zoom: number;
+        mapType: 'ROADMAP' | 'SATELLITE' | 'HYBRID' | 'TERRAIN';
+        createdAt: string;
+        updatedAt: string;
+        deletedAt: string;
+      };
+      cQMetadata?: CQMetadata;
+    },
   ) {}
 }

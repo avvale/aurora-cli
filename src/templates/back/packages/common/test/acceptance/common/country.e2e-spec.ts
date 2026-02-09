@@ -1,6 +1,7 @@
-/* eslint-disable max-len */
-/* eslint-disable quotes */
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonModule } from '@api/common/common.module';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
@@ -10,7 +11,7 @@ import {
   commonMockCountryData,
   CommonMockCountrySeeder,
 } from '@app/common/country';
-import { GraphQLConfigModule } from '@aurora/modules/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules';
 import { CoreAddI18nConstraintService } from '@aurorajs.dev/core';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -125,6 +126,22 @@ describe('country', () => {
       });
   });
 
+  test('/REST:POST common/country/create - Got 400 Conflict, CountryRowId property can not to be null', () => {
+    return request(app.getHttpServer())
+      .post('/common/country/create')
+      .set('Accept', 'application/json')
+      .send({
+        ...mockData[0],
+        rowId: null,
+      })
+      .expect(400)
+      .then((res) => {
+        expect(res.body.message).toContain(
+          'Value for CommonCountryRowId must be defined, can not be null',
+        );
+      });
+  });
+
   test('/REST:POST common/country/create - Got 400 Conflict, CountryIso3166Alpha2 property can not to be null', () => {
     return request(app.getHttpServer())
       .post('/common/country/create')
@@ -233,6 +250,22 @@ describe('country', () => {
       .then((res) => {
         expect(res.body.message).toContain(
           'Value for CommonCountryId must be defined, can not be undefined',
+        );
+      });
+  });
+
+  test('/REST:POST common/country/create - Got 400 Conflict, CountryRowId property can not to be undefined', () => {
+    return request(app.getHttpServer())
+      .post('/common/country/create')
+      .set('Accept', 'application/json')
+      .send({
+        ...mockData[0],
+        rowId: undefined,
+      })
+      .expect(400)
+      .then((res) => {
+        expect(res.body.message).toContain(
+          'Value for CommonCountryRowId must be defined, can not be undefined',
         );
       });
   });
@@ -413,19 +446,19 @@ describe('country', () => {
       });
   });
 
-  test('/REST:POST common/country/create - Got 400 Conflict, CountryCustomCode is too large, has a maximum length of 63', () => {
+  test('/REST:POST common/country/create - Got 400 Conflict, CountryCustomCode is too large, has a maximum length of 64', () => {
     return request(app.getHttpServer())
       .post('/common/country/create')
       .set('Accept', 'application/json')
       .send({
         ...mockData[0],
         customCode:
-          '****************************************************************',
+          '*****************************************************************',
       })
       .expect(400)
       .then((res) => {
         expect(res.body.message).toContain(
-          'Value for CommonCountryCustomCode is too large, has a maximum length of 63',
+          'Value for CommonCountryCustomCode is too large, has a maximum length of 64',
         );
       });
   });
@@ -463,85 +496,85 @@ describe('country', () => {
       });
   });
 
-  test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nName is too large, has a maximum length of 127', () => {
+  test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nName is too large, has a maximum length of 128', () => {
     return request(app.getHttpServer())
       .post('/common/country/create')
       .set('Accept', 'application/json')
       .send({
         ...mockData[0],
-        name: '********************************************************************************************************************************',
+        name: '*********************************************************************************************************************************',
       })
       .expect(400)
       .then((res) => {
         expect(res.body.message).toContain(
-          'Value for CommonCountryI18nName is too large, has a maximum length of 127',
+          'Value for CommonCountryI18nName is too large, has a maximum length of 128',
         );
       });
   });
 
-  test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nSlug is too large, has a maximum length of 127', () => {
+  test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nSlug is too large, has a maximum length of 128', () => {
     return request(app.getHttpServer())
       .post('/common/country/create')
       .set('Accept', 'application/json')
       .send({
         ...mockData[0],
-        slug: '********************************************************************************************************************************',
+        slug: '*********************************************************************************************************************************',
       })
       .expect(400)
       .then((res) => {
         expect(res.body.message).toContain(
-          'Value for CommonCountryI18nSlug is too large, has a maximum length of 127',
+          'Value for CommonCountryI18nSlug is too large, has a maximum length of 128',
         );
       });
   });
 
-  test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nAdministrativeAreaLevel1 is too large, has a maximum length of 63', () => {
+  test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nAdministrativeAreaLevel1 is too large, has a maximum length of 64', () => {
     return request(app.getHttpServer())
       .post('/common/country/create')
       .set('Accept', 'application/json')
       .send({
         ...mockData[0],
         administrativeAreaLevel1:
-          '****************************************************************',
+          '*****************************************************************',
       })
       .expect(400)
       .then((res) => {
         expect(res.body.message).toContain(
-          'Value for CommonCountryI18nAdministrativeAreaLevel1 is too large, has a maximum length of 63',
+          'Value for CommonCountryI18nAdministrativeAreaLevel1 is too large, has a maximum length of 64',
         );
       });
   });
 
-  test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nAdministrativeAreaLevel2 is too large, has a maximum length of 63', () => {
+  test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nAdministrativeAreaLevel2 is too large, has a maximum length of 64', () => {
     return request(app.getHttpServer())
       .post('/common/country/create')
       .set('Accept', 'application/json')
       .send({
         ...mockData[0],
         administrativeAreaLevel2:
-          '****************************************************************',
+          '*****************************************************************',
       })
       .expect(400)
       .then((res) => {
         expect(res.body.message).toContain(
-          'Value for CommonCountryI18nAdministrativeAreaLevel2 is too large, has a maximum length of 63',
+          'Value for CommonCountryI18nAdministrativeAreaLevel2 is too large, has a maximum length of 64',
         );
       });
   });
 
-  test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nAdministrativeAreaLevel3 is too large, has a maximum length of 63', () => {
+  test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nAdministrativeAreaLevel3 is too large, has a maximum length of 64', () => {
     return request(app.getHttpServer())
       .post('/common/country/create')
       .set('Accept', 'application/json')
       .send({
         ...mockData[0],
         administrativeAreaLevel3:
-          '****************************************************************',
+          '*****************************************************************',
       })
       .expect(400)
       .then((res) => {
         expect(res.body.message).toContain(
-          'Value for CommonCountryI18nAdministrativeAreaLevel3 is too large, has a maximum length of 63',
+          'Value for CommonCountryI18nAdministrativeAreaLevel3 is too large, has a maximum length of 64',
         );
       });
   });
@@ -801,6 +834,7 @@ describe('country', () => {
                         commonCreateCountry (payload:$payload)
                         {
                             id
+                            rowId
                             iso3166Alpha2
                             iso3166Alpha3
                             iso3166Numeric
@@ -895,6 +929,7 @@ describe('country', () => {
                         commonGetCountries (query:$query)
                         {
                             id
+                            rowId
                             iso3166Alpha2
                             iso3166Alpha3
                             iso3166Numeric
@@ -911,6 +946,7 @@ describe('country', () => {
                             createdAt
                             updatedAt
                             id
+                            rowId
                             name
                             slug
                             administrativeAreaLevel1
@@ -949,6 +985,7 @@ describe('country', () => {
                         commonCreateCountry (payload:$payload)
                         {
                             id
+                            rowId
                             iso3166Alpha2
                             iso3166Alpha3
                             iso3166Numeric
@@ -997,6 +1034,7 @@ describe('country', () => {
                         commonFindCountry (query:$query)
                         {
                             id
+                            rowId
                             iso3166Alpha2
                             iso3166Alpha3
                             iso3166Numeric
@@ -1013,6 +1051,7 @@ describe('country', () => {
                             createdAt
                             updatedAt
                             id
+                            rowId
                             name
                             slug
                             administrativeAreaLevel1
@@ -1054,6 +1093,7 @@ describe('country', () => {
                         commonFindCountry (query:$query)
                         {
                             id
+                            rowId
                             iso3166Alpha2
                             iso3166Alpha3
                             iso3166Numeric
@@ -1070,6 +1110,7 @@ describe('country', () => {
                             createdAt
                             updatedAt
                             id
+                            rowId
                             name
                             slug
                             administrativeAreaLevel1
@@ -1107,6 +1148,7 @@ describe('country', () => {
                         commonFindCountryById (id:$id)
                         {
                             id
+                            rowId
                             iso3166Alpha2
                             iso3166Alpha3
                             iso3166Numeric
@@ -1123,6 +1165,7 @@ describe('country', () => {
                             createdAt
                             updatedAt
                             id
+                            rowId
                             name
                             slug
                             administrativeAreaLevel1
@@ -1160,6 +1203,7 @@ describe('country', () => {
                         commonFindCountryById (id:$id)
                         {
                             id
+                            rowId
                             iso3166Alpha2
                             iso3166Alpha3
                             iso3166Numeric
@@ -1176,6 +1220,7 @@ describe('country', () => {
                             createdAt
                             updatedAt
                             id
+                            rowId
                             name
                             slug
                             administrativeAreaLevel1
@@ -1209,6 +1254,7 @@ describe('country', () => {
                         commonUpdateCountryById (payload:$payload)
                         {
                             id
+                            rowId
                             iso3166Alpha2
                             iso3166Alpha3
                             iso3166Numeric
@@ -1225,6 +1271,7 @@ describe('country', () => {
                             createdAt
                             updatedAt
                             id
+                            rowId
                             name
                             slug
                             administrativeAreaLevel1
@@ -1265,6 +1312,7 @@ describe('country', () => {
                         commonUpdateCountryById (payload:$payload)
                         {
                             id
+                            rowId
                             iso3166Alpha2
                             iso3166Alpha3
                             iso3166Numeric
@@ -1281,6 +1329,7 @@ describe('country', () => {
                             createdAt
                             updatedAt
                             id
+                            rowId
                             name
                             slug
                             administrativeAreaLevel1
@@ -1317,6 +1366,7 @@ describe('country', () => {
                         commonUpdateCountries (payload:$payload query:$query)
                         {
                             id
+                            rowId
                             iso3166Alpha2
                             iso3166Alpha3
                             iso3166Numeric
@@ -1333,6 +1383,7 @@ describe('country', () => {
                             createdAt
                             updatedAt
                             id
+                            rowId
                             name
                             slug
                             administrativeAreaLevel1
@@ -1374,6 +1425,7 @@ describe('country', () => {
                         commonDeleteCountryById (id:$id)
                         {
                             id
+                            rowId
                             iso3166Alpha2
                             iso3166Alpha3
                             iso3166Numeric
@@ -1390,6 +1442,7 @@ describe('country', () => {
                             createdAt
                             updatedAt
                             id
+                            rowId
                             name
                             slug
                             administrativeAreaLevel1
@@ -1427,6 +1480,7 @@ describe('country', () => {
                         commonDeleteCountryById (id:$id)
                         {
                             id
+                            rowId
                             iso3166Alpha2
                             iso3166Alpha3
                             iso3166Numeric
@@ -1443,6 +1497,7 @@ describe('country', () => {
                             createdAt
                             updatedAt
                             id
+                            rowId
                             name
                             slug
                             administrativeAreaLevel1

@@ -54,7 +54,8 @@ standards.
 | Project structure, folder organization, navigating codebase    | `.claude/skills/aurora-project-structure/SKILL.md` |
 | Analyzing or editing \*.aurora.yaml files, schema validation   | `.claude/skills/aurora-schema/SKILL.md`            |
 | Sync Aurora schemas with Google Sheets (push, pull, diff)      | `.claude/skills/aurora-sheets-sync/SKILL.md`       |
-| Generate CONTEXT.md for bounded contexts from code exploration | `.claude/skills/bounded-context-generator/SKILL.md`|
+| Generate CONTEXT.md for bounded contexts from code exploration | `.claude/skills/aurora-context-generator/SKILL.md` |
+| Merge .origin.ts files after Aurora CLI regeneration           | `.claude/skills/aurora-origin-merge/SKILL.md`      |
 | Migrations SQL, procedures, functions, triggers (tools)        | `.claude/skills/aurora-tools-scripts/SKILL.md`     |
 | Git commits, commit messages, conventional commits             | `.claude/skills/conventional-commits/SKILL.md`     |
 | Commit and push changes (/commit command)                      | `.claude/skills/commit/SKILL.md`                   |
@@ -77,6 +78,11 @@ standards.
 
 ## Bounded Context Documentation
 
-Before working on any bounded context, check if `cliter/[bounded-context]/CONTEXT.md`
-exists and read it to understand the business domain, modules, and rules.
-This file contains business logic documentation specific to each installed bounded context.
+Before working on any bounded context, check if
+`cliter/[bounded-context]/CONTEXT.md` exists and read it to understand the
+business domain, modules, and rules. This file contains business logic
+documentation specific to each installed bounded context.
+
+<!-- SKILLS-INDEX-START -->
+[Project Skills Index]|root:.claude|IMPORTANT:Prefer retrieval-led reasoning over pre-training.Read SKILL.md first,then related files.|skills/aurora-cli:{SKILL.md}|skills/aurora-context-generator:{SKILL.md,CONTEXT-template.md}|skills/aurora-cqrs:{SKILL.md,aggregates.md,commands-queries.md,events-sagas.md,patterns.md,services.md}|skills/aurora-criteria:{SKILL.md,examples.md,operators.md}|skills/aurora-development:{SKILL.md,handlers.md,nestjs-components.md,patterns.md,testing.md}|skills/aurora-origin-merge:{SKILL.md,merge-rules.md}|skills/aurora-project-structure:{SKILL.md}|skills/aurora-schema:{SKILL.md,patterns-workflow.md,types-reference.md}|skills/aurora-sheets-sync:{SKILL.md}|skills/aurora-tools-scripts:{SKILL.md}|skills/commit:{SKILL.md}|skills/commit-pr:{SKILL.md}|skills/conventional-commits:{SKILL.md}|skills/jest-nestjs:{SKILL.md,aurora-testing.md,e2e-testing.md,unit-testing.md}|skills/logger:{SKILL.md}|skills/postgresql:{SKILL.md,data-types.md,indexing.md,performance.md,queries.md}|skills/prettier:{SKILL.md}|skills/skill-creator:{SKILL.md,SKILL-TEMPLATE.md}|skills/supertest-nestjs:{SKILL.md,advanced-patterns.md,auth-testing.md,graphql-testing.md,rest-crud.md}|skills/typescript:{SKILL.md}|commands:{create-schema.md,create-skill.md}|agents:{aurora-schema-manager.md}|agents/assets:{address-patterns.md,field-patterns.md,phone-patterns.md}|output-styles:{gentleman.md}
+<!-- SKILLS-INDEX-END -->

@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-2.aurora.yaml
+ */
 import {
   CommonUpdateAdministrativeAreaLevel2ByIdHandler,
   CommonUpdateAdministrativeAreaLevel2ByIdResolver,

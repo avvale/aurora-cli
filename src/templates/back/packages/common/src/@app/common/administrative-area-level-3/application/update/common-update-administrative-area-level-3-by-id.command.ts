@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-3.aurora.yaml
+ */
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
 export class CommonUpdateAdministrativeAreaLevel3ByIdCommand {
@@ -14,7 +18,7 @@ export class CommonUpdateAdministrativeAreaLevel3ByIdCommand {
       latitude?: number;
       longitude?: number;
       zoom?: number;
-      mapType?: string;
+      mapType?: 'ROADMAP' | 'SATELLITE' | 'HYBRID' | 'TERRAIN';
     },
     public readonly constraint?: QueryStatement,
     public readonly cQMetadata?: CQMetadata,

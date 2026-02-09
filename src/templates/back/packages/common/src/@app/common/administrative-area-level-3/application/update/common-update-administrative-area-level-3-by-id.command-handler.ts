@@ -1,4 +1,7 @@
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-3.aurora.yaml
+ */
 import { CommonUpdateAdministrativeAreaLevel3ByIdCommand } from '@app/common/administrative-area-level-3';
 import { CommonUpdateAdministrativeAreaLevel3ByIdService } from '@app/common/administrative-area-level-3/application/update/common-update-administrative-area-level-3-by-id.service';
 import {

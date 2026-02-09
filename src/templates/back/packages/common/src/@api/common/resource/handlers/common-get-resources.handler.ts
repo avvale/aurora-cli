@@ -1,4 +1,7 @@
-import { CommonResourceDto } from '@api/common/resource';
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonResource } from '@api/graphql';
 import { CommonGetResourcesQuery } from '@app/common/resource';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
@@ -12,7 +15,7 @@ export class CommonGetResourcesHandler {
     queryStatement?: QueryStatement,
     constraint?: QueryStatement,
     timezone?: string,
-  ): Promise<CommonResource[] | CommonResourceDto[]> {
+  ): Promise<CommonResource[]> {
     return await this.queryBus.ask(
       new CommonGetResourcesQuery(queryStatement, constraint, {
         timezone,

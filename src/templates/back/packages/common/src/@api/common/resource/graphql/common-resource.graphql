@@ -1,100 +1,95 @@
+# @aurora-generated
+# @source cliter/common/resource.aurora.yaml
 
-type CommonResource
-{
-    id: ID!
-    code: GraphQLString!
-    name: GraphQLString!
-    isActive: GraphQLBoolean!
-    hasAttachments: GraphQLBoolean!
-    createdAt: GraphQLTimestamp
-    updatedAt: GraphQLTimestamp
-    deletedAt: GraphQLTimestamp
+type CommonResource {
+  """
+  Unique identifier for the resource. UUID v4 format, generated automatically on creation.
+  """
+  id: ID!
+  """
+  Sequential numeric identifier for sorting and pagination. Auto-incremented, unique per record. Used for efficient range queries.
+  """
+  rowId: GraphQLInt!
+  """
+  Unique code identifying the resource type (e.g., &quot;PRODUCT&quot;, &quot;USER_AVATAR&quot;, &quot;ARTICLE_IMAGE&quot;). Used programmatically to reference resource types. Must be unique across all resources. Typically uppercase with underscores.
+  """
+  code: GraphQLString!
+  """
+  Human-readable name of the resource type (e.g., &quot;Product Images&quot;, &quot;User Avatars&quot;). Displayed in admin interfaces for resource management. Should be descriptive and user-friendly.
+  """
+  name: GraphQLString!
+  """
+  Indicates if the resource type is currently active and can accept new attachments. TRUE: Resource accepts attachments. FALSE: Resource disabled, no new attachments allowed but existing ones preserved. Used for feature toggles and deprecation.
+  """
+  isActive: GraphQLBoolean!
+  """
+  Indicates if this resource type supports file attachments. TRUE: Attachments can be associated with entities of this type. FALSE: Resource type exists but doesn&#x27;t support attachments. Used for resource classification and validation.
+  """
+  hasAttachments: GraphQLBoolean!
+  """
+  Timestamp when the record was created. Automatically set on insertion. Part of audit trail.
+  """
+  createdAt: GraphQLTimestamp
+  """
+  Timestamp of the last update to the record. Automatically updated on modification. Part of audit trail.
+  """
+  updatedAt: GraphQLTimestamp
+  """
+  Soft delete timestamp. NULL indicates active record. When set, record is excluded from normal queries but preserved for audit and data integrity of existing attachments.
+  """
+  deletedAt: GraphQLTimestamp
 }
 
-input CommonCreateResourceInput
-{
-    id: ID!
-    code: GraphQLString!
-    name: GraphQLString!
-    isActive: GraphQLBoolean!
-    hasAttachments: GraphQLBoolean!
+input CommonCreateResourceInput {
+  id: ID!
+  code: GraphQLString!
+  name: GraphQLString!
+  isActive: GraphQLBoolean!
+  hasAttachments: GraphQLBoolean!
 }
 
-input CommonUpdateResourceByIdInput
-{
-    id: ID!
-    code: GraphQLString
-    name: GraphQLString
-    isActive: GraphQLBoolean
-    hasAttachments: GraphQLBoolean
+input CommonUpdateResourceByIdInput {
+  id: ID!
+  code: GraphQLString
+  name: GraphQLString
+  isActive: GraphQLBoolean
+  hasAttachments: GraphQLBoolean
 }
 
-input CommonUpdateResourcesInput
-{
-    id: ID
-    code: GraphQLString
-    name: GraphQLString
-    isActive: GraphQLBoolean
-    hasAttachments: GraphQLBoolean
+input CommonUpdateResourcesInput {
+  id: ID
+  code: GraphQLString
+  name: GraphQLString
+  isActive: GraphQLBoolean
+  hasAttachments: GraphQLBoolean
 }
 
-type Query
-{
-    commonFindResource(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): CommonResource
+type Query {
+  commonFindResource(
+    query: QueryStatement
+    constraint: QueryStatement
+  ): CommonResource
 
-    commonFindResourceById(
-        id: ID
-        constraint: QueryStatement
-    ): CommonResource
+  commonFindResourceById(id: ID, constraint: QueryStatement): CommonResource
 
-    commonGetResources(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [CommonResource]!
+  commonGetResources(
+    query: QueryStatement
+    constraint: QueryStatement
+  ): [CommonResource]!
 
-    commonPaginateResources(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): Pagination!
-
+  commonPaginateResources(
+    query: QueryStatement
+    constraint: QueryStatement
+  ): Pagination!
 }
 
-type Mutation
-{
-    commonCreateResource(
-        payload: CommonCreateResourceInput!
-    ): CommonResource
+type Mutation {
+  commonCreateResource(payload: CommonCreateResourceInput!): CommonResource
 
-    commonCreateResources(
-        payload: [CommonCreateResourceInput]!
-    ): Boolean!
+  commonUpdateResourceById(
+    payload: CommonUpdateResourceByIdInput!
+    constraint: QueryStatement
+  ): CommonResource
 
-    commonUpdateResourceById(
-        payload: CommonUpdateResourceByIdInput!
-        constraint: QueryStatement
-    ): CommonResource
-
-    commonUpdateResources(
-        payload: CommonUpdateResourcesInput!
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [CommonResource]!
-
-    commonUpsertResource(
-        payload: CommonUpdateResourceByIdInput!
-    ): CommonResource
-
-    commonDeleteResourceById(
-        id: ID!
-        constraint: QueryStatement
-    ): CommonResource
-
-    commonDeleteResources(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [CommonResource]!
-
+  commonDeleteResourceById(id: ID!, constraint: QueryStatement): CommonResource
 }

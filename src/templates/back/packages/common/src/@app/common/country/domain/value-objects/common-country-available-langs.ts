@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { JsonValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class CommonCountryAvailableLangs extends JsonValueObject {

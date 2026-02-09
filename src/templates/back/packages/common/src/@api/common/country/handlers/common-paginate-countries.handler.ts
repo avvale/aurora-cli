@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { Pagination } from '@api/graphql';
 import { CommonPaginateCountriesQuery } from '@app/common/country';
 import {
@@ -12,6 +16,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 @Injectable()
 export class CommonPaginateCountriesHandler {
   i18nColumns: string[] = [
+    'rowId',
     'name',
     'slug',
     'administrativeAreaLevel1',

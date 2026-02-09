@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonUpdateResourceByIdHandler } from '@api/common/resource';
 import { CommonUpdateResourceByIdInput } from '@api/graphql';
 import { commonMockResourceData } from '@app/common/resource';

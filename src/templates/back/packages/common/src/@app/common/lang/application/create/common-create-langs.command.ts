@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CQMetadata } from '@aurorajs.dev/core';
 
 export class CommonCreateLangsCommand {
@@ -10,7 +14,7 @@ export class CommonCreateLangsCommand {
       iso6393: string;
       ietf: string;
       customCode?: string;
-      dir: string;
+      dir: 'LTR' | 'RTL';
       sort?: number;
       isActive: boolean;
     }[],

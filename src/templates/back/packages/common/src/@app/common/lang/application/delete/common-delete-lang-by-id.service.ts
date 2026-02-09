@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonILangRepository } from '@app/common/lang';
 import { CommonLangId } from '@app/common/lang/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
@@ -32,7 +36,10 @@ export class CommonDeleteLangByIdService {
     // insert EventBus in object, to be able to apply and commit events
     const langRegister = this.publisher.mergeObjectContext(lang);
 
-    langRegister.deleted(lang); // apply event to model events
+    langRegister.deleted({
+      payload: lang,
+      cQMetadata,
+    }); // apply event to model events
     langRegister.commit(); // commit all events of model
   }
 }

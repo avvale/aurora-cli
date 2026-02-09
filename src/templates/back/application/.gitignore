@@ -68,8 +68,4 @@ pids
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Aurora Sheets Sync
-aurora-sheets.config.json
-scripts/aurora-sheets-sync/credentials/*.json
-!scripts/aurora-sheets-sync/credentials/.gitignore
-scripts/aurora-sheets-sync/node_modules
 /backups

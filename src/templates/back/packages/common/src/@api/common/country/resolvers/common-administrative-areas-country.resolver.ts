@@ -1,15 +1,16 @@
-import {
-  CommonAdministrativeAreasCountryHandler,
-  CommonCountryDto,
-} from '@api/common/country';
-import {
-  CommonAdministrativeAreaLevel1,
-  CommonAdministrativeAreaLevel2,
-  CommonAdministrativeAreaLevel3,
-  CommonCountry,
-} from '@api/graphql';
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
+import { CommonAdministrativeAreasCountryHandler } from '@api/common/country';
+import { CommonCountry } from '@api/graphql';
 import { Auth } from '@aurora/decorators';
-import { ContentLanguage } from '@aurorajs.dev/core';
+import {
+  Auditing,
+  AuditingMeta,
+  QueryStatement,
+  Timezone,
+} from '@aurorajs.dev/core';
 import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
@@ -21,21 +22,16 @@ export class CommonAdministrativeAreasCountryResolver {
 
   @Query('commonAdministrativeAreasCountry')
   async main(
-    @Args('countryId') countryId: string,
-    @Args('administrativeAreaLevel1Id') administrativeAreaLevel1Id?: string,
-    @Args('administrativeAreaLevel2Id') administrativeAreaLevel2Id?: string,
-    @ContentLanguage() contentLanguage?: string,
-  ): Promise<{
-    commonCountry?: CommonCountry | CommonCountryDto;
-    administrativeAreasLevel1?: CommonAdministrativeAreaLevel1[];
-    administrativeAreasLevel2?: CommonAdministrativeAreaLevel2[];
-    administrativeAreasLevel3?: CommonAdministrativeAreaLevel3[];
-  }> {
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ): Promise<CommonCountry[]> {
     return await this.handler.main(
-      countryId,
-      administrativeAreaLevel1Id,
-      administrativeAreaLevel2Id,
-      contentLanguage,
+      queryStatement,
+      constraint,
+      timezone,
+      auditing,
     );
   }
 }

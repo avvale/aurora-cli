@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import {
   CommonCountry,
   CommonICountryI18nRepository,
@@ -70,6 +74,7 @@ export class CommonUpdateCountryByIdService {
     // create aggregate with factory pattern
     const country = CommonCountry.register(
       payload.id,
+      undefined, // rowId
       payload.iso3166Alpha2,
       payload.iso3166Alpha3,
       payload.iso3166Numeric,
@@ -108,7 +113,7 @@ export class CommonUpdateCountryByIdService {
       constraint,
       cQMetadata,
       updateByIdOptions: cQMetadata?.repositoryOptions,
-      dataFactory: (aggregate: CommonCountry) => aggregate.toI18nDTO(),
+      dataFactory: (aggregate: CommonCountry) => aggregate.toI18nRepository(),
       findArguments: {
         langId: contentLanguage.id,
         countryId: country.id.value,
@@ -118,7 +123,10 @@ export class CommonUpdateCountryByIdService {
     // merge EventBus methods with object returned by the repository, to be able to apply and commit events
     const countryRegister = this.publisher.mergeObjectContext(country);
 
-    countryRegister.updated(country); // apply event to model events
+    countryRegister.updated({
+      payload: country,
+      cQMetadata,
+    }); // apply event to model events
     countryRegister.commit(); // commit all events of model
   }
 }

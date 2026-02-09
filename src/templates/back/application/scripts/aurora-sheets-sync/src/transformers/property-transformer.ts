@@ -68,6 +68,21 @@ function getModuleNameFromPath(modulePath?: string): string {
 }
 
 /**
+ * Get the value for the "maxLength/length" column based on property type
+ * - char: uses length
+ * - varchar and others: uses maxLength
+ */
+function getLengthValue(property: AuroraProperty): string {
+  if (property.type === 'char' && property.length !== undefined) {
+    return property.length.toString();
+  }
+  if (property.maxLength !== undefined) {
+    return property.maxLength.toString();
+  }
+  return '';
+}
+
+/**
  * Converts a YAML property to a Sheet row
  */
 export function propertyToSheetRow(property: AuroraProperty): SheetPropertyRow {
@@ -82,7 +97,7 @@ export function propertyToSheetRow(property: AuroraProperty): SheetPropertyRow {
     primaryKey: boolToString(property.primaryKey),
     index: property.index || '',
     indexUsing: property.indexUsing || '',
-    maxLength: property.maxLength?.toString() || '',
+    'maxLength/length': getLengthValue(property),
     decimals: formatDecimals(property.decimals),
     defaultValue: formatDefaultValue(property.defaultValue),
     enumOptions: formatEnumOptions(property.enumOptions),
@@ -127,7 +142,16 @@ export function sheetRowToProperty(row: SheetPropertyRow): AuroraProperty {
   }
   if (row.index) property.index = row.index;
   if (row.indexUsing) property.indexUsing = row.indexUsing;
-  if (row.maxLength) property.maxLength = parseInt(row.maxLength, 10);
+
+  // Handle maxLength/length column based on type
+  const lengthValue = row['maxLength/length'];
+  if (lengthValue) {
+    if (row.type === 'char') {
+      property.length = parseInt(lengthValue, 10);
+    } else {
+      property.maxLength = parseInt(lengthValue, 10);
+    }
+  }
 
   // Handle values column based on type
   // - enum: values contains enumOptions

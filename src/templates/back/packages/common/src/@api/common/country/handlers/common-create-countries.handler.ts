@@ -1,4 +1,7 @@
-import { CommonCreateCountryDto } from '@api/common/country';
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonCreateCountryInput } from '@api/graphql';
 import { CommonCreateCountriesCommand } from '@app/common/country';
 import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
@@ -9,7 +12,7 @@ export class CommonCreateCountriesHandler {
   constructor(private readonly commandBus: ICommandBus) {}
 
   async main(
-    payload: CommonCreateCountryInput[] | CommonCreateCountryDto[],
+    payload: CommonCreateCountryInput[],
     timezone?: string,
     auditing?: AuditingMeta,
   ): Promise<boolean> {

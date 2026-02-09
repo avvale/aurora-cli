@@ -1,7 +1,7 @@
-import {
-  CommonAdministrativeAreaLevel1Dto,
-  CommonUpdateAdministrativeAreaLevel1ByIdDto,
-} from '@api/common/administrative-area-level-1';
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import {
   CommonAdministrativeAreaLevel1,
   CommonUpdateAdministrativeAreaLevel1ByIdInput,
@@ -12,12 +12,12 @@ import {
 } from '@app/common/administrative-area-level-1';
 import {
   AuditingMeta,
+  diff,
   ICommandBus,
   IQueryBus,
   QueryStatement,
-  diff,
 } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class CommonUpdateAdministrativeAreaLevel1ByIdHandler {
@@ -27,20 +27,22 @@ export class CommonUpdateAdministrativeAreaLevel1ByIdHandler {
   ) {}
 
   async main(
-    payload:
-      | CommonUpdateAdministrativeAreaLevel1ByIdInput
-      | CommonUpdateAdministrativeAreaLevel1ByIdDto,
+    payload: CommonUpdateAdministrativeAreaLevel1ByIdInput,
     constraint?: QueryStatement,
     timezone?: string,
     auditing?: AuditingMeta,
-  ): Promise<
-    CommonAdministrativeAreaLevel1 | CommonAdministrativeAreaLevel1Dto
-  > {
+  ): Promise<CommonAdministrativeAreaLevel1> {
     const administrativeAreaLevel1 = await this.queryBus.ask(
       new CommonFindAdministrativeAreaLevel1ByIdQuery(payload.id, constraint, {
         timezone,
       }),
     );
+
+    if (!administrativeAreaLevel1) {
+      throw new NotFoundException(
+        `CommonAdministrativeAreaLevel1 with id: ${payload.id}, not found`,
+      );
+    }
 
     const dataToUpdate = diff(payload, administrativeAreaLevel1);
 

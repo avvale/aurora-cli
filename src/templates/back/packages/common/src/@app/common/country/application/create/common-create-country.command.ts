@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CQMetadata } from '@aurorajs.dev/core';
 
 export class CommonCreateCountryCommand {
@@ -15,7 +19,7 @@ export class CommonCreateCountryCommand {
       latitude?: number;
       longitude?: number;
       zoom?: number;
-      mapType?: string;
+      mapType?: 'ROADMAP' | 'SATELLITE' | 'HYBRID' | 'TERRAIN';
       availableLangs?: any;
       langId: string;
       name: string;

@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-2.aurora.yaml
+ */
 import { DecimalValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class CommonAdministrativeAreaLevel2Latitude extends DecimalValueObject {

@@ -1,4 +1,7 @@
-import { CommonCreateAdministrativeAreaLevel3Dto } from '@api/common/administrative-area-level-3';
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-3.aurora.yaml
+ */
 import { CommonCreateAdministrativeAreaLevel3Input } from '@api/graphql';
 import { CommonCreateAdministrativeAreasLevel3Command } from '@app/common/administrative-area-level-3';
 import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
@@ -9,9 +12,7 @@ export class CommonCreateAdministrativeAreasLevel3Handler {
   constructor(private readonly commandBus: ICommandBus) {}
 
   async main(
-    payload:
-      | CommonCreateAdministrativeAreaLevel3Input[]
-      | CommonCreateAdministrativeAreaLevel3Dto[],
+    payload: CommonCreateAdministrativeAreaLevel3Input[],
     timezone?: string,
     auditing?: AuditingMeta,
   ): Promise<boolean> {

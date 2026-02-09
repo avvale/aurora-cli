@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import {
   CommonIResourceRepository,
   commonMockResourceData,
@@ -11,6 +15,7 @@ import {
   CommonResourceId,
   CommonResourceIsActive,
   CommonResourceName,
+  CommonResourceRowId,
   CommonResourceUpdatedAt,
 } from '@app/common/resource/domain/value-objects';
 import { MockRepository, Utils } from '@aurorajs.dev/core';
@@ -46,6 +51,7 @@ export class CommonMockResourceRepository
       this.collectionSource.push(
         CommonResource.register(
           new CommonResourceId(itemCollection.id),
+          new CommonResourceRowId(itemCollection.rowId),
           new CommonResourceCode(itemCollection.code),
           new CommonResourceName(itemCollection.name),
           new CommonResourceIsActive(itemCollection.isActive),

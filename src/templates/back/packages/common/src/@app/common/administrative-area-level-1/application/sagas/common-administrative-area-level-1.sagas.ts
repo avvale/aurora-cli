@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -10,7 +14,6 @@ export class CommonAdministrativeAreaLevel1Sagas {
                 ofType(CreatedAdministrativeAreaLevel1Event),
                 delay(1000),
                 map(event => {
-                    console.log('Inside [HeroesGameSagas] Saga');
                     return 'command';
                 }),
             );

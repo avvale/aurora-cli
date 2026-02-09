@@ -1,4 +1,7 @@
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonCreateCountryCommand } from '@app/common/country';
 import { CommonCreateCountryService } from '@app/common/country/application/create/common-create-country.service';
 import {

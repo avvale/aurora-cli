@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import {
   CommonCountry,
   CommonICountryI18nRepository,
@@ -28,11 +32,7 @@ import {
   CommonCountryZoom,
 } from '@app/common/country/domain/value-objects';
 import { CQMetadata } from '@aurorajs.dev/core';
-import {
-  ConflictException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 import * as _ from 'lodash';
 
@@ -77,6 +77,7 @@ export class CommonCreateCountryService {
     // create aggregate with factory pattern
     const country = CommonCountry.register(
       payload.id,
+      undefined, // rowId
       payload.iso3166Alpha2,
       payload.iso3166Alpha3,
       payload.iso3166Numeric,
@@ -101,22 +102,21 @@ export class CommonCreateCountryService {
       payload.administrativeAreaLevel3,
     );
 
-    try {
-      // try get object from database
-      const countryInDB = await this.repository.findById(country.id, {
-        constraint: {
-          include: [
-            {
-              association: 'countryI18n',
-              where: {
-                langId: fallbackLang.id,
-              },
+    // try get object from database
+    const countryInDB = await this.repository.findById(country.id, {
+      constraint: {
+        include: [
+          {
+            association: 'countryI18n',
+            where: {
+              langId: fallbackLang.id,
             },
-          ],
-        },
-      });
+          },
+        ],
+      },
+    });
 
-      // eslint-disable-next-line max-len
+    if (countryInDB) {
       if (countryInDB.availableLangs.value.includes(contentLanguage.id))
         throw new ConflictException(
           `Error to create CommonCountry, the id ${contentLanguage.id} already exist in database`,
@@ -129,7 +129,7 @@ export class CommonCreateCountryService {
 
       await this.repository.update(country, {
         dataFactory: (aggregate) =>
-          _.pick(aggregate.toDTO(), 'id', 'availableLangs'),
+          _.pick(aggregate.toRepository(), 'id', 'availableLangs'),
         updateOptions: cQMetadata?.repositoryOptions,
         queryStatement: {
           where: {
@@ -137,20 +137,18 @@ export class CommonCreateCountryService {
           },
         },
       });
-    } catch (error) {
-      if (error instanceof NotFoundException) {
-        country.availableLangs = new CommonCountryAvailableLangs([
-          contentLanguage.id,
-        ]);
-        await this.repository.create(country, {
-          createOptions: cQMetadata?.repositoryOptions,
-        });
-      }
+    } else {
+      country.availableLangs = new CommonCountryAvailableLangs([
+        contentLanguage.id,
+      ]);
+      await this.repository.create(country, {
+        createOptions: cQMetadata?.repositoryOptions,
+      });
     }
 
     // save new i18n record
     await this.repositoryI18n.create(country, {
-      dataFactory: (aggregate: CommonCountry) => aggregate.toI18nDTO(),
+      dataFactory: (aggregate: CommonCountry) => aggregate.toI18nRepository(),
       finderQueryStatement: (aggregate: CommonCountry) => ({
         where: {
           countryId: aggregate['id']['value'],
@@ -163,7 +161,10 @@ export class CommonCreateCountryService {
     // merge EventBus methods with object returned by the repository, to be able to apply and commit events
     const countryRegister = this.publisher.mergeObjectContext(country);
 
-    countryRegister.created(country); // apply event to model events
+    countryRegister.created({
+      payload: country,
+      cQMetadata,
+    }); // apply event to model events
     countryRegister.commit(); // commit all events of model
   }
 }

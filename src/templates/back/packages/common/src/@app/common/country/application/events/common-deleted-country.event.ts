@@ -1,27 +1,39 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
+import { CQMetadata } from '@aurorajs.dev/core';
+
 export class CommonDeletedCountryEvent {
   constructor(
-    public readonly id: string,
-    public readonly iso3166Alpha2: string,
-    public readonly iso3166Alpha3: string,
-    public readonly iso3166Numeric: string,
-    public readonly customCode: string,
-    public readonly prefix: string,
-    public readonly image: string,
-    public readonly sort: number,
-    public readonly administrativeAreas: any,
-    public readonly latitude: number,
-    public readonly longitude: number,
-    public readonly zoom: number,
-    public readonly mapType: string,
-    public readonly availableLangs: any,
-    public readonly createdAt: string,
-    public readonly updatedAt: string,
-    public readonly deletedAt: string,
-    public readonly langId: string,
-    public readonly name: string,
-    public readonly slug: string,
-    public readonly administrativeAreaLevel1: string,
-    public readonly administrativeAreaLevel2: string,
-    public readonly administrativeAreaLevel3: string,
+    public readonly event: {
+      payload: {
+        id: string;
+        rowId: number;
+        iso3166Alpha2: string;
+        iso3166Alpha3: string;
+        iso3166Numeric: string;
+        customCode: string;
+        prefix: string;
+        image: string;
+        sort: number;
+        administrativeAreas: any;
+        latitude: number;
+        longitude: number;
+        zoom: number;
+        mapType: 'ROADMAP' | 'SATELLITE' | 'HYBRID' | 'TERRAIN';
+        availableLangs: any;
+        createdAt: string;
+        updatedAt: string;
+        deletedAt: string;
+        langId: string;
+        name: string;
+        slug: string;
+        administrativeAreaLevel1: string;
+        administrativeAreaLevel2: string;
+        administrativeAreaLevel3: string;
+      };
+      cQMetadata?: CQMetadata;
+    },
   ) {}
 }

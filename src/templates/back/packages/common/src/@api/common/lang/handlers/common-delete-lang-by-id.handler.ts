@@ -1,4 +1,7 @@
-import { CommonLangDto } from '@api/common/lang';
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonLang } from '@api/graphql';
 import {
   CommonDeleteLangByIdCommand,
@@ -11,7 +14,7 @@ import {
   IQueryBus,
   QueryStatement,
 } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class CommonDeleteLangByIdHandler {
@@ -26,12 +29,16 @@ export class CommonDeleteLangByIdHandler {
     constraint?: QueryStatement,
     timezone?: string,
     auditing?: AuditingMeta,
-  ): Promise<CommonLang | CommonLangDto> {
+  ): Promise<CommonLang> {
     const lang = await this.queryBus.ask(
       new CommonFindLangByIdQuery(id, constraint, {
         timezone,
       }),
     );
+
+    if (!lang) {
+      throw new NotFoundException(`CommonLang with id: ${id}, not found`);
+    }
 
     await this.commandBus.dispatch(
       new CommonDeleteLangByIdCommand(id, constraint, {

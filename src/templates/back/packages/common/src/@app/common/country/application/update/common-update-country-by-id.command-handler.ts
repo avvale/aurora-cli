@@ -1,4 +1,7 @@
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonUpdateCountryByIdCommand } from '@app/common/country';
 import { CommonUpdateCountryByIdService } from '@app/common/country/application/update/common-update-country-by-id.service';
 import {

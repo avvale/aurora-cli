@@ -1,4 +1,7 @@
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-3.aurora.yaml
+ */
 import { CommonAdministrativeAreaLevel1 } from '@app/common/administrative-area-level-1';
 import { CommonAdministrativeAreaLevel2 } from '@app/common/administrative-area-level-2';
 import {
@@ -19,16 +22,18 @@ import {
   CommonAdministrativeAreaLevel3Longitude,
   CommonAdministrativeAreaLevel3MapType,
   CommonAdministrativeAreaLevel3Name,
+  CommonAdministrativeAreaLevel3RowId,
   CommonAdministrativeAreaLevel3Slug,
   CommonAdministrativeAreaLevel3UpdatedAt,
   CommonAdministrativeAreaLevel3Zoom,
 } from '@app/common/administrative-area-level-3/domain/value-objects';
 import { CommonCountry } from '@app/common/country';
-import { LiteralObject } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class CommonAdministrativeAreaLevel3 extends AggregateRoot {
   id: CommonAdministrativeAreaLevel3Id;
+  rowId: CommonAdministrativeAreaLevel3RowId;
   countryId: CommonAdministrativeAreaLevel3CountryId;
   administrativeAreaLevel1Id: CommonAdministrativeAreaLevel3AdministrativeAreaLevel1Id;
   administrativeAreaLevel2Id: CommonAdministrativeAreaLevel3AdministrativeAreaLevel2Id;
@@ -49,6 +54,7 @@ export class CommonAdministrativeAreaLevel3 extends AggregateRoot {
 
   constructor(
     id: CommonAdministrativeAreaLevel3Id,
+    rowId: CommonAdministrativeAreaLevel3RowId,
     countryId: CommonAdministrativeAreaLevel3CountryId,
     administrativeAreaLevel1Id: CommonAdministrativeAreaLevel3AdministrativeAreaLevel1Id,
     administrativeAreaLevel2Id: CommonAdministrativeAreaLevel3AdministrativeAreaLevel2Id,
@@ -69,6 +75,7 @@ export class CommonAdministrativeAreaLevel3 extends AggregateRoot {
   ) {
     super();
     this.id = id;
+    this.rowId = rowId;
     this.countryId = countryId;
     this.administrativeAreaLevel1Id = administrativeAreaLevel1Id;
     this.administrativeAreaLevel2Id = administrativeAreaLevel2Id;
@@ -90,6 +97,7 @@ export class CommonAdministrativeAreaLevel3 extends AggregateRoot {
 
   static register(
     id: CommonAdministrativeAreaLevel3Id,
+    rowId: CommonAdministrativeAreaLevel3RowId,
     countryId: CommonAdministrativeAreaLevel3CountryId,
     administrativeAreaLevel1Id: CommonAdministrativeAreaLevel3AdministrativeAreaLevel1Id,
     administrativeAreaLevel2Id: CommonAdministrativeAreaLevel3AdministrativeAreaLevel2Id,
@@ -110,6 +118,7 @@ export class CommonAdministrativeAreaLevel3 extends AggregateRoot {
   ): CommonAdministrativeAreaLevel3 {
     return new CommonAdministrativeAreaLevel3(
       id,
+      rowId,
       countryId,
       administrativeAreaLevel1Id,
       administrativeAreaLevel2Id,
@@ -130,75 +139,101 @@ export class CommonAdministrativeAreaLevel3 extends AggregateRoot {
     );
   }
 
-  created(administrativeAreaLevel3: CommonAdministrativeAreaLevel3): void {
+  created(event: {
+    payload: CommonAdministrativeAreaLevel3;
+    cQMetadata?: CQMetadata;
+  }): void {
     this.apply(
-      new CommonCreatedAdministrativeAreaLevel3Event(
-        administrativeAreaLevel3.id.value,
-        administrativeAreaLevel3.countryId.value,
-        administrativeAreaLevel3.administrativeAreaLevel1Id.value,
-        administrativeAreaLevel3.administrativeAreaLevel2Id.value,
-        administrativeAreaLevel3.code.value,
-        administrativeAreaLevel3.customCode?.value,
-        administrativeAreaLevel3.name.value,
-        administrativeAreaLevel3.slug.value,
-        administrativeAreaLevel3.latitude?.value,
-        administrativeAreaLevel3.longitude?.value,
-        administrativeAreaLevel3.zoom?.value,
-        administrativeAreaLevel3.mapType?.value,
-        administrativeAreaLevel3.createdAt?.value,
-        administrativeAreaLevel3.updatedAt?.value,
-        administrativeAreaLevel3.deletedAt?.value,
-      ),
+      new CommonCreatedAdministrativeAreaLevel3Event({
+        payload: {
+          id: event.payload.id.value,
+          countryId: event.payload.countryId.value,
+          administrativeAreaLevel1Id:
+            event.payload.administrativeAreaLevel1Id.value,
+          administrativeAreaLevel2Id:
+            event.payload.administrativeAreaLevel2Id.value,
+          code: event.payload.code.value,
+          customCode: event.payload.customCode?.value,
+          name: event.payload.name.value,
+          slug: event.payload.slug.value,
+          latitude: event.payload.latitude?.value,
+          longitude: event.payload.longitude?.value,
+          zoom: event.payload.zoom?.value,
+          mapType: event.payload.mapType?.value,
+          createdAt: event.payload.createdAt?.value,
+          updatedAt: event.payload.updatedAt?.value,
+          deletedAt: event.payload.deletedAt?.value,
+        },
+        cQMetadata: event.cQMetadata,
+      }),
     );
   }
 
-  updated(administrativeAreaLevel3: CommonAdministrativeAreaLevel3): void {
+  updated(event: {
+    payload: CommonAdministrativeAreaLevel3;
+    cQMetadata?: CQMetadata;
+  }): void {
     this.apply(
-      new CommonUpdatedAdministrativeAreaLevel3Event(
-        administrativeAreaLevel3.id?.value,
-        administrativeAreaLevel3.countryId?.value,
-        administrativeAreaLevel3.administrativeAreaLevel1Id?.value,
-        administrativeAreaLevel3.administrativeAreaLevel2Id?.value,
-        administrativeAreaLevel3.code?.value,
-        administrativeAreaLevel3.customCode?.value,
-        administrativeAreaLevel3.name?.value,
-        administrativeAreaLevel3.slug?.value,
-        administrativeAreaLevel3.latitude?.value,
-        administrativeAreaLevel3.longitude?.value,
-        administrativeAreaLevel3.zoom?.value,
-        administrativeAreaLevel3.mapType?.value,
-        administrativeAreaLevel3.createdAt?.value,
-        administrativeAreaLevel3.updatedAt?.value,
-        administrativeAreaLevel3.deletedAt?.value,
-      ),
+      new CommonUpdatedAdministrativeAreaLevel3Event({
+        payload: {
+          id: event.payload.id?.value,
+          countryId: event.payload.countryId?.value,
+          administrativeAreaLevel1Id:
+            event.payload.administrativeAreaLevel1Id?.value,
+          administrativeAreaLevel2Id:
+            event.payload.administrativeAreaLevel2Id?.value,
+          code: event.payload.code?.value,
+          customCode: event.payload.customCode?.value,
+          name: event.payload.name?.value,
+          slug: event.payload.slug?.value,
+          latitude: event.payload.latitude?.value,
+          longitude: event.payload.longitude?.value,
+          zoom: event.payload.zoom?.value,
+          mapType: event.payload.mapType?.value,
+          createdAt: event.payload.createdAt?.value,
+          updatedAt: event.payload.updatedAt?.value,
+          deletedAt: event.payload.deletedAt?.value,
+        },
+        cQMetadata: event.cQMetadata,
+      }),
     );
   }
 
-  deleted(administrativeAreaLevel3: CommonAdministrativeAreaLevel3): void {
+  deleted(event: {
+    payload: CommonAdministrativeAreaLevel3;
+    cQMetadata?: CQMetadata;
+  }): void {
     this.apply(
-      new CommonDeletedAdministrativeAreaLevel3Event(
-        administrativeAreaLevel3.id.value,
-        administrativeAreaLevel3.countryId.value,
-        administrativeAreaLevel3.administrativeAreaLevel1Id.value,
-        administrativeAreaLevel3.administrativeAreaLevel2Id.value,
-        administrativeAreaLevel3.code.value,
-        administrativeAreaLevel3.customCode?.value,
-        administrativeAreaLevel3.name.value,
-        administrativeAreaLevel3.slug.value,
-        administrativeAreaLevel3.latitude?.value,
-        administrativeAreaLevel3.longitude?.value,
-        administrativeAreaLevel3.zoom?.value,
-        administrativeAreaLevel3.mapType?.value,
-        administrativeAreaLevel3.createdAt?.value,
-        administrativeAreaLevel3.updatedAt?.value,
-        administrativeAreaLevel3.deletedAt?.value,
-      ),
+      new CommonDeletedAdministrativeAreaLevel3Event({
+        payload: {
+          id: event.payload.id.value,
+          rowId: event.payload.rowId.value,
+          countryId: event.payload.countryId.value,
+          administrativeAreaLevel1Id:
+            event.payload.administrativeAreaLevel1Id.value,
+          administrativeAreaLevel2Id:
+            event.payload.administrativeAreaLevel2Id.value,
+          code: event.payload.code.value,
+          customCode: event.payload.customCode?.value,
+          name: event.payload.name.value,
+          slug: event.payload.slug.value,
+          latitude: event.payload.latitude?.value,
+          longitude: event.payload.longitude?.value,
+          zoom: event.payload.zoom?.value,
+          mapType: event.payload.mapType?.value,
+          createdAt: event.payload.createdAt?.value,
+          updatedAt: event.payload.updatedAt?.value,
+          deletedAt: event.payload.deletedAt?.value,
+        },
+        cQMetadata: event.cQMetadata,
+      }),
     );
   }
 
   toDTO(): LiteralObject {
     return {
       id: this.id.value,
+      rowId: this.rowId.value,
       countryId: this.countryId.value,
       administrativeAreaLevel1Id: this.administrativeAreaLevel1Id.value,
       administrativeAreaLevel2Id: this.administrativeAreaLevel2Id.value,
@@ -237,9 +272,9 @@ export class CommonAdministrativeAreaLevel3 extends AggregateRoot {
       createdAt: this.createdAt?.value,
       updatedAt: this.updatedAt?.value,
       deletedAt: this.deletedAt?.value,
-      country: this.country?.toDTO(),
-      administrativeAreaLevel1: this.administrativeAreaLevel1?.toDTO(),
-      administrativeAreaLevel2: this.administrativeAreaLevel2?.toDTO(),
+      country: this.country?.toRepository(),
+      administrativeAreaLevel1: this.administrativeAreaLevel1?.toRepository(),
+      administrativeAreaLevel2: this.administrativeAreaLevel2?.toRepository(),
     };
   }
 }

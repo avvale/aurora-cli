@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { DecimalValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class CommonCountryLatitude extends DecimalValueObject {

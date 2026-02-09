@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonFindResourceHandler } from '@api/common/resource';
 import { CommonResource } from '@api/graphql';
 import { Auth } from '@aurora/decorators';

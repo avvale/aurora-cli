@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonGetLangsHandler } from '@api/common/lang';
 import { CommonLang } from '@api/graphql';
 import { Auth } from '@aurora/decorators';

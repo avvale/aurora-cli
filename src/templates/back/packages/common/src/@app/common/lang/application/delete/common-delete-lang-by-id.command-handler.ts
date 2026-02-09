@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonDeleteLangByIdCommand } from '@app/common/lang';
 import { CommonDeleteLangByIdService } from '@app/common/lang/application/delete/common-delete-lang-by-id.service';
 import { CommonLangId } from '@app/common/lang/domain/value-objects';

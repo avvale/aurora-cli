@@ -1,11 +1,14 @@
+// ignored file
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-2.aurora.yaml
+ */
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 //
-import {
-  CommonCreateAdministrativeAreasLevel2Command,
-  commonMockAdministrativeAreaLevel2Data,
-} from '@app/common/administrative-area-level-2';
+import { CommonCreateAdministrativeAreasLevel2Command } from '@app/common/administrative-area-level-2';
+import { administrativeAreasLevel2 } from '@app/common/common.seed';
 
 @Injectable()
 export class CommonAdministrativeAreaLevel2Seeder {
@@ -17,7 +20,7 @@ export class CommonAdministrativeAreaLevel2Seeder {
   async main(): Promise<boolean> {
     await this.commandBus.dispatch(
       new CommonCreateAdministrativeAreasLevel2Command(
-        commonMockAdministrativeAreaLevel2Data,
+        administrativeAreasLevel2,
         {
           timezone: process.env.TZ,
         },

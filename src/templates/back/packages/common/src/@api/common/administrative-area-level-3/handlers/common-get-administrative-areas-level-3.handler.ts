@@ -1,4 +1,7 @@
-import { CommonAdministrativeAreaLevel3Dto } from '@api/common/administrative-area-level-3';
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-3.aurora.yaml
+ */
 import { CommonAdministrativeAreaLevel3 } from '@api/graphql';
 import { CommonGetAdministrativeAreasLevel3Query } from '@app/common/administrative-area-level-3';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
@@ -12,9 +15,7 @@ export class CommonGetAdministrativeAreasLevel3Handler {
     queryStatement?: QueryStatement,
     constraint?: QueryStatement,
     timezone?: string,
-  ): Promise<
-    CommonAdministrativeAreaLevel3[] | CommonAdministrativeAreaLevel3Dto[]
-  > {
+  ): Promise<CommonAdministrativeAreaLevel3[]> {
     return await this.queryBus.ask(
       new CommonGetAdministrativeAreasLevel3Query(queryStatement, constraint, {
         timezone,

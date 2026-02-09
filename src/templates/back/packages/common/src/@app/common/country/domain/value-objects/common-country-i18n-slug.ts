@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { StringValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class CommonCountryI18nSlug extends StringValueObject {
@@ -11,7 +15,7 @@ export class CommonCountryI18nSlug extends StringValueObject {
           name: 'CommonCountryI18nSlug',
           nullable: false,
           undefinable: false,
-          maxLength: 127,
+          maxLength: 128,
         },
         validationRules,
       ),

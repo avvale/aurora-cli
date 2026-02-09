@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonPaginateCountriesHandler } from '@api/common/country';
 import { Pagination } from '@api/graphql';
 import { Auth } from '@aurora/decorators';

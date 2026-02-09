@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonLang, commonMockLangData } from '@app/common/lang';
 import {
   CommonLangCreatedAt,
@@ -11,6 +15,7 @@ import {
   CommonLangIso6392,
   CommonLangIso6393,
   CommonLangName,
+  CommonLangRowId,
   CommonLangSort,
   CommonLangUpdatedAt,
 } from '@app/common/lang/domain/value-objects';
@@ -34,6 +39,7 @@ export class CommonMockLangSeeder extends MockSeeder<CommonLang> {
       this.collectionSource.push(
         CommonLang.register(
           new CommonLangId(lang.id),
+          new CommonLangRowId(lang.rowId),
           new CommonLangName(lang.name),
           new CommonLangImage(lang.image),
           new CommonLangIso6392(lang.iso6392),

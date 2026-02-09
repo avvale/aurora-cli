@@ -1,4 +1,7 @@
-import { CommonLangDto, CommonUpdateLangByIdDto } from '@api/common/lang';
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonLang, CommonUpdateLangByIdInput } from '@api/graphql';
 import {
   CommonFindLangByIdQuery,
@@ -7,12 +10,12 @@ import {
 import {
   AuditingMeta,
   CoreGetLangsService,
+  diff,
   ICommandBus,
   IQueryBus,
   QueryStatement,
-  diff,
 } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class CommonUpdateLangByIdHandler {
@@ -23,16 +26,22 @@ export class CommonUpdateLangByIdHandler {
   ) {}
 
   async main(
-    payload: CommonUpdateLangByIdInput | CommonUpdateLangByIdDto,
+    payload: CommonUpdateLangByIdInput,
     constraint?: QueryStatement,
     timezone?: string,
     auditing?: AuditingMeta,
-  ): Promise<CommonLang | CommonLangDto> {
+  ): Promise<CommonLang> {
     const lang = await this.queryBus.ask(
       new CommonFindLangByIdQuery(payload.id, constraint, {
         timezone,
       }),
     );
+
+    if (!lang) {
+      throw new NotFoundException(
+        `CommonLang with id: ${payload.id}, not found`,
+      );
+    }
 
     const dataToUpdate = diff(payload, lang);
 

@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonUpdatedResourceEvent } from '@app/common/resource';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
@@ -6,6 +10,6 @@ export class CommonUpdatedResourceEventHandler
   implements IEventHandler<CommonUpdatedResourceEvent>
 {
   handle(event: CommonUpdatedResourceEvent): void {
-    // console.log('UpdatedResourceEvent: ', event);
+    // 'UpdatedResourceEvent'
   }
 }

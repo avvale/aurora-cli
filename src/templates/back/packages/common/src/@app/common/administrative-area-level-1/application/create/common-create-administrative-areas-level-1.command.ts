@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import { CQMetadata } from '@aurorajs.dev/core';
 
 export class CommonCreateAdministrativeAreasLevel1Command {
@@ -12,7 +16,7 @@ export class CommonCreateAdministrativeAreasLevel1Command {
       latitude?: number;
       longitude?: number;
       zoom?: number;
-      mapType?: string;
+      mapType?: 'ROADMAP' | 'SATELLITE' | 'HYBRID' | 'TERRAIN';
     }[],
     public readonly cQMetadata?: CQMetadata,
   ) {}

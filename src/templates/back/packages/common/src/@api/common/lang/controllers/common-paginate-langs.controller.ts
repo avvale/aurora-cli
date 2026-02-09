@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonPaginateLangsHandler } from '@api/common/lang';
 import { Auth } from '@aurora/decorators';
 import { Pagination, QueryStatement, Timezone } from '@aurorajs.dev/core';

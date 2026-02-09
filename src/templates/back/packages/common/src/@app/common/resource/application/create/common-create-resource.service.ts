@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import {
   CommonIResourceRepository,
   CommonResource,
@@ -35,6 +39,7 @@ export class CommonCreateResourceService {
     // create aggregate with factory pattern
     const resource = CommonResource.register(
       payload.id,
+      undefined, // rowId
       payload.code,
       payload.name,
       payload.isActive,
@@ -51,7 +56,10 @@ export class CommonCreateResourceService {
     // merge EventBus methods with object returned by the repository, to be able to apply and commit events
     const resourceRegister = this.publisher.mergeObjectContext(resource);
 
-    resourceRegister.created(resource); // apply event to model events
+    resourceRegister.created({
+      payload: resource,
+      cQMetadata,
+    }); // apply event to model events
     resourceRegister.commit(); // commit all events of model
   }
 }

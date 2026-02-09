@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import {
   CommonCountry,
   CommonICountryRepository,
@@ -24,6 +28,7 @@ import {
   CommonCountryLongitude,
   CommonCountryMapType,
   CommonCountryPrefix,
+  CommonCountryRowId,
   CommonCountrySort,
   CommonCountryUpdatedAt,
   CommonCountryZoom,
@@ -61,6 +66,7 @@ export class CommonMockCountryRepository
       this.collectionSource.push(
         CommonCountry.register(
           new CommonCountryId(itemCollection.id),
+          new CommonCountryRowId(itemCollection.rowId),
           new CommonCountryIso3166Alpha2(itemCollection.iso3166Alpha2),
           new CommonCountryIso3166Alpha3(itemCollection.iso3166Alpha3),
           new CommonCountryIso3166Numeric(itemCollection.iso3166Numeric),

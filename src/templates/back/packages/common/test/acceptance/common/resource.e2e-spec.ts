@@ -1,6 +1,7 @@
-/* eslint-disable max-len */
-/* eslint-disable quotes */
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { CommonModule } from '@api/common/common.module';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
@@ -9,7 +10,7 @@ import {
   commonMockResourceData,
   CommonMockResourceSeeder,
 } from '@app/common/resource';
-import { GraphQLConfigModule } from '@aurora/modules/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -99,6 +100,22 @@ describe('resource', () => {
       });
   });
 
+  test('/REST:POST common/resource/create - Got 400 Conflict, ResourceRowId property can not to be null', () => {
+    return request(app.getHttpServer())
+      .post('/common/resource/create')
+      .set('Accept', 'application/json')
+      .send({
+        ...mockData[0],
+        rowId: null,
+      })
+      .expect(400)
+      .then((res) => {
+        expect(res.body.message).toContain(
+          'Value for CommonResourceRowId must be defined, can not be null',
+        );
+      });
+  });
+
   test('/REST:POST common/resource/create - Got 400 Conflict, ResourceCode property can not to be null', () => {
     return request(app.getHttpServer())
       .post('/common/resource/create')
@@ -175,6 +192,22 @@ describe('resource', () => {
       .then((res) => {
         expect(res.body.message).toContain(
           'Value for CommonResourceId must be defined, can not be undefined',
+        );
+      });
+  });
+
+  test('/REST:POST common/resource/create - Got 400 Conflict, ResourceRowId property can not to be undefined', () => {
+    return request(app.getHttpServer())
+      .post('/common/resource/create')
+      .set('Accept', 'application/json')
+      .send({
+        ...mockData[0],
+        rowId: undefined,
+      })
+      .expect(400)
+      .then((res) => {
+        expect(res.body.message).toContain(
+          'Value for CommonResourceRowId must be defined, can not be undefined',
         );
       });
   });
@@ -259,34 +292,34 @@ describe('resource', () => {
       });
   });
 
-  test('/REST:POST common/resource/create - Got 400 Conflict, ResourceCode is too large, has a maximum length of 63', () => {
+  test('/REST:POST common/resource/create - Got 400 Conflict, ResourceCode is too large, has a maximum length of 64', () => {
     return request(app.getHttpServer())
       .post('/common/resource/create')
       .set('Accept', 'application/json')
       .send({
         ...mockData[0],
-        code: '****************************************************************',
+        code: '*****************************************************************',
       })
       .expect(400)
       .then((res) => {
         expect(res.body.message).toContain(
-          'Value for CommonResourceCode is too large, has a maximum length of 63',
+          'Value for CommonResourceCode is too large, has a maximum length of 64',
         );
       });
   });
 
-  test('/REST:POST common/resource/create - Got 400 Conflict, ResourceName is too large, has a maximum length of 127', () => {
+  test('/REST:POST common/resource/create - Got 400 Conflict, ResourceName is too large, has a maximum length of 128', () => {
     return request(app.getHttpServer())
       .post('/common/resource/create')
       .set('Accept', 'application/json')
       .send({
         ...mockData[0],
-        name: '********************************************************************************************************************************',
+        name: '*********************************************************************************************************************************',
       })
       .expect(400)
       .then((res) => {
         expect(res.body.message).toContain(
-          'Value for CommonResourceName is too large, has a maximum length of 127',
+          'Value for CommonResourceName is too large, has a maximum length of 128',
         );
       });
   });
@@ -490,6 +523,7 @@ describe('resource', () => {
                         commonCreateResource (payload:$payload)
                         {
                             id
+                            rowId
                             code
                             name
                             isActive
@@ -563,6 +597,7 @@ describe('resource', () => {
                         commonGetResources (query:$query)
                         {
                             id
+                            rowId
                             code
                             name
                             isActive
@@ -600,6 +635,7 @@ describe('resource', () => {
                         commonCreateResource (payload:$payload)
                         {
                             id
+                            rowId
                             code
                             name
                             isActive
@@ -634,6 +670,7 @@ describe('resource', () => {
                         commonFindResource (query:$query)
                         {
                             id
+                            rowId
                             code
                             name
                             isActive
@@ -674,6 +711,7 @@ describe('resource', () => {
                         commonFindResource (query:$query)
                         {
                             id
+                            rowId
                             code
                             name
                             isActive
@@ -710,6 +748,7 @@ describe('resource', () => {
                         commonFindResourceById (id:$id)
                         {
                             id
+                            rowId
                             code
                             name
                             isActive
@@ -746,6 +785,7 @@ describe('resource', () => {
                         commonFindResourceById (id:$id)
                         {
                             id
+                            rowId
                             code
                             name
                             isActive
@@ -778,6 +818,7 @@ describe('resource', () => {
                         commonUpdateResourceById (payload:$payload)
                         {
                             id
+                            rowId
                             code
                             name
                             isActive
@@ -817,6 +858,7 @@ describe('resource', () => {
                         commonUpdateResourceById (payload:$payload)
                         {
                             id
+                            rowId
                             code
                             name
                             isActive
@@ -852,6 +894,7 @@ describe('resource', () => {
                         commonUpdateResources (payload:$payload query:$query)
                         {
                             id
+                            rowId
                             code
                             name
                             isActive
@@ -892,6 +935,7 @@ describe('resource', () => {
                         commonDeleteResourceById (id:$id)
                         {
                             id
+                            rowId
                             code
                             name
                             isActive
@@ -928,6 +972,7 @@ describe('resource', () => {
                         commonDeleteResourceById (id:$id)
                         {
                             id
+                            rowId
                             code
                             name
                             isActive

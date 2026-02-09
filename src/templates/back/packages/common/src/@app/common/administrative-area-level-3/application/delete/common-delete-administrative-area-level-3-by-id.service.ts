@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-3.aurora.yaml
+ */
 import { CommonIAdministrativeAreaLevel3Repository } from '@app/common/administrative-area-level-3';
 import { CommonAdministrativeAreaLevel3Id } from '@app/common/administrative-area-level-3/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
@@ -34,7 +38,10 @@ export class CommonDeleteAdministrativeAreaLevel3ByIdService {
       administrativeAreaLevel3,
     );
 
-    administrativeAreaLevel3Register.deleted(administrativeAreaLevel3); // apply event to model events
+    administrativeAreaLevel3Register.deleted({
+      payload: administrativeAreaLevel3,
+      cQMetadata,
+    }); // apply event to model events
     administrativeAreaLevel3Register.commit(); // commit all events of model
   }
 }

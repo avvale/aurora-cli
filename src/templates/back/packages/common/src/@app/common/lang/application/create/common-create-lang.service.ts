@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonILangRepository, CommonLang } from '@app/common/lang';
 import {
   CommonLangCreatedAt,
@@ -42,6 +46,7 @@ export class CommonCreateLangService {
     // create aggregate with factory pattern
     const lang = CommonLang.register(
       payload.id,
+      undefined, // rowId
       payload.name,
       payload.image,
       payload.iso6392,
@@ -63,7 +68,10 @@ export class CommonCreateLangService {
     // merge EventBus methods with object returned by the repository, to be able to apply and commit events
     const langRegister = this.publisher.mergeObjectContext(lang);
 
-    langRegister.created(lang); // apply event to model events
+    langRegister.created({
+      payload: lang,
+      cQMetadata,
+    }); // apply event to model events
     langRegister.commit(); // commit all events of model
   }
 }

@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/**
+ * @aurora-generated
+ * @source cliter/common/administrative-area-level-1.aurora.yaml
+ */
 import { CommonPaginateAdministrativeAreasLevel1Handler } from '@api/common/administrative-area-level-1';
 import { Auth } from '@aurora/decorators';
 import { Pagination, QueryStatement, Timezone } from '@aurorajs.dev/core';

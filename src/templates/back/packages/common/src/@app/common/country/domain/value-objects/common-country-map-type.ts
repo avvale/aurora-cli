@@ -1,9 +1,18 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { EnumValueObject, ValidationRules } from '@aurorajs.dev/core';
 
-export class CommonCountryMapType extends EnumValueObject {
+export class CommonCountryMapType extends EnumValueObject<
+  'ROADMAP' | 'SATELLITE' | 'HYBRID' | 'TERRAIN'
+> {
   public readonly type: string = 'CommonCountryMapType';
 
-  constructor(value: string, validationRules: ValidationRules = {}) {
+  constructor(
+    value: 'ROADMAP' | 'SATELLITE' | 'HYBRID' | 'TERRAIN',
+    validationRules: ValidationRules = {},
+  ) {
     super(
       value,
       Object.assign(

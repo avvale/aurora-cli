@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import { CommonCountry, CommonCountryResponse } from '@app/common/country';
 import {
   CommonCountryAdministrativeAreas,
@@ -20,6 +24,7 @@ import {
   CommonCountryLongitude,
   CommonCountryMapType,
   CommonCountryPrefix,
+  CommonCountryRowId,
   CommonCountrySort,
   CommonCountryUpdatedAt,
   CommonCountryZoom,
@@ -87,6 +92,7 @@ export class CommonCountryMapper implements IMapper {
   ): CommonCountry {
     return CommonCountry.register(
       new CommonCountryId(country.id, { undefinable: true }),
+      new CommonCountryRowId(country.rowId, { undefinable: true }),
       new CommonCountryIso3166Alpha2(country.iso3166Alpha2, {
         undefinable: true,
       }),
@@ -96,9 +102,7 @@ export class CommonCountryMapper implements IMapper {
       new CommonCountryIso3166Numeric(country.iso3166Numeric, {
         undefinable: true,
       }),
-      new CommonCountryCustomCode(country.customCode, {
-        undefinable: true,
-      }),
+      new CommonCountryCustomCode(country.customCode, { undefinable: true }),
       new CommonCountryPrefix(country.prefix, { undefinable: true }),
       new CommonCountryImage(country.image, { undefinable: true }),
       new CommonCountrySort(country.sort, { undefinable: true }),
@@ -106,9 +110,7 @@ export class CommonCountryMapper implements IMapper {
         undefinable: true,
       }),
       new CommonCountryLatitude(country.latitude, { undefinable: true }),
-      new CommonCountryLongitude(country.longitude, {
-        undefinable: true,
-      }),
+      new CommonCountryLongitude(country.longitude, { undefinable: true }),
       new CommonCountryZoom(country.zoom, { undefinable: true }),
       new CommonCountryMapType(country.mapType, { undefinable: true }),
       new CommonCountryAvailableLangs(country.availableLangs, {
@@ -151,9 +153,10 @@ export class CommonCountryMapper implements IMapper {
         { undefinable: true },
       ),
       this.options.eagerLoading
-        ? new CommonLangMapper({
-            eagerLoading: true,
-          }).mapModelToAggregate(country.countryI18n.lang, cQMetadata)
+        ? new CommonLangMapper({ eagerLoading: true }).mapModelToAggregate(
+            country.countryI18n.lang,
+            cQMetadata,
+          )
         : undefined,
     );
   }
@@ -163,6 +166,7 @@ export class CommonCountryMapper implements IMapper {
 
     return new CommonCountryResponse(
       country.id.value,
+      country.rowId.value,
       country.iso3166Alpha2.value,
       country.iso3166Alpha3.value,
       country.iso3166Numeric.value,
@@ -186,9 +190,9 @@ export class CommonCountryMapper implements IMapper {
       country.administrativeAreaLevel2.value,
       country.administrativeAreaLevel3.value,
       this.options.eagerLoading
-        ? new CommonLangMapper({
-            eagerLoading: true,
-          }).mapAggregateToResponse(country.lang)
+        ? new CommonLangMapper({ eagerLoading: true }).mapAggregateToResponse(
+            country.lang,
+          )
         : undefined,
     );
   }

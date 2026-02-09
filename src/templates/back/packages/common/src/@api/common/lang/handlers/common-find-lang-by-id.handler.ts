@@ -1,8 +1,11 @@
-import { CommonLangDto } from '@api/common/lang';
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonLang } from '@api/graphql';
 import { CommonFindLangByIdQuery } from '@app/common/lang';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class CommonFindLangByIdHandler {
@@ -12,11 +15,17 @@ export class CommonFindLangByIdHandler {
     id: string,
     constraint?: QueryStatement,
     timezone?: string,
-  ): Promise<CommonLang | CommonLangDto> {
-    return await this.queryBus.ask(
+  ): Promise<CommonLang> {
+    const lang = await this.queryBus.ask(
       new CommonFindLangByIdQuery(id, constraint, {
         timezone,
       }),
     );
+
+    if (!lang) {
+      throw new NotFoundException(`CommonLang with id: ${id}, not found`);
+    }
+
+    return lang;
   }
 }

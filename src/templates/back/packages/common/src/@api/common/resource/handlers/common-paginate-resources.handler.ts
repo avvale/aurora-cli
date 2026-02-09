@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { Pagination } from '@api/graphql';
 import { CommonPaginateResourcesQuery } from '@app/common/resource';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';

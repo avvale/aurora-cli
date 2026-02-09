@@ -1,4 +1,7 @@
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import { CommonCreateLangsCommand } from '@app/common/lang';
 import { CommonCreateLangsService } from '@app/common/lang/application/create/common-create-langs.service';
 import {

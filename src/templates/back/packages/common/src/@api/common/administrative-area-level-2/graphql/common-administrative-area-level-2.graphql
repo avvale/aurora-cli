@@ -1,133 +1,157 @@
+# @aurora-generated
+# @source cliter/common/administrative-area-level-2.aurora.yaml
 enum CommonAdministrativeAreaLevel2MapType {
-    ROADMAP
-    SATELLITE
-    HYBRID
-    TERRAIN
+  ROADMAP
+  SATELLITE
+  HYBRID
+  TERRAIN
 }
 
-
-type CommonAdministrativeAreaLevel2
-{
-    id: ID!
-    countryId: ID!
-    country: CommonCountry
-    administrativeAreaLevel1Id: ID!
-    administrativeAreaLevel1: CommonAdministrativeAreaLevel1
-    code: GraphQLString!
-    customCode: GraphQLString
-    name: GraphQLString!
-    slug: GraphQLString!
-    latitude: GraphQLFloat
-    longitude: GraphQLFloat
-    zoom: GraphQLInt
-    mapType: CommonAdministrativeAreaLevel2MapType
-    createdAt: GraphQLTimestamp
-    updatedAt: GraphQLTimestamp
-    deletedAt: GraphQLTimestamp
+type CommonAdministrativeAreaLevel2 {
+  """
+  Unique identifier for the administrative area level 2. UUID v4 format, generated automatically on creation.
+  """
+  id: ID!
+  """
+  Auto-incrementing sequential identifier for the administrative area level 1. Used for internal ordering, human-readable reference numbers, and optimized queries. Not exposed in external APIs. Provides a stable, predictable identifier for database operations.
+  """
+  rowId: GraphQLInt!
+  """
+  Foreign key to the country this administrative area belongs to. Denormalized from level 1 for efficient querying without joins.
+  """
+  countryId: ID!
+  country: CommonCountry
+  """
+  Foreign key to the parent administrative area level 1. Establishes hierarchical relationship (e.g., county belongs to state).
+  """
+  administrativeAreaLevel1Id: ID!
+  administrativeAreaLevel1: CommonAdministrativeAreaLevel1
+  """
+  Standard code for the administrative area (e.g., &quot;LAC&quot; for Los Angeles County). Must be unique across all level 2 areas. Maximum 8 characters.
+  """
+  code: GraphQLString!
+  """
+  Optional custom code defined by the organization for internal identification. Must be unique if provided. Can be used for legacy system integration or custom business logic.
+  """
+  customCode: GraphQLString
+  """
+  Full name of the administrative area (e.g., &quot;Los Angeles County&quot;, &quot;District of Columbia&quot;). Indexed for efficient searching and sorting.
+  """
+  name: GraphQLString!
+  """
+  URL-friendly identifier derived from the name. Lowercase, hyphenated format (e.g., &quot;los-angeles-county&quot;, &quot;king-county&quot;). Used for SEO-friendly URLs and routing.
+  """
+  slug: GraphQLString!
+  """
+  Geographical latitude coordinate of the administrative area&#x27;s center point. Precision of 14 decimal places allows sub-meter accuracy. Used for map visualization and distance calculations.
+  """
+  latitude: GraphQLFloat
+  """
+  Geographical longitude coordinate of the administrative area&#x27;s center point. Precision of 14 decimal places allows sub-meter accuracy. Used for map visualization and distance calculations.
+  """
+  longitude: GraphQLFloat
+  """
+  Default zoom level for map display when viewing this administrative area. Typical range: 1 (world view) to 21 (building level). Usually higher than level 1 for more detailed view.
+  """
+  zoom: GraphQLInt
+  """
+  Preferred map visualization type for this area. ROADMAP: Street map view. SATELLITE: Aerial imagery. HYBRID: Satellite with road overlay. TERRAIN: Topographic relief map. NULL uses system default.
+  """
+  mapType: CommonAdministrativeAreaLevel2MapType
+  """
+  Timestamp when the record was created. Automatically set on insertion. Part of audit trail.
+  """
+  createdAt: GraphQLTimestamp
+  """
+  Timestamp of the last update to the record. Automatically updated on modification. Part of audit trail.
+  """
+  updatedAt: GraphQLTimestamp
+  """
+  Soft delete timestamp. NULL indicates active record. When set, record is excluded from normal queries but preserved for audit and recovery.
+  """
+  deletedAt: GraphQLTimestamp
 }
 
-input CommonCreateAdministrativeAreaLevel2Input
-{
-    id: ID!
-    countryId: ID!
-    administrativeAreaLevel1Id: ID!
-    code: GraphQLString!
-    customCode: GraphQLString
-    name: GraphQLString!
-    slug: GraphQLString!
-    latitude: GraphQLFloat
-    longitude: GraphQLFloat
-    zoom: GraphQLInt
-    mapType: CommonAdministrativeAreaLevel2MapType
+input CommonCreateAdministrativeAreaLevel2Input {
+  id: ID!
+  countryId: ID!
+  administrativeAreaLevel1Id: ID!
+  code: GraphQLString!
+  customCode: GraphQLString
+  name: GraphQLString!
+  slug: GraphQLString!
+  latitude: GraphQLFloat
+  longitude: GraphQLFloat
+  zoom: GraphQLInt
+  mapType: CommonAdministrativeAreaLevel2MapType
 }
 
-input CommonUpdateAdministrativeAreaLevel2ByIdInput
-{
-    id: ID!
-    countryId: ID
-    administrativeAreaLevel1Id: ID
-    code: GraphQLString
-    customCode: GraphQLString
-    name: GraphQLString
-    slug: GraphQLString
-    latitude: GraphQLFloat
-    longitude: GraphQLFloat
-    zoom: GraphQLInt
-    mapType: CommonAdministrativeAreaLevel2MapType
+input CommonUpdateAdministrativeAreaLevel2ByIdInput {
+  id: ID!
+  countryId: ID
+  administrativeAreaLevel1Id: ID
+  code: GraphQLString
+  customCode: GraphQLString
+  name: GraphQLString
+  slug: GraphQLString
+  latitude: GraphQLFloat
+  longitude: GraphQLFloat
+  zoom: GraphQLInt
+  mapType: CommonAdministrativeAreaLevel2MapType
 }
 
-input CommonUpdateAdministrativeAreasLevel2Input
-{
+input CommonUpdateAdministrativeAreasLevel2Input {
+  id: ID
+  countryId: ID
+  administrativeAreaLevel1Id: ID
+  code: GraphQLString
+  customCode: GraphQLString
+  name: GraphQLString
+  slug: GraphQLString
+  latitude: GraphQLFloat
+  longitude: GraphQLFloat
+  zoom: GraphQLInt
+  mapType: CommonAdministrativeAreaLevel2MapType
+}
+
+type Query {
+  commonFindAdministrativeAreaLevel2(
+    query: QueryStatement
+    constraint: QueryStatement
+  ): CommonAdministrativeAreaLevel2
+
+  commonFindAdministrativeAreaLevel2ById(
     id: ID
-    countryId: ID
-    administrativeAreaLevel1Id: ID
-    code: GraphQLString
-    customCode: GraphQLString
-    name: GraphQLString
-    slug: GraphQLString
-    latitude: GraphQLFloat
-    longitude: GraphQLFloat
-    zoom: GraphQLInt
-    mapType: CommonAdministrativeAreaLevel2MapType
+    constraint: QueryStatement
+  ): CommonAdministrativeAreaLevel2
+
+  commonGetAdministrativeAreasLevel2(
+    query: QueryStatement
+    constraint: QueryStatement
+  ): [CommonAdministrativeAreaLevel2]!
+
+  commonPaginateAdministrativeAreasLevel2(
+    query: QueryStatement
+    constraint: QueryStatement
+  ): Pagination!
 }
 
-type Query
-{
-    commonFindAdministrativeAreaLevel2(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): CommonAdministrativeAreaLevel2
+type Mutation {
+  commonCreateAdministrativeAreaLevel2(
+    payload: CommonCreateAdministrativeAreaLevel2Input!
+  ): CommonAdministrativeAreaLevel2
 
-    commonFindAdministrativeAreaLevel2ById(
-        id: ID
-        constraint: QueryStatement
-    ): CommonAdministrativeAreaLevel2
+  commonCreateAdministrativeAreasLevel2(
+    payload: [CommonCreateAdministrativeAreaLevel2Input]!
+  ): Boolean!
 
-    commonGetAdministrativeAreasLevel2(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [CommonAdministrativeAreaLevel2]!
+  commonUpdateAdministrativeAreaLevel2ById(
+    payload: CommonUpdateAdministrativeAreaLevel2ByIdInput!
+    constraint: QueryStatement
+  ): CommonAdministrativeAreaLevel2
 
-    commonPaginateAdministrativeAreasLevel2(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): Pagination!
-
-}
-
-type Mutation
-{
-    commonCreateAdministrativeAreaLevel2(
-        payload: CommonCreateAdministrativeAreaLevel2Input!
-    ): CommonAdministrativeAreaLevel2
-
-    commonCreateAdministrativeAreasLevel2(
-        payload: [CommonCreateAdministrativeAreaLevel2Input]!
-    ): Boolean!
-
-    commonUpdateAdministrativeAreaLevel2ById(
-        payload: CommonUpdateAdministrativeAreaLevel2ByIdInput!
-        constraint: QueryStatement
-    ): CommonAdministrativeAreaLevel2
-
-    commonUpdateAdministrativeAreasLevel2(
-        payload: CommonUpdateAdministrativeAreasLevel2Input!
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [CommonAdministrativeAreaLevel2]!
-
-    commonUpsertAdministrativeAreaLevel2(
-        payload: CommonUpdateAdministrativeAreaLevel2ByIdInput!
-    ): CommonAdministrativeAreaLevel2
-
-    commonDeleteAdministrativeAreaLevel2ById(
-        id: ID!
-        constraint: QueryStatement
-    ): CommonAdministrativeAreaLevel2
-
-    commonDeleteAdministrativeAreasLevel2(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [CommonAdministrativeAreaLevel2]!
-
+  commonDeleteAdministrativeAreaLevel2ById(
+    id: ID!
+    constraint: QueryStatement
+  ): CommonAdministrativeAreaLevel2
 }

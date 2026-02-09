@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import {
   CommonAddCountriesContextEvent,
   CommonCountry,
@@ -66,9 +70,10 @@ export class CommonCreateCountriesService {
     cQMetadata?: CQMetadata,
   ): Promise<void> {
     // create aggregate with factory pattern
-    const aggregateCountries = payload.map((country) =>
+    const countries = payload.map((country) =>
       CommonCountry.register(
         country.id,
+        undefined, // rowId
         country.iso3166Alpha2,
         country.iso3166Alpha3,
         country.iso3166Numeric,
@@ -97,7 +102,7 @@ export class CommonCreateCountriesService {
     // insert
     // delete duplicate elements from multiple languages
     await this.repository.insert(
-      aggregateCountries.filter(
+      countries.filter(
         (country, index, self) =>
           index === self.findIndex((t) => t.id.value === country.id.value),
       ),
@@ -106,15 +111,15 @@ export class CommonCreateCountriesService {
       },
     );
 
-    await this.repositoryI18n.insert(aggregateCountries, {
-      dataFactory: (aggregate) => aggregate.toI18nDTO(),
+    await this.repositoryI18n.insert(countries, {
+      dataFactory: (aggregate) => aggregate.toI18nRepository(),
       insertOptions: cQMetadata?.repositoryOptions,
     });
 
     // create AddCountriesContextEvent to have object wrapper to add event publisher functionality
     // insert EventBus in object, to be able to apply and commit events
     const countriesRegistered = this.publisher.mergeObjectContext(
-      new CommonAddCountriesContextEvent(aggregateCountries),
+      new CommonAddCountriesContextEvent(countries, cQMetadata),
     );
 
     countriesRegistered.created(); // apply event to model events

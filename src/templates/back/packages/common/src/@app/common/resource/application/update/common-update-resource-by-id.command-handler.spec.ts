@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import {
   commonMockResourceData,
   CommonUpdateResourceByIdCommand,
@@ -40,6 +44,7 @@ describe('CommonUpdateResourceByIdCommandHandler', () => {
           new CommonUpdateResourceByIdCommand(
             {
               id: commonMockResourceData[0].id,
+              rowId: commonMockResourceData[0].rowId,
               code: commonMockResourceData[0].code,
               name: commonMockResourceData[0].name,
               isActive: commonMockResourceData[0].isActive,
