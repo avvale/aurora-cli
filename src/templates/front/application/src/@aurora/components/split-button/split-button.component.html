@@ -1,44 +1,44 @@
 <div class="flex flex-shrink-0 items-center">
+  <button
+    class="ml-3 pr-3"
+    [ngClass]="{ 'rounded-r-none pr-0': hasMenu() }"
+    [attr.form]="mainButtonForm()"
+    [color]="color()"
+    [disabled]="disabled()"
+    [type]="mainButtonType()"
+    [routerLink]="routerLinkMainButton()"
+    mat-flat-button
+    (click)="mainButtonClick.emit($event)"
+  >
+    <ng-container
+      *ngTemplateOutlet="
+        splitMainButtonContentTemplate?.templateRef;
+        context: {}
+      "
+    ></ng-container>
+  </button>
+  @if (hasMenu()) {
     <button
-        mat-flat-button
-        class="ml-3 pr-3"
-        [ngClass]="{ 'rounded-r-none pr-0': hasMenu }"
-        [color]="color()"
-        [disabled]="disabled()"
-        [type]="mainButtonType()"
-        [attr.form]="mainButtonForm()"
-        [routerLink]="routerLinkMainButton()"
-        (click)="mainButtonClick.emit($event)"
+      class="min-w-12 rounded-l-none p-0"
+      [ngClass]="{ 'disabled-main-button': disabled() }"
+      [color]="color()"
+      [matMenuTriggerFor]="menu"
+      mat-flat-button
     >
-        <ng-container
-            *ngTemplateOutlet="splitMainButtonContentTemplate?.templateRef; context: { }"
-        >
-        </ng-container>
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example home icon"
+      >
+        expand_more
+      </mat-icon>
     </button>
-    @if (hasMenu())
-    {
-        <button
-            mat-flat-button
-            class="rounded-l-none p-0 min-w-12"
-            [ngClass]="{ 'disabled-main-button': disabled() }"
-            [color]="color()"
-            [matMenuTriggerFor]="menu"
-        >
-            <mat-icon
-                aria-hidden="false"
-                aria-label="Example home icon"
-            >
-                expand_more
-            </mat-icon>
-        </button>
-        <mat-menu
-            #menu="matMenu"
-            xPosition="before"
-        >
-            <ng-container
-                *ngTemplateOutlet="splitMenuButtonsTemplate?.templateRef; context: { }"
-            >
-            </ng-container>
-        </mat-menu>
-    }
+    <mat-menu
+      #menu="matMenu"
+      xPosition="before"
+    >
+      <ng-container
+        *ngTemplateOutlet="splitMenuButtonsTemplate?.templateRef; context: {}"
+      ></ng-container>
+    </mat-menu>
+  }
 </div>

@@ -1,0 +1,7 @@
+/* Prefix fix for phone number fields with country selector */
+.mobile-country-prefix-fix {
+    .mat-mdc-notched-outline__leading,
+    .mdc-notched-outline__leading {
+        width: 32px !important;
+    }
+}

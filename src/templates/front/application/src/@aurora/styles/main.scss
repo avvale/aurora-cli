@@ -1,6 +1,7 @@
 /* 1. Components */
 @use 'components/density';
 @use 'components/ng-matero';
+@use '../components/phone-number-format/phone-number-format';
 
 /* 2. Overrides */
 @use 'overrides/tailwind';
