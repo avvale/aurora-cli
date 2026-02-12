@@ -1,107 +1,107 @@
 {
-    "name": "@aurorajs.dev/cli",
-    "version": "4.4.1",
-    "description": "Aurora CLI",
-    "author": "José Carlos Rodríguez Palacín <carlos.rodriguez.palacin@gmail.com>",
-    "bin": {
-        "aurora": "./bin/run"
-    },
-    "homepage": "https://github.com/avvale/aurora-cli",
-    "license": "MIT",
-    "main": "dist/index.js",
-    "repository": "https://github.com/avvale/aurora-cli",
-    "files": [
-        "/bin",
-        "/dist",
-        "/npm-shrinkwrap.json",
-        "/oclif.manifest.json"
+  "name": "@aurorajs.dev/cli",
+  "version": "4.4.2",
+  "description": "Aurora CLI",
+  "author": "José Carlos Rodríguez Palacín <carlos.rodriguez.palacin@gmail.com>",
+  "bin": {
+    "aurora": "./bin/run"
+  },
+  "homepage": "https://github.com/avvale/aurora-cli",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "repository": "https://github.com/avvale/aurora-cli",
+  "files": [
+    "/bin",
+    "/dist",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "dependencies": {
+    "@oclif/core": "^2",
+    "@oclif/plugin-help": "^5",
+    "@oclif/plugin-plugins": "^2.3.2",
+    "cli-table3": "^0.6.3",
+    "copyfiles": "^2.4.1",
+    "dayjs": "^1.11.7",
+    "faker": "^5.5.3",
+    "handlebars": "^4.7.7",
+    "handlebars-helpers": "^0.10.0",
+    "inquirer": "^8.2.5",
+    "js-yaml": "^4.1.0",
+    "jsrsasign": "^10.6.1",
+    "jsrsasign-util": "^1.0.5",
+    "nanoid": "^3.3.4",
+    "node-emoji": "^1.11.0",
+    "reflect-metadata": "^0.1.13",
+    "ts-morph": "^17.0.1",
+    "tsyringe": "^4.7.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@oclif/test": "^2.3.8",
+    "@types/chai": "^4",
+    "@types/faker": "^5.5.9",
+    "@types/handlebars": "^4.1.0",
+    "@types/handlebars-helpers": "^0.5.3",
+    "@types/inquirer": "^8.2.1",
+    "@types/js-yaml": "^4.0.5",
+    "@types/jsrsasign": "^10.5.3",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.18.14",
+    "@types/node-emoji": "^1.8.2",
+    "@types/uuid": "^8.3.4",
+    "chai": "^4",
+    "eslint": "^7.32.0",
+    "eslint-config-oclif": "^4",
+    "eslint-config-oclif-typescript": "^1.0.3",
+    "mocha": "^9",
+    "oclif": "^3",
+    "shx": "^0.3.3",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.5"
+  },
+  "peerDependencies": {
+    "prettier": "3.4.2",
+    "prettier-plugin-organize-attributes": "^1.0.0",
+    "prettier-plugin-organize-imports": "4.1.0",
+    "prettier-plugin-tailwindcss": "0.6.9"
+  },
+  "oclif": {
+    "bin": "aurora",
+    "dirname": "aurora",
+    "commands": "./dist/commands",
+    "plugins": [
+      "@oclif/plugin-help",
+      "@oclif/plugin-plugins"
     ],
-    "dependencies": {
-        "@oclif/core": "^2",
-        "@oclif/plugin-help": "^5",
-        "@oclif/plugin-plugins": "^2.3.2",
-        "cli-table3": "^0.6.3",
-        "copyfiles": "^2.4.1",
-        "dayjs": "^1.11.7",
-        "faker": "^5.5.3",
-        "handlebars": "^4.7.7",
-        "handlebars-helpers": "^0.10.0",
-        "inquirer": "^8.2.5",
-        "js-yaml": "^4.1.0",
-        "jsrsasign": "^10.6.1",
-        "jsrsasign-util": "^1.0.5",
-        "nanoid": "^3.3.4",
-        "node-emoji": "^1.11.0",
-        "reflect-metadata": "^0.1.13",
-        "ts-morph": "^17.0.1",
-        "tsyringe": "^4.7.0",
-        "uuid": "^8.3.2"
-    },
-    "devDependencies": {
-        "@oclif/test": "^2.3.8",
-        "@types/chai": "^4",
-        "@types/faker": "^5.5.9",
-        "@types/handlebars": "^4.1.0",
-        "@types/handlebars-helpers": "^0.5.3",
-        "@types/inquirer": "^8.2.1",
-        "@types/js-yaml": "^4.0.5",
-        "@types/jsrsasign": "^10.5.3",
-        "@types/mocha": "^9.0.0",
-        "@types/node": "^16.18.14",
-        "@types/node-emoji": "^1.8.2",
-        "@types/uuid": "^8.3.4",
-        "chai": "^4",
-        "eslint": "^7.32.0",
-        "eslint-config-oclif": "^4",
-        "eslint-config-oclif-typescript": "^1.0.3",
-        "mocha": "^9",
-        "oclif": "^3",
-        "shx": "^0.3.3",
-        "ts-node": "^10.9.1",
-        "tslib": "^2.5.0",
-        "typescript": "^4.9.5"
-    },
-    "peerDependencies": {
-        "prettier": "3.4.2",
-        "prettier-plugin-organize-attributes": "^1.0.0",
-        "prettier-plugin-organize-imports": "4.1.0",
-        "prettier-plugin-tailwindcss": "0.6.9"
-    },
-    "oclif": {
-        "bin": "aurora",
-        "dirname": "aurora",
-        "commands": "./dist/commands",
-        "plugins": [
-            "@oclif/plugin-help",
-            "@oclif/plugin-plugins"
-        ],
-        "topicSeparator": " ",
-        "topics": {
-            "hello": {
-                "description": "Say hello to the world and others"
-            }
-        }
-    },
-    "scripts": {
-        "build": "shx rm -rf dist && tsc -b",
-        "postbuild": "npm run copy-files",
-        "lint": "eslint . --ext .ts --config .eslintrc",
-        "postpack": "shx rm -f oclif.manifest.json",
-        "posttest": "yarn lint",
-        "prepack": "yarn build && oclif manifest && oclif readme",
-        "test": "mocha --forbid-only \"test/**/*.test.ts\"",
-        "version": "oclif readme && git add README.md",
-        "copy-files": "copyfiles -a -u 1 \"src/templates/**/*\" dist"
-    },
-    "engines": {
-        "node": ">=12.0.0"
-    },
-    "bugs": "https://github.com/https://github.com/techedge-group/aurora-cli/https://github.com/techedge-group/aurora-cli/issues",
-    "keywords": [
-        "oclif"
-    ],
-    "types": "dist/index.d.ts",
-    "publishConfig": {
-        "access": "public"
+    "topicSeparator": " ",
+    "topics": {
+      "hello": {
+        "description": "Say hello to the world and others"
+      }
     }
+  },
+  "scripts": {
+    "build": "shx rm -rf dist && tsc -b",
+    "postbuild": "npm run copy-files",
+    "lint": "eslint . --ext .ts --config .eslintrc",
+    "postpack": "shx rm -f oclif.manifest.json",
+    "posttest": "yarn lint",
+    "prepack": "yarn build && oclif manifest && oclif readme",
+    "test": "mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif readme && git add README.md",
+    "copy-files": "copyfiles -a -u 1 \"src/templates/**/*\" dist"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "bugs": "https://github.com/https://github.com/techedge-group/aurora-cli/https://github.com/techedge-group/aurora-cli/issues",
+  "keywords": [
+    "oclif"
+  ],
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  }
 }
